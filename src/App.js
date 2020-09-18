@@ -1,14 +1,25 @@
-import React from 'react';
+import React, {Component,useState} from 'react';
+import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import Login from "./pages/Login"
+import MainPage from "./pages/MainPage"
 import './App.css';
+import './pages/Login.css';
 
-function App() {
-  let i=0;
+class App extends Component {
+  render(){
   return (
-    <div className="App">
-      <p>소융봇 로그인페이지</p>
-      <button onClick={()=> {i++; alert(i);}}>click</button>
+    <div>
+      <Router>
+        <Switch>
+          <Route path="/" component={Login} exact/>
+          <Route path="/main" component={MainPage} exact/>
+        </Switch>
+      </Router>
     </div>
   );
+  }
 }
+
+
 
 export default App;
