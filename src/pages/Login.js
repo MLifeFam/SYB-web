@@ -10,7 +10,7 @@ class Login extends Component{
                     <form name="login_form" action="">
                         <p>
                             아이디 
-                            <input type="text"></input>
+                            <input type="text" name="id"></input>
                         </p>
                         <p>
                             비밀번호 
@@ -18,6 +18,9 @@ class Login extends Component{
                         </p>
                         <Link to="/main">
                           <button style={{}}>로그인</button>
+                        </Link>
+                        <Link to="/signup">
+                          <button style={{}}>회원가입</button>
                         </Link>
                     </form>
             </div>
