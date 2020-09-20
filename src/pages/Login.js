@@ -1,16 +1,25 @@
-import React , { Component } from 'react';
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
-import './Login.css';
+import React , { Component,useState } from 'react';
+import { Link, Redirect, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import styled from 'styled-components';
+
+const Container = styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+`;
 
 class Login extends Component{
     render(){
         return(
-            <div className="container">
+            <Container>
                 <p>소융봇 로그인페이지</p>
                     <form name="login_form" action="">
                         <p>
                             아이디 
-                            <input type="text" name="id"></input>
+                            <input 
+                                type="text"
+                             />
                         </p>
                         <p>
                             비밀번호 
@@ -23,7 +32,7 @@ class Login extends Component{
                           <button style={{}}>회원가입</button>
                         </Link>
                     </form>
-            </div>
+            </Container>
         );
     }
   }
