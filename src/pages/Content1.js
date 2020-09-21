@@ -66,7 +66,7 @@ const Content1 = () => {
   }, [department, getData]);
 
   return (
-    <div style={{ margin: "0 10%" }}>
+    <div style={{ margin: "0 10%", display:"flex",alignItems:"center", flexDirection:"column"}}>
       <div
         style={{
           textAlign: "center",
@@ -76,7 +76,7 @@ const Content1 = () => {
         <p>학과 조교 상태 수정 페이지</p>
       </div>
 
-      <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange}>
+      <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
         <Form.Item label="학과" name="department">
           <Select onChange={onChangeSelectFunc}>
             <Option value="소프트웨어학과">소프트웨어학과</Option>
