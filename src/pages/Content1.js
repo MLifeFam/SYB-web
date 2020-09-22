@@ -77,7 +77,7 @@ const Content1 = () => {
       </div>
 
       <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
-        <Form.Item label="학과" name="department">
+        <Form.Item label="학과" name="department" required>
           <Select onChange={onChangeSelectFunc}>
             <Option value="소프트웨어학과">소프트웨어학과</Option>
             <Option value="컴퓨터공학과">컴퓨터공학과</Option>
@@ -87,14 +87,14 @@ const Content1 = () => {
             <Option value="창의소프트학부">창의소프트학부</Option>
           </Select>
         </Form.Item>
-        <Form.Item label="상태" name="status">
+        <Form.Item label="상태" name="status" required>
           <Select>
             <Option value="0">근무중</Option>
             <Option value="1">부재중</Option>
             <Option value="2">기타내용 입력</Option>
           </Select>
         </Form.Item>
-        <Form.Item label="기타내용" name="comment">
+        <Form.Item label="기타내용" name="comment" style={{resize:"none"}}>
           <TextArea disabled={isDisable} />
         </Form.Item>
         <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>

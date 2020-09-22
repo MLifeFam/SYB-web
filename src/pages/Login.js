@@ -1,40 +1,83 @@
 import React , { Component,useState } from 'react';
 import { Link, Redirect, Route, Switch, BrowserRouter as Router } from "react-router-dom"
 import styled from 'styled-components';
+import { Form, Input, Button, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-const Container = styled.div`
+const LoginForm = styled.div`
     display:flex;
-    flex-direction:column;
-    align-items:center;
+    width:100%;
+    height:100%;
     justify-content:center;
+    align-items:center;
 `;
 
-class Login extends Component{
-    render(){
-        return(
-            <Container>
-                <p>소융봇 로그인페이지</p>
-                    <form name="login_form" action="">
-                        <p>
-                            아이디 
-                            <input 
-                                type="text"
-                             />
-                        </p>
-                        <p>
-                            비밀번호 
-                            <input type="password"></input>
-                        </p>
-                        <Link to="/main">
-                          <button style={{}}>로그인</button>
-                        </Link>
-                        <Link to="/signup">
-                          <button style={{}}>회원가입</button>
-                        </Link>
-                    </form>
-            </Container>
-        );
-    }
-  }
+const Login = () => {
+  const onFinish = (values) => {
+    console.log('Received values of form: ', values);
+  };
+
+  return (
+    <LoginForm>
+        <Form
+        name="normal_login"
+        className="login-form"
+        initialValues={{
+            remember: true,
+        }}
+        onFinish={onFinish}
+        >
+        <Form.Item
+            name="ID"
+            rules={[
+            {
+                required: true,
+                message: 'ID를 입력해주세요',
+            },
+            ]}
+        >
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="아이디" />
+        </Form.Item>
+        <Form.Item
+            name="비밀번호"
+            rules={[
+            {
+                required: true,
+                message: '비밀번호를 입력해주세요',
+            },
+            ]}
+        >
+            <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="비밀번호"
+            />
+        </Form.Item>
+        <Form.Item>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+            <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+
+            <a className="login-form-forgot" href="">
+            Forgot password
+            </a>
+        </Form.Item>
+
+        <Form.Item>
+            <Link to='/main'>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                    로그인
+                </Button>
+            </Link>
+            <Link to='/signup'>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                    회원가입
+                </Button>
+            </Link>
+        </Form.Item>
+        </Form>
+    </LoginForm>
+  );
+};
 
 export default Login;
