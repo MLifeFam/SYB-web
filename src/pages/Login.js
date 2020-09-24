@@ -9,15 +9,18 @@ const LoginForm = styled.div`
     display:flex;
     flex-direction:column;
     position:absolute;
+    min-width:800px;
+    min-height:500px;
     width:100%;
     height:100%;
     justify-content:center;
     align-items:center;
+    padding-bottom:6rem;
 `;
 
 const Logo = styled.div`
     font-size : 6rem;
-    letter-spacing:3px;
+    letter-spacing:1rem;
     color: ${oc.red[9]};
     font-family:'Rajdhani';
 `;
@@ -28,9 +31,9 @@ const Login = () => {
   };
 
   return (
-    <LoginForm style={{paddingBottom:"6rem"}}>
+    <LoginForm>
         <Logo style={{marginBottom:"3%"}}>
-            SYB Admin
+            SYB ADMIN
         </Logo>
         <Form
         name="normal_login"
@@ -65,15 +68,6 @@ const Login = () => {
             type="password"
             placeholder="비밀번호"
             />
-        </Form.Item>
-        <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <a className="login-form-forgot" href="">
-            Forgot password
-            </a>
         </Form.Item>
 
         <Form.Item>

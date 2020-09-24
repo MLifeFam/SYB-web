@@ -8,13 +8,13 @@ import './App.css';
 class App extends Component {
   render(){
   return (
-      <Router>
-        <Switch>
-          <Route path="/" component={Login} exact/>
-          <Route path="/signup" component={Signup} exact/>
-          <Route path="/main" component={MainPage} exact/>
-        </Switch>
-      </Router>
+    <Router>
+      <Switch>
+        <Route path="/" component={Login} exact/>
+        <Route path="/signup" component={Signup} exact/>
+        <Route path="/main" component={MainPage} exact/>
+      </Switch>
+    </Router>
   );
   }
 }

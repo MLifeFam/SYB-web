@@ -66,7 +66,7 @@ const Content1 = () => {
   }, [department, getData]);
 
   return (
-    <div style={{ margin: "0 10%", display:"flex",alignItems:"center", flexDirection:"column"}}>
+    <div style={{ margin: "3% 10%", display:"flex",alignItems:"center", flexDirection:"column"}}>
       <div
         style={{
           textAlign: "center",
