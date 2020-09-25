@@ -8,6 +8,7 @@ import Content2 from './Content2';
 import Content1 from './Content1';
 import Content3 from './Content3';
 import Content4 from './Content4';
+import oc from 'open-color';
 
 const Container = styled.div`
     display:flex;
@@ -22,7 +23,7 @@ const Container = styled.div`
 const MenuBar = styled.div`
   width:10rem;
   height:100%;
-  background-color:black;
+  background-color:${oc.gray[1]};
   position:fixed;
   z-index:2;
 `;

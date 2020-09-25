@@ -6,7 +6,7 @@ class Welcome extends Component{
         return(
             <center>
                 <p style={{fontSize:"5rem"}}>Welcome 페이지</p>
-            </center>
+            </center>   
         );
     }
   }
