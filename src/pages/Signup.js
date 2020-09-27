@@ -14,13 +14,19 @@ import {
   } from 'antd';
   import { QuestionCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import oc from 'open-color';
 
 const Container = styled.div`
     display:flex;
     flex-direction:column;
-    align-items:center;
+    position:absolute;
+    min-width:800px;
+    min-height:500px;
+    width:100%;
+    height:100%;
     justify-content:center;
-    margin:2rem 0;
+    align-items:center;
+    padding-bottom:6rem;
 `;
 
 const { Option } = Select;
@@ -60,6 +66,12 @@ const residences = [
     ],
   },
 ];
+
+const Title = styled.div`
+    font-size : 3rem;
+    color: ${oc.red[9]};
+    font-family:'Rajdhani';
+`;
 
 const formItemLayout = {
   labelCol: {
@@ -128,6 +140,9 @@ const Signup = () => {
       scrollToFirstError
     >
     <Container>
+      <Title>
+        <p>Sign up</p>
+      </Title>
       <Form.Item
         name="email"
         label="이메일"
