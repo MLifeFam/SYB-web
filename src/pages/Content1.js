@@ -94,8 +94,8 @@ const Content1 = () => {
             <Option value="2">기타내용 입력</Option>
           </Select>
         </Form.Item>
-        <Form.Item label="기타내용" name="comment" style={{resize:"none"}}>
-          <TextArea disabled={isDisable} />
+        <Form.Item label="기타내용" name="comment">
+          <TextArea disabled={isDisable} style={{resize:"none"}}/>
         </Form.Item>
         <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
           <Button type="primary" htmlType="submit">

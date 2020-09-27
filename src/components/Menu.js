@@ -39,7 +39,7 @@ class Menu extends Component{
                 <Link to="/content2" style={{textDecoration: 'none'}}>
                     <Spacing>
                         <MenuContent>
-                            Content2
+                            교과과정
                         </MenuContent>
                     </Spacing>
                 </Link>

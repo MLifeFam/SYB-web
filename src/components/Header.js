@@ -25,7 +25,7 @@ const Positioner = styled.div`
 `;
 
 const GradientBorder = styled.div`
-    height: 1rem;
+    height: 3rem;
     background: linear-gradient(to right, ${oc.gray[3]}, ${oc.gray[1]});
 `;
 
@@ -52,7 +52,11 @@ const Header = ({children}) =>{
             <Positioner>    
                 <WhiteBackground>
                     <HeaderContents>
-                        <Logo>SYB ADMIN</Logo>
+                        <Link to="/main" style={{textDecoration: 'none'}}>
+                            <Logo>
+                                SYB ADMIN
+                            </Logo>
+                        </Link>
                         <Spacer/>
                         {children}
                         <Link to="/" style={{textDecoration: 'none'}}>

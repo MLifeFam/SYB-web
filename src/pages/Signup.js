@@ -144,6 +144,7 @@ const Signup = () => {
         <p>Sign up</p>
       </Title>
       <Form.Item
+        style={{width:"20rem"}}
         name="email"
         label="이메일"
         rules={[
@@ -161,6 +162,7 @@ const Signup = () => {
       </Form.Item>
 
       <Form.Item
+        style={{width:"20rem"}}
         name="password"
         label="비밀번호"
         rules={[
@@ -175,6 +177,7 @@ const Signup = () => {
       </Form.Item>
 
       <Form.Item
+        style={{width:"20rem"}}
         name="confirm"
         label="비밀번호 확인"
         dependencies={['password']}
@@ -198,6 +201,7 @@ const Signup = () => {
       </Form.Item>
 
       <Form.Item
+        style={{width:"20rem"}}
         name="name"
         label="이름"
         rules={[
