@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Option = Select.Option;
 const { TextArea } = Input;
 
-const Content1 = () => {
+const Status = () => {
   const [form] = Form.useForm();
   const [department, setDepartment] = React.useState("");
   const [isDisable, setDisable] = React.useState(true);
@@ -118,4 +118,4 @@ const Content1 = () => {
   );
 };
 
-export default Content1;
+export default Status;

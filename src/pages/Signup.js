@@ -69,7 +69,7 @@ const residences = [
 
 const Title = styled.div`
     font-size : 3rem;
-    color: ${oc.red[9]};
+    color: #a31432;
     font-family:'Rajdhani';
 `;
 

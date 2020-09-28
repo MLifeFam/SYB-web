@@ -8,7 +8,6 @@ const MenuContainer = styled.div`
     flex-direction:column;
     align-Items:center;
     padding-top:2rem;
-    
 `;
 
 const MenuContent = styled.div`
@@ -29,24 +28,24 @@ class Menu extends Component{
     render(){
         return(
             <MenuContainer>
-                <Link to="/content1" style={{textDecoration: 'none'}}>
+                <Link to="/status" style={{textDecoration: 'none'}}>
                     <Spacing>
                         <MenuContent>
                             조교 부재여부
                         </MenuContent>
                     </Spacing>
                 </Link>
-                <Link to="/content2" style={{textDecoration: 'none'}}>
+                <Link to="/curriculum" style={{textDecoration: 'none'}}>
                     <Spacing>
                         <MenuContent>
                             교과과정
                         </MenuContent>
                     </Spacing>
                 </Link>
-                <Link to="/content3" style={{textDecoration: 'none'}}>
+                <Link to="/notice" style={{textDecoration: 'none'}}>
                     <Spacing>
                         <MenuContent>
-                            Content3
+                            학과공지
                         </MenuContent>
                     </Spacing>
                 </Link>

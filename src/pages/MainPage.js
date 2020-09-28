@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import Menu from '../components/Menu';
 import Welcome from './Welcome';
-import Content2 from './Content2';
-import Content1 from './Content1';
-import Content3 from './Content3';
+import Curriculum from './Curriculum';
+import Status from './Status';
+import Notice from './Notice';
 import Content4 from './Content4';
 import oc from 'open-color';
 
@@ -22,8 +22,9 @@ const Container = styled.div`
 
 const MenuBar = styled.div`
   width:10rem;
-  height:100%;
+  height:80%;
   background-color:${oc.gray[1]};
+  border-radius:2rem;
   position:fixed;
   z-index:2;
 `;
@@ -44,15 +45,15 @@ class MainPage extends Component{
             </header>
             <Container>
               <Router>
-                <MenuBar>
+                <MenuBar style={{marginTop:"2rem"}}>
                   <Menu/>
                 </MenuBar>
-                <Contents>
+                <Contents style={{marginTop:"1rem"}}>
                   <Switch>
                     <Route path="/main" component={Welcome} exact/>
-                    <Route path="/content1" component={Content1} exact/>
-                    <Route path="/content2" component={Content2} exact/>
-                    <Route path="/content3" component={Content3} exact/>
+                    <Route path="/status" component={Status} exact/>
+                    <Route path="/curriculum" component={Curriculum} exact/>
+                    <Route path="/notice" component={Notice} exact/>
                     <Route path="/content4" component={Content4} exact/>
                   </Switch>
                 </Contents>

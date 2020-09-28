@@ -21,7 +21,7 @@ const LoginForm = styled.div`
 const Logo = styled.div`
     font-size : 6rem;
     letter-spacing:1rem;
-    color: ${oc.red[9]};
+    color: #a31432;
     font-family:'Rajdhani';
 `;
 

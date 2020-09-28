@@ -5,7 +5,7 @@ import oc from 'open-color';
 const Font = styled.div`
     font-size : 5rem;
     letter-spacing:3px;
-    color: ${oc.red[9]};
+    color: #a31432;
     font-family:'Rajdhani';
 `;
 
@@ -27,7 +27,8 @@ class Welcome extends Component{
         return(
             <CenterPos>
                 <Font>
-                    SYB ADMIN SITE.
+                    SYB ADMIN SITE. <br/>
+                    (공지사항)
                 </Font>
             </CenterPos> 
         );

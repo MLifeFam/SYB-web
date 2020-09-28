@@ -7,13 +7,13 @@ import "react-toastify/dist/ReactToastify.css";
 const Option = Select.Option;
 const { TextArea } = Input;
 
-const Content2 = () => {
+const Notice = () => {
     const [form] = Form.useForm();
     const [department, setDepartment] = React.useState("");
     const [data, setData] = React.useState([]);
     const [isDisable, setDisable] = React.useState(true);
     const getData = React.useCallback(async () => {
-      const response = await axios.get(`http://mfam.site:3001/curriculum/${department}`);
+      const response = await axios.get(`http://mfam.site:3001/notice/${department}`);
       console.log(response);
       setData(response.data);
 
@@ -34,7 +34,7 @@ const Content2 = () => {
   
     const onFinish = async (formData) => {
       const response = await axios
-      .put(`http://mfam.site:3001/curriculum/${formData.department}`, formData)
+      .put(`http://mfam.site:3001/notice/${formData.department}`, formData)
       .catch((error) => {
         toast.error("에러가 났어요!");
       });
@@ -50,7 +50,7 @@ const Content2 = () => {
     return (
       <div style={{ margin: "3% 10%", display:"flex",alignItems:"center", flexDirection:"column"}}>
         <div style={{ textAlign: "center", fontSize: "30px" }}>
-          <p>교과 과정 링크 수정 페이지</p>
+          <p>학과 공지 링크 수정 페이지</p>
         </div>
         <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
         <Form.Item label="학과" name="department" required>
@@ -87,4 +87,4 @@ const Content2 = () => {
     );
   };
   
-export default Content2;
+export default Notice;
