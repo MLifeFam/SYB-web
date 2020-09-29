@@ -7,7 +7,8 @@ import Welcome from './Welcome';
 import Curriculum from './Curriculum';
 import Status from './Status';
 import Notice from './Notice';
-import Content4 from './Content4';
+import Professor from './Professor';
+import Timetable from './Timetable';
 import oc from 'open-color';
 
 const Container = styled.div`
@@ -54,7 +55,8 @@ class MainPage extends Component{
                     <Route path="/status" component={Status} exact/>
                     <Route path="/curriculum" component={Curriculum} exact/>
                     <Route path="/notice" component={Notice} exact/>
-                    <Route path="/content4" component={Content4} exact/>
+                    <Route path="/professor" component={Professor} exact/>
+                    <Route path="/timetable" component={Timetable} exact/>
                   </Switch>
                 </Contents>
               </Router>

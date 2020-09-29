@@ -49,10 +49,17 @@ class Menu extends Component{
                         </MenuContent>
                     </Spacing>
                 </Link>
-                <Link to="/content4" style={{textDecoration: 'none'}}>
+                <Link to="/professor" style={{textDecoration: 'none'}}>
                     <Spacing>
                         <MenuContent>
-                            Content4
+                            교수님 연구실
+                        </MenuContent>
+                    </Spacing>
+                </Link>
+                <Link to="/timetable" style={{textDecoration: 'none'}}>
+                    <Spacing>
+                        <MenuContent>
+                            강의실
                         </MenuContent>
                     </Spacing>
                 </Link>
