@@ -103,8 +103,8 @@ const Status = () => {
           </Button>
         </Form.Item>
         <ToastContainer
-          position="bottom-center"
-          autoClose={3000}
+          position="bottom-right"
+          autoClose={2500}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
