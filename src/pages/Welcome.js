@@ -27,8 +27,7 @@ class Welcome extends Component{
         return(
             <CenterPos>
                 <Font>
-                    SYB ADMIN SITE. <br/>
-                    (공지사항)
+                    공지사항
                 </Font>
             </CenterPos> 
         );

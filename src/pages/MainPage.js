@@ -9,6 +9,7 @@ import Status from './Status';
 import Notice from './Notice';
 import Professor from './Professor';
 import Timetable from './Timetable';
+import Bestqa from './Bestqa';
 import oc from 'open-color';
 
 const Container = styled.div`
@@ -19,13 +20,14 @@ const Container = styled.div`
     position:absolute;
     margin-top:3rem;
     margin-left:2rem;
+    overflow:hidden;
 `;
 
 const MenuBar = styled.div`
   width:10rem;
   height:80%;
   background-color:${oc.gray[1]};
-  border-radius:2rem;
+  border-radius:1rem;
   position:fixed;
   z-index:2;
 `;
@@ -33,8 +35,9 @@ const MenuBar = styled.div`
 const Contents = styled.div`
   width:100%;
   height:100%;
-  margin-left:12rem;
-  margin-right:3rem;
+  margin:2rem 3rem 3rem 12rem;
+  border-radius:0.5rem;
+  background-color:${oc.gray[1]};
 `;
 
 class MainPage extends Component{
@@ -49,7 +52,7 @@ class MainPage extends Component{
                 <MenuBar style={{marginTop:"2rem"}}>
                   <Menu/>
                 </MenuBar>
-                <Contents style={{marginTop:"1rem"}}>
+                <Contents>
                   <Switch>
                     <Route path="/main" component={Welcome} exact/>
                     <Route path="/status" component={Status} exact/>
@@ -57,6 +60,7 @@ class MainPage extends Component{
                     <Route path="/notice" component={Notice} exact/>
                     <Route path="/professor" component={Professor} exact/>
                     <Route path="/timetable" component={Timetable} exact/>
+                    <Route path="/bestqa" component={Bestqa} exact/>
                   </Switch>
                 </Contents>
               </Router>

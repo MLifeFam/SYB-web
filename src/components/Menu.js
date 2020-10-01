@@ -11,15 +11,13 @@ const MenuContainer = styled.div`
 `;
 
 const MenuContent = styled.div`
-    color:${oc.gray[6]};
-    font-size:1rem;
-    ':hover':{
-        color:"red"
-    }
+    color:${oc.gray[7]};
+    font-weight:bold;
 `;
 
 const Spacing = styled.div`
     margin:0.5rem 0;
+    height:2rem;
 `;
 
 
@@ -60,6 +58,13 @@ class Menu extends Component{
                     <Spacing>
                         <MenuContent>
                             강의실
+                        </MenuContent>
+                    </Spacing>
+                </Link>
+                <Link to="/bestqa" style={{textDecoration: 'none'}}>
+                    <Spacing>
+                        <MenuContent>
+                            자주 묻는 질문
                         </MenuContent>
                     </Spacing>
                 </Link>

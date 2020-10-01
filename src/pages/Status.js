@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Select, Input, Button } from "antd";
 import axios from "axios";
+import styled from 'styled-components';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,7 +14,7 @@ const Status = () => {
   const [isDisable, setDisable] = React.useState(true);
   const getData = React.useCallback(async () => {
     const response = await axios.get(
-      `http://mfam.site:3001/status/${department}`
+      `https://mfam.site/status/${department}`
     );
     console.log(response);
     let data = "";
@@ -42,7 +43,7 @@ const Status = () => {
 
   const onFinish = async (data) => {
     const response = await axios
-      .put(`http://mfam.site:3001/status/${data.department}`, data)
+      .put(`https://mfam.site/status/${data.department}`, data)
       .catch((error) => {
         toast.error("에러가 났어요!");
       });
@@ -66,7 +67,7 @@ const Status = () => {
   }, [department, getData]);
 
   return (
-    <div style={{ margin: "3% 10%", display:"flex",alignItems:"center", flexDirection:"column"}}>
+    <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
       <div
         style={{
           textAlign: "center",

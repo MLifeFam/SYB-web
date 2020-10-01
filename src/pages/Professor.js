@@ -10,7 +10,7 @@ const Professor = () => {
     const [inputValue, setInputValue] = React.useState("");
     const onFinishFunc = async (data) => {
       const response = await axios
-        .put(`http://mfam.site:3001/professor/${inputValue}`, data)
+        .put(`hhttps://mfam.site/professor/${inputValue}`, data)
         .catch((error) => {
           toast.error("에러가 났어요!");
         });
@@ -25,7 +25,7 @@ const Professor = () => {
     const onSearchFunc = async () => {
       console.log(inputValue);
       const response = await axios
-        .get(`http://mfam.site:3001/professor/${inputValue}`)
+        .get(`https://mfam.site/professor/${inputValue}`)
         .catch((error) => {
           toast.error("에러가 났어요!");
         });
@@ -40,7 +40,7 @@ const Professor = () => {
       });
     };
     return (
-    <div style={{ margin: "3% 10%", display:"flex",alignItems:"center", flexDirection:"column"}}>
+    <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
         <div style={{ textAlign: "center", fontSize: "30px" }}>
           <p>교수님 연구실 수정 페이지</p>
         </div>

@@ -13,7 +13,7 @@ const Notice = () => {
     const [data, setData] = React.useState([]);
     const [isDisable, setDisable] = React.useState(true);
     const getData = React.useCallback(async () => {
-      const response = await axios.get(`http://mfam.site:3001/notice/${department}`);
+      const response = await axios.get(`https://mfam.site/notice/${department}`);
       console.log(response);
       setData(response.data);
 
@@ -34,7 +34,7 @@ const Notice = () => {
   
     const onFinish = async (formData) => {
       const response = await axios
-      .put(`http://mfam.site:3001/notice/${formData.department}`, formData)
+      .put(`https://mfam.site/notice/${formData.department}`, formData)
       .catch((error) => {
         toast.error("에러가 났어요!");
       });
@@ -48,7 +48,7 @@ const Notice = () => {
     }, [department, getData]);
 
     return (
-      <div style={{ margin: "3% 10%", display:"flex",alignItems:"center", flexDirection:"column"}}>
+      <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
         <div style={{ textAlign: "center", fontSize: "30px" }}>
           <p>학과 공지 링크 수정 페이지</p>
         </div>
