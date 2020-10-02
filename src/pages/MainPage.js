@@ -14,13 +14,19 @@ import oc from 'open-color';
 
 const Container = styled.div`
     display:flex;
+    position:fixed;
     flex-direction:row;
     width:100%;
     height:100%;
-    position:absolute;
+    min-width:800px;
+    min-height:800px;
     margin-top:3rem;
     margin-left:2rem;
-    overflow:hidden;
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 `;
 
 const MenuBar = styled.div`
@@ -34,8 +40,8 @@ const MenuBar = styled.div`
 
 const Contents = styled.div`
   width:100%;
-  height:100%;
-  margin:2rem 3rem 3rem 12rem;
+  height:72%;
+  margin:2rem 3rem 0 12rem;
   border-radius:0.5rem;
   background-color:${oc.gray[1]};
 `;
@@ -43,29 +49,30 @@ const Contents = styled.div`
 class MainPage extends Component{
     render(){
         return(
-          <>
+          <div style={{overflow:"hidden"}}>
+            
             <header>
               <Header/>
             </header>
-            <Container>
-              <Router>
-                <MenuBar style={{marginTop:"2rem"}}>
-                  <Menu/>
-                </MenuBar>
-                <Contents>
-                  <Switch>
-                    <Route path="/main" component={Welcome} exact/>
-                    <Route path="/status" component={Status} exact/>
-                    <Route path="/curriculum" component={Curriculum} exact/>
-                    <Route path="/notice" component={Notice} exact/>
-                    <Route path="/professor" component={Professor} exact/>
-                    <Route path="/timetable" component={Timetable} exact/>
-                    <Route path="/bestqa" component={Bestqa} exact/>
-                  </Switch>
-                </Contents>
-              </Router>
-            </Container>
-          </>
+              <Container>
+              <Router basename={`${process.env.PUBLIC_URL}/`}>
+                  <MenuBar style={{marginTop:"2rem"}}>
+                    <Menu/>
+                  </MenuBar>
+                  <Contents>
+                    <Switch>
+                      <Route path="/status" component={Status} exact/>
+                      <Route path="/curriculum" component={Curriculum} exact/>
+                      <Route path="/notice" component={Notice} exact/>
+                      <Route path="/professor" component={Professor} exact/>
+                      <Route path="/timetable" component={Timetable} exact/>
+                      <Route path="/bestqa" component={Bestqa} exact/>
+                      <Route path="/main" component={Welcome} exact/>
+                    </Switch>
+                  </Contents>
+                </Router>
+              </Container>
+          </div>
         );
     }
   }
