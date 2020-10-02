@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
 import styled from 'styled-components';
-import { Link, Redirect, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
 import oc from 'open-color';
 
 const Logo = styled.div`
@@ -47,11 +47,9 @@ const Header = ({children}) =>{
         return(
             <Positioner>    
                     <HeaderContents>
-                        <Link to="/main" style={{textDecoration: 'none'}}>
-                            <Logo>
-                                SYB ADMIN
-                            </Logo>
-                        </Link>
+                        <Logo>
+                            SYB ADMIN
+                        </Logo>
                         <Spacer/>
                         {children}
                         <Link to="/" style={{textDecoration: 'none'}}>

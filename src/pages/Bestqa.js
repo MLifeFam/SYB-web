@@ -22,8 +22,7 @@ const BestqaData = ({ data }) => {
           onFinish={onFinishFunc}
           form={form}
         >
-          <Form.Item label={`Top ${data.id} `} name="id"></Form.Item>
-          <Form.Item label="질문" name="question">
+          <Form.Item label={`Top ${data.id} `} name="question">
             <Input/>
           </Form.Item>
           <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>

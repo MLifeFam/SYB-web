@@ -7,15 +7,14 @@ import oc from 'open-color';
 
 const LoginForm = styled.div`
     display:flex;
-    flex-direction:column;
-    position:absolute;
     min-width:800px;
-    min-height:500px;
+    min-height:600px;
+    position:absolute;
     width:100%;
     height:100%;
+    background-color:#a31432;
     justify-content:center;
     align-items:center;
-    padding-bottom:6rem;
 `;
 
 const Logo = styled.div`
@@ -25,6 +24,18 @@ const Logo = styled.div`
     font-family:'Rajdhani';
 `;
 
+const Whitespace = styled.div`
+  display:flex;
+  flex-direction:column;
+  background-color:white;
+  justify-content:center;
+  align-items:center;
+  padding-bottom:6rem;
+  width:90%;
+  height:90%;
+  border-radius:2rem;
+`
+
 const Login = () => {
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -32,57 +43,59 @@ const Login = () => {
 
   return (
     <LoginForm>
-        <Logo style={{marginBottom:"3%"}}>
-            SYB ADMIN
-        </Logo>
-        <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-            remember: true,
-        }}
-        onFinish={onFinish}
-        >
-        <Form.Item
-            name="ID"
-            rules={[
-            {
-                required: true,
-                message: 'ID를 입력해주세요',
-            },
-            ]}
-        >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="아이디" />
-        </Form.Item>
-        <Form.Item
-            name="비밀번호"
-            rules={[
-            {
-                required: true,
-                message: '비밀번호를 입력해주세요',
-            },
-            ]}
-        >
-            <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="비밀번호"
-            />
-        </Form.Item>
+        <Whitespace>
+            <Logo style={{marginBottom:"3%"}}>
+                SYB ADMIN
+            </Logo>
+            <Form
+            name="normal_login"
+            className="login-form"
+            initialValues={{
+                remember: true,
+            }}
+            onFinish={onFinish}
+            >
+            <Form.Item
+                name="ID"
+                rules={[
+                {
+                    required: true,
+                    message: 'ID를 입력해주세요',
+                },
+                ]}
+            >
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="아이디" />
+            </Form.Item>
+            <Form.Item
+                name="비밀번호"
+                rules={[
+                {
+                    required: true,
+                    message: '비밀번호를 입력해주세요',
+                },
+                ]}
+            >
+                <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="비밀번호"
+                />
+            </Form.Item>
 
-        <Form.Item>
-            <Link to='/main' style={{margin:"0 1rem"}}>
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                    로그인
-                </Button>
-            </Link>
-            <Link to='/signup' style={{margin:"0 1rem"}}>
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                    회원가입
-                </Button>
-            </Link>
-        </Form.Item>
-        </Form>
+            <Form.Item>
+                <Link to='/main' style={{margin:"0 1rem"}}>
+                    <Button type="primary" htmlType="submit" className="login-form-button" style={{backgroundColor:"#a31432", border:"none"}}>
+                        로그인
+                    </Button>
+                </Link>
+                <Link to='/signup' style={{margin:"0 1rem"}}>
+                    <Button type="primary" htmlType="submit" className="login-form-button" style={{backgroundColor:"#a31432", border:"none"}}>
+                        회원가입
+                    </Button>
+                </Link>
+            </Form.Item>
+            </Form>
+        </Whitespace>
     </LoginForm>
   );
 };

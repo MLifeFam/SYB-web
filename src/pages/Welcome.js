@@ -1,35 +1,19 @@
 import React , { Component } from 'react';
+import axios from "axios";
+import { Form, Select, Input, Button } from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styled from 'styled-components';
 import oc from 'open-color';
-
-const Font = styled.div`
-    font-size : 5rem;
-    letter-spacing:3px;
-    color: #a31432;
-    font-family:'Rajdhani';
-`;
-
-const CenterPos = styled.div`
-    display:flex;
-    flex-direction:column;
-    position:absolute;
-    min-width:800px;
-    min-height:500px;
-    width:80%;
-    height:80%;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-`;
 
 class Welcome extends Component{
     render(){
         return(
-            <CenterPos>
-                <Font>
-                    공지사항
-                </Font>
-            </CenterPos> 
+            <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray",height:"30rem"}}>
+                <div style={{ textAlign: "center", fontSize: "30px", margin:"0 0 2rem 0"}}>
+                 소융봇 관리자 공지사항
+                </div>
+          </div>
         );
     }
   }

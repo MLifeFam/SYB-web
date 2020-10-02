@@ -18,16 +18,27 @@ import oc from 'open-color';
 
 const Container = styled.div`
     display:flex;
-    flex-direction:column;
-    position:absolute;
     min-width:800px;
-    min-height:500px;
+    min-height:600px;
+    position:absolute;
     width:100%;
     height:100%;
+    background-color:#a31432;
     justify-content:center;
     align-items:center;
-    padding-bottom:6rem;
 `;
+
+const Whitespace = styled.div`
+  display:flex;
+  flex-direction:column;
+  background-color:white;
+  justify-content:center;
+  align-items:center;
+  padding-bottom:6rem;
+  width:90%;
+  height:90%;
+  border-radius:2rem;
+`
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
@@ -140,6 +151,7 @@ const Signup = () => {
       scrollToFirstError
     >
     <Container>
+      <Whitespace>
       <Title>
         <p>Sign up</p>
       </Title>
@@ -216,11 +228,12 @@ const Signup = () => {
 
       <Form.Item {...tailFormItemLayout}>
         <Link to ='/'>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" style={{backgroundColor:"#a31432", border:"none"}}>
                 회원가입
             </Button>
         </Link>
       </Form.Item>
+      </Whitespace>
       </Container>
     </Form>
   );
