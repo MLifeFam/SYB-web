@@ -2,6 +2,7 @@ import React , { Component } from 'react';
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
 import styled from 'styled-components';
 import Header from '../components/Header';
+import Footer from '../components/Footer'
 import Menu from '../components/Menu';
 import Welcome from './Welcome';
 import Curriculum from './Curriculum';
@@ -40,7 +41,7 @@ const MenuBar = styled.div`
 
 const Contents = styled.div`
   width:100%;
-  height:72%;
+  height:80%;
   margin:2rem 3rem 0 12rem;
   border-radius:0.5rem;
   background-color:${oc.gray[1]};
@@ -49,8 +50,7 @@ const Contents = styled.div`
 class MainPage extends Component{
     render(){
         return(
-          <div style={{overflow:"hidden"}}>
-            
+          <div>
             <header>
               <Header/>
             </header>
@@ -72,6 +72,7 @@ class MainPage extends Component{
                   </Contents>
                 </Router>
               </Container>
+              <Footer/>
           </div>
         );
     }

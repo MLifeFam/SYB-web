@@ -4,9 +4,9 @@ import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
 import oc from 'open-color';
 
 const Logo = styled.div`
-    font-size : 2rem;
-    letter-spacing:15px;
-    color:#a31432;
+    font-size : 5rem;
+    letter-spacing:3px;
+    color:white;
     font-family:'Rajdhani';
 `;
 
@@ -17,13 +17,13 @@ const Spacer = styled.div`
 const Positioner = styled.div`
     display: flex;
     flex-direction: column;
-    background:white;
-    position: fixed;    
-    top: 0px;
+    background-color:${oc.gray[8]};
+    position:absolute;
+    top:100%;
     width:100%;
     min-width:800px;
     z-index:3;
-    margin:0.5rem 0;
+    opacity:0.2;
 `;
 
 const GradientBorder = styled.div`
@@ -35,31 +35,28 @@ const GradientBorder = styled.div`
 
 const HeaderContents = styled.div`
     width: 100%;
-    height: 55px;
+    height: 300px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin:0 2rem;
     padding-right: 3rem;
     padding-left: 1rem;
 `;
 
-const Header = ({children}) =>{
+const Footer = ({children}) =>{
         return(
             <Positioner>    
                     <HeaderContents>
                         <Logo>
-                            SYB ADMIN
+                            Footer TEST
                         </Logo>
                         <Spacer/>
-                        {children}
-                        <Link to="/" style={{textDecoration: 'none'}}>
-                            <Logo style={{fontSize:"1rem", letterSpacing:"3px"}}>Logout</Logo>
-                        </Link>
+                        <Logo>
+                            SYB
+                        </Logo>
                     </HeaderContents>
-                <GradientBorder/>
             </Positioner>
         );
 };
 
-export default Header;
+export default Footer;

@@ -26,6 +26,13 @@ class Menu extends Component{
     render(){
         return(
             <MenuContainer>
+                <Link to="/main" style={{textDecoration: 'none'}}>
+                    <Spacing>
+                        <MenuContent>
+                            공지사항
+                        </MenuContent>
+                    </Spacing>
+                </Link>
                 <Link to="/status" style={{textDecoration: 'none'}}>
                     <Spacing>
                         <MenuContent>
