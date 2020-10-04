@@ -58,7 +58,7 @@ const Bestqa = () => {
     }, []);
     return (
       <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
-        <div style={{ textAlign: "center", fontSize: "30px", margin:"0 0 2rem 0"}}>
+        <div style={{ textAlign: "center", fontSize: "30px", margin:"0 0 2rem 0" , fontFamily:"Gothic A1"}}>
           자주 묻는 질문 수정 페이지
         </div>
         {data.map((it, i) => {

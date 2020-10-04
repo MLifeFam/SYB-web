@@ -155,6 +155,21 @@ const Signup = () => {
       <Title>
         <p>Sign up</p>
       </Title>
+
+      <Form.Item
+        style={{width:"20rem"}}
+        name="id"
+        label="아이디"
+        rules={[
+          {
+            required: true,
+            message: '아이디를 입력해주세요.',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
       <Form.Item
         style={{width:"20rem"}}
         name="email"

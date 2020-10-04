@@ -72,9 +72,10 @@ const Status = () => {
         style={{
           textAlign: "center",
           fontSize: "30px",
+          fontFamily:"Gothic A1"
         }}
       >
-        <p>학과 조교 상태 수정 페이지</p>
+        <p >학과 조교 상태 수정 페이지</p>
       </div>
 
       <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange} style={{width:"30rem"}}>

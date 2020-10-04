@@ -49,7 +49,7 @@ const Notice = () => {
 
     return (
       <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
-        <div style={{ textAlign: "center", fontSize: "30px" }}>
+        <div style={{ textAlign: "center", fontSize: "30px", fontFamily:"Gothic A1" }}>
           <p>학과 공지 링크 수정 페이지</p>
         </div>
         <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
