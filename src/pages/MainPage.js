@@ -37,6 +37,10 @@ const MenuBar = styled.div`
   border-radius:1rem;
   position:fixed;
   z-index:2;
+
+  "&:hover": {
+      background: "#efefef"
+    }
 `;
 
 const Contents = styled.div`
