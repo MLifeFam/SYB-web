@@ -55,11 +55,12 @@ const Login = (props) => {
           userid:_id,
           password:_password,
         };
+        console.log(body);
         dispatch(loginUser(body))
           .then((res) => {
             console.log(res);
             if (res.payload.loginSuccess) {
-              props.history.push("/");
+              props.history.push("/main");
             } else {
               alert(res.payload.message);
             }
