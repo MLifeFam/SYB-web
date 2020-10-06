@@ -50,7 +50,7 @@ const Login = (props) => {
     };
     
     const onSubmitHandler = (e) => {
-        e.preventDefault();
+
         const body = {
           userid:_id,
           password:_password,
@@ -65,7 +65,7 @@ const Login = (props) => {
             }
           })
           .catch((err) => {
-            console.log(err);
+              console.log(err);
           });
       };
 
@@ -78,7 +78,7 @@ const Login = (props) => {
             <Form
             name="normal_login"
             className="login-form"
-            onSubmit={onSubmitHandler}
+            onFinish={onSubmitHandler}
             >
             <Form.Item
                 name="id"
