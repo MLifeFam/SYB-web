@@ -41,11 +41,14 @@ const MenuBar = styled.div`
   "&:hover": {
       background: "#efefef"
     }
+
+
 `;
 
 const Contents = styled.div`
   width:100%;
   height:80%;
+  min-width:800px;
   margin:2rem 3rem 0 12rem;
   border-radius:0.5rem;
   background-color:${oc.gray[1]};

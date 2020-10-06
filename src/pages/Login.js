@@ -1,8 +1,10 @@
 import React , { Component,useState } from 'react';
 import { Link, Redirect, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import { useDispatch } from "react-redux";
 import styled from 'styled-components';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { loginUser } from "../actions/userAction";
 import oc from 'open-color';
 
 const LoginForm = styled.div`
@@ -36,10 +38,36 @@ const Whitespace = styled.div`
   border-radius:2rem;
 `
 
-const Login = () => {
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
+const Login = (props) => {
+    const [_id,setId] = useState("");
+    const [_password,setPassword] = useState("");
+    const dispatch = useDispatch();
+    const onIdHandler = (e) => {
+        setId(e.currentTarget.value);
+      };
+    const onPasswordHanlder = (e) => {
+        setPassword(e.currentTarget.value);
+    };
+    
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        const body = {
+          userid:_id,
+          password:_password,
+        };
+        dispatch(loginUser(body))
+          .then((res) => {
+            console.log(res);
+            if (res.payload.loginSuccess) {
+              props.history.push("/");
+            } else {
+              alert(res.payload.message);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
 
   return (
     <LoginForm>
@@ -50,44 +78,45 @@ const Login = () => {
             <Form
             name="normal_login"
             className="login-form"
-            initialValues={{
-                remember: true,
-            }}
-            onFinish={onFinish}
+            onSubmit={onSubmitHandler}
             >
             <Form.Item
-                name="ID"
+                name="id"
                 rules={[
                 {
                     required: true,
                     message: 'ID를 입력해주세요',
                 },
                 ]}
+                style={{paddingBottom:"0.5rem"}}
             >
-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="아이디" />
+                <Input 
+                prefix={<UserOutlined className="site-form-item-icon"/>}
+                onChange={onIdHandler}
+                placeholder="아이디" />
             </Form.Item>
             <Form.Item
-                name="비밀번호"
+                name="password"
                 rules={[
                 {
                     required: true,
                     message: '비밀번호를 입력해주세요',
                 },
                 ]}
+                style={{paddingBottom:"1rem"}}
             >
                 <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="비밀번호"
+                onChange={onPasswordHanlder}
                 />
             </Form.Item>
-
+            
             <Form.Item>
-                <Link to='/main' style={{margin:"0 1rem"}}>
-                    <Button type="primary" htmlType="submit" className="login-form-button" style={{backgroundColor:"#a31432", border:"none"}}>
-                        로그인
-                    </Button>
-                </Link>
+                <Button type="primary" htmlType="submit" style={{backgroundColor:"#a31432", border:"none", margin:"0 1rem"}}>
+                   로그인
+                </Button>
                 <Link to='/signup' style={{margin:"0 1rem"}}>
                     <Button type="primary" htmlType="submit" className="login-form-button" style={{backgroundColor:"#a31432", border:"none"}}>
                         회원가입

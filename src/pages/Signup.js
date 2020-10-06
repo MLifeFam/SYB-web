@@ -107,11 +107,12 @@ const tailFormItemLayout = {
   },
 };
 
-const Signup = () => {
+const Signup = (props) => {
   const [form] = Form.useForm();
 
   const onFinish = values => {
     console.log('Received values of form: ', values);
+    props.history.push("/");
   };
 
   const prefixSelector = (
@@ -242,11 +243,9 @@ const Signup = () => {
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
-        <Link to ='/'>
-            <Button type="primary" htmlType="submit" style={{backgroundColor:"#a31432", border:"none"}}>
-                회원가입
-            </Button>
-        </Link>
+          <Button type="primary" htmlType="submit" style={{backgroundColor:"#a31432", border:"none"}}>
+              회원가입
+          </Button>
       </Form.Item>
       </Whitespace>
       </Container>
