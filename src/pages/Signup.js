@@ -14,9 +14,13 @@ import {
     Button,
     AutoComplete,
   } from 'antd';
-  import { QuestionCircleOutlined } from '@ant-design/icons';
-  import styled from 'styled-components';
-  import oc from 'open-color';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
+import oc from 'open-color';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal);
 
 const Container = styled.div`
     display:flex;
@@ -107,23 +111,20 @@ const Signup = (props) => {
         userid:_id,
         phoneNumber:_phonenum,
       };
-
+      
       dispatch(registerUser(body)).then((res) => {
-        alert("가입이 정상적으로 완료되었습니다");
+        Swal.fire({
+          icon: 'success',
+          title: '가입 완료',
+          showConfirmButton: false,
+          width:'20rem',
+          timer: 2000
+        })
         props.history.push("/");
       }).catch((err) => {
         console.log(err);
      }); 
   };
-
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
 
   return (
     <Form
@@ -152,36 +153,6 @@ const Signup = (props) => {
         ]}
       >
         <Input onChange={onIdHandler}/>
-      </Form.Item>
-
-      <Form.Item
-        style={{width:"20rem", paddingBottom:"1rem"}}
-        name="email"
-        label="이메일"
-        initialValue=""
-        hasFeedback
-        rules={[
-          {
-            type: 'email',
-            message: '올바른 이메일이 아닙니다',
-          },
-          {
-            required: true,
-            message: '이메일을 입력해주세요.',
-          },
-          ({ getFieldValue }) => ({
-            validator(rule, value) {
-              if (value.indexOf(sejongemail)===value.length-sejongemail.length || !value) {
-                return Promise.resolve();
-              }
-              return Promise.reject('');
-            },
-          }),
-          
-        ]}
-        
-      >
-        <Input onChange={onEmailHandler}/>
       </Form.Item>
 
       <Form.Item
@@ -235,6 +206,35 @@ const Signup = (props) => {
         ]}
       >
         <Input onChange={onNameHandler}/>
+      </Form.Item>
+
+      <Form.Item
+        style={{width:"20rem", paddingBottom:"1rem"}}
+        name="email"
+        label="이메일"
+        initialValue=""
+        hasFeedback
+        rules={[
+          {
+            type: 'email',
+            message: '올바른 이메일이 아닙니다',
+          },
+          {
+            required: true,
+            message: '이메일을 입력해주세요.',
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (value.indexOf(sejongemail)===value.length-sejongemail.length || !value) {
+                return Promise.resolve();
+              }
+              return Promise.reject('');
+            },
+          }),
+          
+        ]}
+      >
+        <Input onChange={onEmailHandler} placeholder="abc@sejong.ac.kr"/>
       </Form.Item>
 
       <Form.Item

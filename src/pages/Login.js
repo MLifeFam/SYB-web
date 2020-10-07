@@ -80,6 +80,7 @@ const Login = (props) => {
             name="normal_login"
             className="login-form"
             onFinish={onSubmitHandler}
+            autoComplete="off"
             >
             <Form.Item
                 name="id"

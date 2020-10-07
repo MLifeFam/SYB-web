@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/compatible": "^1.0.8",
-    "@ant-design/icons": "^4.2.2",
+    "@ant-design/icons": "4.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -22,7 +22,9 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "sweetalert2": "^10.3.5",
+    "sweetalert2-react-content": "^3.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
