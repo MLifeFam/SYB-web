@@ -1,5 +1,7 @@
 import React , { Component, useState } from 'react';
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import { registerUser } from "../actions/userAction";
+import { useDispatch } from "react-redux";
 import {
     Form,
     Input,
@@ -13,8 +15,8 @@ import {
     AutoComplete,
   } from 'antd';
   import { QuestionCircleOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
-import oc from 'open-color';
+  import styled from 'styled-components';
+  import oc from 'open-color';
 
 const Container = styled.div`
     display:flex;
@@ -39,49 +41,14 @@ const Whitespace = styled.div`
   height:90%;
   border-radius:2rem;
 `
-
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
-
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
 
 const Title = styled.div`
     font-size : 3rem;
     color: #a31432;
     font-family:'Rajdhani';
+    margin-top:5rem;
 `;
 
 const formItemLayout = {
@@ -109,10 +76,44 @@ const tailFormItemLayout = {
 
 const Signup = (props) => {
   const [form] = Form.useForm();
+  const [_id,setId] = useState("");
+  const [_password,setPassword] = useState("");
+  const [_email,setEmail] = useState("");
+  const [_name,setName] = useState("");
+  const [_phonenum,setPhonenum] = useState("");
+  const sejongemail = '@sejong.ac.kr';
+  const dispatch = useDispatch();
+  const onIdHandler = (e) => {
+    setId(e.currentTarget.value);
+  };
+  const onPasswordHanlder = (e) => {
+      setPassword(e.currentTarget.value);
+  };
+  const onEmailHandler = (e) => {
+    setEmail(e.currentTarget.value);
+  };
+  const onNameHandler = (e) => {
+    setName(e.currentTarget.value);
+  };
+  const onPhoneHandler = (e) => {
+      setPhonenum(e.currentTarget.value);
+  };
 
-  const onFinish = values => {
-    console.log('Received values of form: ', values);
-    props.history.push("/");
+  const onSubmitHandler = (e) => {
+      let body = {
+        email: _email,
+        name: _name,
+        password: _password,
+        userid:_id,
+        phoneNumber:_phonenum,
+      };
+
+      dispatch(registerUser(body)).then((res) => {
+        alert("가입이 정상적으로 완료되었습니다");
+        props.history.push("/");
+      }).catch((err) => {
+        console.log(err);
+     }); 
   };
 
   const prefixSelector = (
@@ -124,31 +125,13 @@ const Signup = (props) => {
     </Form.Item>
   );
 
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-  const onWebsiteChange = value => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(['.com', '.org', '.net'].map(domain => `${value}${domain}`));
-    }
-  };
-
-  const websiteOptions = autoCompleteResult.map(website => ({
-    label: website,
-    value: website,
-  }));
-
   return (
     <Form
       {...formItemLayout}
       form={form}
       name="register"
-      onFinish={onFinish}
-      initialValues={{
-        residence: ['zhejiang', 'hangzhou', 'xihu'],
-        prefix: '86',
-      }}
+      onFinish={onSubmitHandler}
+      autoComplete="off"
       scrollToFirstError
     >
     <Container>
@@ -158,7 +141,7 @@ const Signup = (props) => {
       </Title>
 
       <Form.Item
-        style={{width:"20rem"}}
+        style={{width:"20rem", paddingBottom:"1rem"}}
         name="id"
         label="아이디"
         rules={[
@@ -168,13 +151,15 @@ const Signup = (props) => {
           },
         ]}
       >
-        <Input />
+        <Input onChange={onIdHandler}/>
       </Form.Item>
 
       <Form.Item
-        style={{width:"20rem"}}
+        style={{width:"20rem", paddingBottom:"1rem"}}
         name="email"
         label="이메일"
+        initialValue=""
+        hasFeedback
         rules={[
           {
             type: 'email',
@@ -184,13 +169,23 @@ const Signup = (props) => {
             required: true,
             message: '이메일을 입력해주세요.',
           },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (value.indexOf(sejongemail)===value.length-sejongemail.length || !value) {
+                return Promise.resolve();
+              }
+              return Promise.reject('');
+            },
+          }),
+          
         ]}
+        
       >
-        <Input />
+        <Input onChange={onEmailHandler}/>
       </Form.Item>
 
       <Form.Item
-        style={{width:"20rem"}}
+        style={{width:"20rem", paddingBottom:"1rem"}}
         name="password"
         label="비밀번호"
         rules={[
@@ -201,11 +196,11 @@ const Signup = (props) => {
         ]}
         hasFeedback
       >
-        <Input.Password />
+        <Input.Password onChange={onPasswordHanlder}/>
       </Form.Item>
 
       <Form.Item
-        style={{width:"20rem"}}
+        style={{width:"20rem", paddingBottom:"1rem"}}
         name="confirm"
         label="비밀번호 확인"
         dependencies={['password']}
@@ -229,7 +224,7 @@ const Signup = (props) => {
       </Form.Item>
 
       <Form.Item
-        style={{width:"20rem"}}
+        style={{width:"20rem", paddingBottom:"1rem"}}
         name="name"
         label="이름"
         rules={[
@@ -239,11 +234,25 @@ const Signup = (props) => {
           },
         ]}
       >
-        <Input />
+        <Input onChange={onNameHandler}/>
+      </Form.Item>
+
+      <Form.Item
+        style={{width:"20rem", paddingBottom:"1rem"}}
+        name="phonenumber"
+        label="휴대폰 번호"
+        rules={[
+          {
+            required: true,
+            message: '휴대폰 번호를 입력해주세요.',
+          },
+        ]}
+      >
+        <Input onChange={onPhoneHandler}/>
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" style={{backgroundColor:"#a31432", border:"none"}}>
+          <Button type="primary" htmlType="submit" style={{backgroundColor:"#a31432", border:"none",marginTop:"0.5rem"}}>
               회원가입
           </Button>
       </Form.Item>
