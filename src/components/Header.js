@@ -1,8 +1,13 @@
 import React , { Component } from 'react';
 import styled from 'styled-components';
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import { Link, Redirect, Route, Switch, withRouter, BrowserRouter as Router } from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../actions/userAction";
 import oc from 'open-color';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
+const MySwal = withReactContent(Swal);
 const Logo = styled.div`
     font-size : 2rem;
     letter-spacing:15px;
@@ -44,7 +49,29 @@ const HeaderContents = styled.div`
     padding-left: 1rem;
 `;
 
-const Header = ({children}) =>{
+function Header(props) {
+    const dispatch = useDispatch();
+    const onClickHandler = () => {
+
+        dispatch(logoutUser())
+        .then((res)=>{
+            console.log(res.status);
+            if (res.status === 404) {   
+                props.history.push("/");
+              } 
+              else if(res.status){
+                  Swal.fire({
+                      icon: 'error',
+                      title:'로그아웃 실패',
+                      text: res.data.message,
+                      showConfirmButton: true,
+                      width:'25rem',
+                      timer: 2000,
+                  })
+              }
+            })
+        .catch((err)=> console.log(err));
+    };
         return(
             <Positioner>    
                     <HeaderContents>
@@ -52,14 +79,11 @@ const Header = ({children}) =>{
                             SYB ADMIN
                         </Logo>
                         <Spacer/>
-                        {children}
-                        <Link to="/" style={{textDecoration: 'none'}}>
-                            <Logo style={{fontSize:"1rem", letterSpacing:"3px"}}>Logout</Logo>
-                        </Link>
+                        <Logo style={{fontSize:"1rem", letterSpacing:"3px"}} onClick={onClickHandler}>Logout</Logo>
                     </HeaderContents>
                 <GradientBorder/>
             </Positioner>
         );
 };
 
-export default Header;
+export default withRouter(Header);  // withRouter 해야 'push'를 못찾는 에러 메세지 뜨지 않음

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { loginUser } from "../actions/userAction";
+import axios from "axios";
 import oc from 'open-color';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -53,32 +54,33 @@ const Login = (props) => {
         setPassword(e.currentTarget.value);
     };
     
-    const onSubmitHandler = (e) => {
+    const onLogin = (e) => {
 
         const body = {
           userid:_id,
           password:_password,
         };
-
-
-        console.log(body);
-
+        
         dispatch(loginUser(body))
           .then((res) => {
-            console.log(res);
+            const accessToken = res.data.token;
+
             if (res.status === 200) {
-              props.history.push("/main");
-            } 
-            else if(res.status){
-                Swal.fire({
-                    icon: 'error',
-                    title:'로그인 실패',
-                    text: res.data.message,
-                    showConfirmButton: true,
-                    width:'25rem',
-                    timer: 2000,
-                })
-            }
+                props.history.push("/main");
+                axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+                localStorage.setItem('user_token', res.data.token);
+              } 
+            else{
+                  Swal.fire({
+                      icon: 'error',
+                      title:'로그인 실패',
+                      text: res.data.message,
+                      showConfirmButton: true,
+                      width:'25rem',
+                      timer: 2000,
+                  })
+              }
+
           })
           .catch((err) => {
             console.log(err);
@@ -94,7 +96,7 @@ const Login = (props) => {
             <Form
             name="normal_login"
             className="login-form"
-            onFinish={onSubmitHandler}
+            onFinish={onLogin}
             autoComplete="off"
             >
             <Form.Item

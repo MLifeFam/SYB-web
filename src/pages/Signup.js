@@ -106,10 +106,10 @@ const Signup = (props) => {
   const onSubmitHandler = (e) => {
       let body = {
         email: _email,
-        name: _name,
+        username: _name,
         password: _password,
-        userid:_id,
-        phoneNumber:_phonenum,
+        userid: _id,
+        phoneNumber: _phonenum,
       };
       
       dispatch(registerUser(body)).then((res) => {
