@@ -6,6 +6,10 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { loginUser } from "../actions/userAction";
 import oc from 'open-color';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal);
 
 const LoginForm = styled.div`
     display:flex;
@@ -55,18 +59,29 @@ const Login = (props) => {
           userid:_id,
           password:_password,
         };
+
+
         console.log(body);
+
         dispatch(loginUser(body))
           .then((res) => {
             console.log(res);
-            if (res.payload.loginSuccess) {
+            if (res.status === 200) {
               props.history.push("/main");
-            } else {
-              alert(res.payload.message);
+            } 
+            else if(res.status){
+                Swal.fire({
+                    icon: 'error',
+                    title:'로그인 실패',
+                    text: res.data.message,
+                    showConfirmButton: true,
+                    width:'25rem',
+                    timer: 2000,
+                })
             }
           })
           .catch((err) => {
-              console.log(err);
+            console.log(err);
           });
       };
 

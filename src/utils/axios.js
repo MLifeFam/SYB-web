@@ -8,6 +8,6 @@ export const request = (method, url, data) => {
     url: DOMAIN + url,
     data,
   })
-    .then((res) => res.data)
+    .then((res) => res)
     .catch((err) => console.log(err));
 };
