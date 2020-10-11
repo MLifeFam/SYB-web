@@ -54,8 +54,9 @@ const Contents = styled.div`
   background-color:${oc.gray[1]};
 `;
 
-class MainPage extends Component{
-    render(){
+
+
+const MainPage = () => {
         return(
           <div>
             <header>
@@ -82,7 +83,6 @@ class MainPage extends Component{
               <Footer/>
           </div>
         );
-    }
   }
 
 export default MainPage;

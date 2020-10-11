@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import styled from 'styled-components';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { loginUser } from "../actions/userAction";
+import { loginUser,authUser,loginSuccess } from "../actions/userAction";
 import axios from "axios";
 import oc from 'open-color';
 import Swal from 'sweetalert2'
@@ -64,12 +64,11 @@ const Login = (props) => {
         dispatch(loginUser(body))
           .then((res) => {
             const accessToken = res.data.token;
-
             if (res.status === 200) {
-                props.history.push("/main");
-                axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-                localStorage.setItem('user_token', res.data.token);
-              } 
+                dispatch(loginSuccess(accessToken));
+                dispatch(authUser())
+                .then(props.history.push("/main"));
+            } 
             else{
                   Swal.fire({
                       icon: 'error',

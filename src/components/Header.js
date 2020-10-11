@@ -1,8 +1,9 @@
-import React , { Component } from 'react';
+import React , { Component,useState } from 'react';
 import styled from 'styled-components';
 import { Link, Redirect, Route, Switch, withRouter, BrowserRouter as Router } from "react-router-dom"
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../actions/userAction";
+import { logoutUser,authUser} from "../actions/userAction";
+import {Button} from 'antd';
 import oc from 'open-color';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -53,24 +54,9 @@ function Header(props) {
     const dispatch = useDispatch();
     const onClickHandler = () => {
 
-        dispatch(logoutUser())
-        .then((res)=>{
-            console.log(res.status);
-            if (res.status === 404) {   
-                props.history.push("/");
-              } 
-              else if(res.status){
-                  Swal.fire({
-                      icon: 'error',
-                      title:'로그아웃 실패',
-                      text: res.data.message,
-                      showConfirmButton: true,
-                      width:'25rem',
-                      timer: 2000,
-                  })
-              }
-            })
-        .catch((err)=> console.log(err));
+        dispatch(logoutUser());
+        localStorage.clear();
+        props.history.push("/");
     };
         return(
             <Positioner>    

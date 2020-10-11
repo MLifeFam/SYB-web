@@ -1,4 +1,13 @@
-import { REGISTER_USER, LOGIN_USER, LOGOUT_USER, AUTH_USER ,REGISTER_ERROR} from "./types";
+import { 
+  REGISTER_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+  AUTH_USER,
+  REGISTER_ERROR,
+  LOGIN_SUCCESS,
+  AUTH_SUCCESS,
+  AUTH_FAILED,
+} from "./types";
 import axios from "axios";
 import { request } from "../utils/axios";
 
@@ -37,26 +46,44 @@ export function registerUser(dataToSubmit) {
     };
   }
 
+  export function loginSuccess(accessToken){
+    localStorage.setItem('user_token', accessToken);
+    axios.defaults.headers.common['Authorization'] = accessToken;
+
+    return {
+      type:LOGIN_SUCCESS,
+    }     
+  }
+
   export function logoutUser(){
     return (dispatch) => {
       dispatch({
           type: LOGOUT_USER,
       });
-
-      return axios.get('https://mfam.site/auth/logout', {widthCredentials:true})
-      .then((res)=>res)
-      .catch((error)=> error.response)
     };
   }
 
-  export function authUser() {
-    return (dispatch) => {
-      dispatch({
-          type: AUTH_USER,
+  export function authUser(props) {
+    const token = localStorage.getItem('user_token');
+    const header = {
+      headers:{
+      "authorization":`Bearer ${token}`
+      }
+    }
+    return (dispatch) =>{
+
+    return axios.get('https://mfam.site/auth/check',header ,{widthCredentials:true})
+      .then((res)=> {
+        dispatch({
+          type:AUTH_SUCCESS,
+        })
+      })
+      .catch((error)=> 
+      {
+        dispatch({
+          type:AUTH_FAILED,
+        })
       });
-
-      return axios.post('https://mfam.site/auth/join', {widthCredentials:true})
-      .then((res)=>res)
-      .catch((error)=> error.response)
     };
   }
+

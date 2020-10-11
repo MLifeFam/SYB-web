@@ -13,12 +13,7 @@ export default function (Component, option , adminRoute = null){
 
         useEffect(() => {
             dispatch(authUser()).then((res) =>{
-                console.log("AUTH:"+res);
-
-                if(option){
-                    props.history.push('/');
-                }
-
+                console.log(res);
             });
         },[]);
 
