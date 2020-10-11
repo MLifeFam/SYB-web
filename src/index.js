@@ -8,10 +8,6 @@ import { applyMiddleware, createStore } from "redux";
 import promiseMiddlerware from "redux-promise";
 import reduxThunk from "redux-thunk";
 import reducer from "./reducer";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal);
 
 const createStoreWidthMiddleware = applyMiddleware(
   promiseMiddlerware,

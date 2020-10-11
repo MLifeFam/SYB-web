@@ -10,11 +10,7 @@ export function registerUser(dataToSubmit) {
           
           return axios.post('https://mfam.site/auth/signup', dataToSubmit)
           .then((response) => response)
-          .catch((error) => dispatch({
-            type: REGISTER_ERROR,
-            payload:'server error',
-          })
-          )
+          .catch((error) => error.response )
       };
   }
   
@@ -27,10 +23,12 @@ export function registerUser(dataToSubmit) {
   // }
   
   export function loginUser(dataToSubmit) {
+    const uid = dataToSubmit.userid;
+
     return (dispatch) => {
         dispatch({
             type: LOGIN_USER,
-            payload:dataToSubmit,
+            payload:uid,
         });
 
         return axios.post('https://mfam.site/auth/login', dataToSubmit)

@@ -16,6 +16,7 @@ import {
   } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import axios from "axios";
 import oc from 'open-color';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -85,10 +86,12 @@ const Signup = (props) => {
   const [_email,setEmail] = useState("");
   const [_name,setName] = useState("");
   const [_phonenum,setPhonenum] = useState("");
+  const [id_duplication,checkDup] = useState("false");
   const sejongemail = '@sejong.ac.kr';
   const dispatch = useDispatch();
   const onIdHandler = (e) => {
     setId(e.currentTarget.value);
+    checkDup(false);
   };
   const onPasswordHanlder = (e) => {
       setPassword(e.currentTarget.value);
@@ -103,6 +106,53 @@ const Signup = (props) => {
       setPhonenum(e.currentTarget.value);
   };
 
+  const onDuplicationHadnler = (e) => {
+    if(_id.length===0){
+      return ;
+    }
+
+    axios.post('https://mfam.site/auth/idCheck', {userid:_id})
+      .then((res) => {
+        console.log(res);
+        if(res.status===201){
+          Swal.fire({
+            icon: 'success',
+            text:res.data.message,
+            showConfirmButton: true,
+            width:'25rem',
+            timer: 1500
+          })
+          
+          checkDup(true);
+          console.log(id_duplication);
+        }
+        else{
+          Swal.fire({
+            icon: 'warning',
+            text:res.data.message,
+            showConfirmButton: true,
+            width:'25rem',
+            timer: 1500
+          })
+
+          checkDup(false);
+        }
+      }
+      )
+      .catch((error) =>  {     
+        console.log(error);   
+        Swal.fire({
+        icon: 'warning',
+        text: '중복된 아이디 입니다.',
+        showConfirmButton: true,
+        width:'25rem',
+        timer: 1500
+      })
+
+      checkDup(false);
+      })
+  };
+
   const onSubmitHandler = (e) => {
       let body = {
         email: _email,
@@ -111,16 +161,44 @@ const Signup = (props) => {
         userid: _id,
         phoneNumber: _phonenum,
       };
-      
-      dispatch(registerUser(body)).then((res) => {
+      console.log(body);
+
+      if(id_duplication===false){
         Swal.fire({
-          icon: 'success',
-          title: '가입 완료',
-          showConfirmButton: false,
-          width:'20rem',
+          icon: 'error',
+          title: '가입 실패',
+          text: '아이디 중복검사를 완료해주세요',
+          showConfirmButton: true,
+          width:'25rem',
           timer: 2000
         })
-        props.history.push("/");
+
+        return ;
+      }
+
+      dispatch(registerUser(body)).then((res) => {
+        
+        if(res.status===409){
+          Swal.fire({
+            icon: 'error',
+            title: '가입 실패',
+            text:res.data.message,
+            showConfirmButton: true,
+            width:'25rem',
+            timer: 2000
+          })
+        }
+        else{
+          Swal.fire({
+            icon: 'success',
+            title: '가입 완료',
+            showConfirmButton: false,
+            width:'20rem',
+            timer: 2000
+          })
+          props.history.push("/");
+        }
+        
       }).catch((err) => {
         console.log(err);
      }); 
@@ -141,6 +219,7 @@ const Signup = (props) => {
         <p>Sign up</p>
       </Title>
 
+      <div style={{display:'flex',flexDirection:'row',justifyContent:'center',marginLeft:'6rem'}}>
       <Form.Item
         style={{width:"20rem", paddingBottom:"1rem"}}
         name="id"
@@ -153,7 +232,10 @@ const Signup = (props) => {
         ]}
       >
         <Input onChange={onIdHandler}/>
+        
       </Form.Item>
+      <Button style={{position:"relatvive",width:"5rem", fontSize:"0.7rem",marginLeft:"1rem"}} onClick={onDuplicationHadnler}>중복검사</Button>
+      </div>
 
       <Form.Item
         style={{width:"20rem", paddingBottom:"1rem"}}
