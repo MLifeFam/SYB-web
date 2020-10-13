@@ -55,7 +55,7 @@ const Login = (props) => {
     };
     
     const onLogin = (e) => {
-
+        localStorage.clear();
         const body = {
           userid:_id,
           password:_password,

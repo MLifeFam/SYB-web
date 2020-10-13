@@ -48,11 +48,14 @@ export function registerUser(dataToSubmit) {
 
   export function loginSuccess(accessToken){
     localStorage.setItem('user_token', accessToken);
-    axios.defaults.headers.common['Authorization'] = accessToken;
+    //axios.defaults.headers.common['Authorization'] = accessToken;
 
-    return {
+    return (dispatch) =>{
+
+    dispatch({
       type:LOGIN_SUCCESS,
-    }     
+    });
+   }
   }
 
   export function logoutUser(){
@@ -70,13 +73,21 @@ export function registerUser(dataToSubmit) {
       "authorization":`Bearer ${token}`
       }
     }
-    return (dispatch) =>{
 
+    console.log(header);
+
+    return (dispatch) =>{
+  
     return axios.get('https://mfam.site/auth/check',header ,{widthCredentials:true})
       .then((res)=> {
         dispatch({
           type:AUTH_SUCCESS,
         })
+        
+        localStorage.setItem('userid',res.data.data.userid);
+        localStorage.setItem('username',res.data.data.username)
+
+        return res.data.data;
       })
       .catch((error)=> 
       {

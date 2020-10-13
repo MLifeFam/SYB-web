@@ -17,8 +17,10 @@ export default function (state = defaultState, action) {
       return { ...state, loggedIn:false, user:{} };
     case AUTH_USER:
       return {...state,loggedIn:true,user:{...action.payload}};
-    // case AUTH_FAILED:
-    //   return {...state,loggedIn:false,user:{}};
+    case AUTH_FAILED:
+      return {...state,loggedIn:false,user:{}};
+    case AUTH_SUCCESS:
+      return {...state,loggedIn:true};
     default:
       return state;
   }

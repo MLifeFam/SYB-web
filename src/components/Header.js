@@ -52,6 +52,9 @@ const HeaderContents = styled.div`
 
 function Header(props) {
     const dispatch = useDispatch();
+    const username = localStorage.getItem('username')
+    const _userdata = props.userdata;
+    console.log(_userdata);
     const onClickHandler = () => {
 
         dispatch(logoutUser());
@@ -65,6 +68,9 @@ function Header(props) {
                             SYB ADMIN
                         </Logo>
                         <Spacer/>
+                        <Logo style={{fontSize:"1rem",letterSpacing:"1px",paddingRight:"3rem"}}>
+                        {username}님 안녕하세요!
+                        </Logo>
                         <Logo style={{fontSize:"1rem", letterSpacing:"3px"}} onClick={onClickHandler}>Logout</Logo>
                     </HeaderContents>
                 <GradientBorder/>

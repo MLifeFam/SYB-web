@@ -12,6 +12,7 @@ import Professor from './Professor';
 import Timetable from './Timetable';
 import Bestqa from './Bestqa';
 import oc from 'open-color';
+import Auth from "../hoc/auth";
 
 const Container = styled.div`
     display:flex;
@@ -56,11 +57,12 @@ const Contents = styled.div`
 
 
 
-const MainPage = () => {
+const MainPage = (props) => {
+  const userdata = props.data;
         return(
           <div>
             <header>
-              <Header/>
+              <Header userdata={userdata}/>
             </header>
               <Container>
               <Router basename={`${process.env.PUBLIC_URL}/`}>
@@ -69,13 +71,13 @@ const MainPage = () => {
                   </MenuBar>
                   <Contents>
                     <Switch>
-                      <Route path="/status" component={Status} exact/>
-                      <Route path="/curriculum" component={Curriculum} exact/>
-                      <Route path="/notice" component={Notice} exact/>
-                      <Route path="/professor" component={Professor} exact/>
-                      <Route path="/timetable" component={Timetable} exact/>
-                      <Route path="/bestqa" component={Bestqa} exact/>
-                      <Route path="/main" component={Welcome} exact/>
+                      <Route path="/status" component={Auth(Status)} exact/>
+                      <Route path="/curriculum" component={Auth(Curriculum)} exact/>
+                      <Route path="/notice" component={Auth(Notice)} exact/>
+                      <Route path="/professor" component={Auth(Professor)} exact/>
+                      <Route path="/timetable" component={Auth(Timetable)} exact/>
+                      <Route path="/bestqa" component={Auth(Bestqa)} exact/>
+                      <Route path="/main" component={Auth(Welcome)} exact/>
                     </Switch>
                   </Contents>
                 </Router>
