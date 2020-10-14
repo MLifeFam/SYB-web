@@ -67,7 +67,11 @@ const Login = (props) => {
             if (res.status === 200) {
                 dispatch(loginSuccess(accessToken));
                 dispatch(authUser())
-                .then(props.history.push("/main"));
+                .then((res)=>{
+                    if(res){                                // res 추가해서 비동기적으로 실행되게 하기위함 (로그인 됬을 때 username 못불러오는 현상 해결)
+                        props.history.push("/main");
+                    }
+                });
             } 
             else{
                   Swal.fire({

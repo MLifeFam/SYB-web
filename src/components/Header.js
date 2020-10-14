@@ -10,7 +10,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal);
 const Logo = styled.div`
-    font-size : 2rem;
+    font-size : 2.5rem;
     letter-spacing:15px;
     color:#a31432;
     font-family:'Rajdhani';
@@ -30,6 +30,17 @@ const Positioner = styled.div`
     min-width:800px;
     z-index:3;
     margin:0.5rem 0;
+`;
+
+const Logout = styled.div`
+    font-size : 1rem;
+    letter-spacing:3px;
+    color:#a31432;
+    font-family:'Rajdhani';
+    &:hover {
+        color: ${oc.red[3]};
+        cursor: pointer;
+      }
 `;
 
 const GradientBorder = styled.div`
@@ -53,8 +64,6 @@ const HeaderContents = styled.div`
 function Header(props) {
     const dispatch = useDispatch();
     const username = localStorage.getItem('username')
-    const _userdata = props.userdata;
-    console.log(_userdata);
     const onClickHandler = () => {
 
         dispatch(logoutUser());
@@ -68,10 +77,10 @@ function Header(props) {
                             SYB ADMIN
                         </Logo>
                         <Spacer/>
-                        <Logo style={{fontSize:"1rem",letterSpacing:"1px",paddingRight:"3rem"}}>
-                        {username}님 안녕하세요!
+                        <Logo style={{fontSize:"1rem",letterSpacing:"1px",paddingRight:"3rem",fontFamily:"Gothic A1"}}>
+                        {username} 님 안녕하세요!
                         </Logo>
-                        <Logo style={{fontSize:"1rem", letterSpacing:"3px"}} onClick={onClickHandler}>Logout</Logo>
+                        <Logout onClick={onClickHandler}>Logout</Logout>
                     </HeaderContents>
                 <GradientBorder/>
             </Positioner>

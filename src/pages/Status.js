@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from 'styled-components';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CloudUploadOutlined } from "@ant-design/icons"
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -100,7 +101,7 @@ const Status = () => {
           <TextArea disabled={isDisable} style={{resize:"none"}}/>
         </Form.Item>
         <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
         </Form.Item>

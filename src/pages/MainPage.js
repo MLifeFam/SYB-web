@@ -32,13 +32,13 @@ const Container = styled.div`
 `;
 
 const MenuBar = styled.div`
-  width:10rem;
+  width:12rem;
   height:80%;
   background-color:${oc.gray[1]};
   border-radius:1rem;
   position:fixed;
   z-index:2;
-
+  border:4px groove ${oc.gray[4]};
   "&:hover": {
       background: "#efefef"
     }
@@ -50,9 +50,10 @@ const Contents = styled.div`
   width:100%;
   height:80%;
   min-width:800px;
-  margin:2rem 3rem 0 12rem;
+  margin:2rem 3rem 0 13rem;
   border-radius:0.5rem;
   background-color:${oc.gray[1]};
+  border:2px groove ${oc.gray[4]};
 `;
 
 
@@ -62,7 +63,7 @@ const MainPage = (props) => {
         return(
           <div>
             <header>
-              <Header userdata={userdata}/>
+              <Header/>
             </header>
               <Container>
               <Router basename={`${process.env.PUBLIC_URL}/`}>
@@ -82,7 +83,7 @@ const MainPage = (props) => {
                   </Contents>
                 </Router>
               </Container>
-              <Footer/>
+              {/* <Footer/> */}
           </div>
         );
   }

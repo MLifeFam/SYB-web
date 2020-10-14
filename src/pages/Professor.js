@@ -4,6 +4,7 @@ import { Form, Select, Input, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CloudUploadOutlined } from "@ant-design/icons"
 
 const Professor = () => {
     const [form] = Form.useForm();
@@ -59,7 +60,7 @@ const Professor = () => {
             <Input />
           </Form.Item>
           <Form.Item wrapperCol={{ span: 11, offset: 11 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit">
               수정하기
             </Button>
           </Form.Item>

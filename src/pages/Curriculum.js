@@ -3,6 +3,7 @@ import axios from "axios";
 import { Form, Select, Input, Button } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CloudUploadOutlined } from "@ant-design/icons"
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -33,13 +34,17 @@ const Curriculum = () => {
     };
   
     const onFinish = async (formData) => {
+      let data = {userid:localStorage.getItem('userid')};
+      Object.assign(data,formData);
+      // formdata에 userid 추가
       const response = await axios
       .put(`https://mfam.site/${formData.department}`, formData)
+      .then((res)=>{
+        toast.success("수정에 성공하였습니다!");
+      })
       .catch((error) => {
         toast.error("에러가 났어요!");
       });
-    toast.success("수정에 성공하였습니다!");
-    console.log(response);
     };
 
     React.useEffect(() => {
@@ -67,7 +72,7 @@ const Curriculum = () => {
           <Input />
         </Form.Item>
         <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
         </Form.Item>

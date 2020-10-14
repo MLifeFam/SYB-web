@@ -14,7 +14,10 @@ import {
     Button,
     AutoComplete,
   } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { 
+  QuestionCircleOutlined,
+  LeftOutlined,
+ } from '@ant-design/icons';
 import styled from 'styled-components';
 import axios from "axios";
 import oc from 'open-color';
@@ -54,6 +57,9 @@ const Title = styled.div`
     color: #a31432;
     font-family:'Rajdhani';
     margin-top:5rem;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
 `;
 
 const formItemLayout = {
@@ -78,6 +84,18 @@ const tailFormItemLayout = {
     },
   },
 };
+
+const Backwards = styled.div`
+  font-size:2.8rem;
+  left:7rem;
+  top:3.5rem;
+  color:#a31432;
+  position:absolute;
+  &:hover {
+    color: ${oc.red[8]};
+    cursor: pointer;
+  }
+`;
 
 const Signup = (props) => {
   const [form] = Form.useForm();
@@ -152,6 +170,9 @@ const Signup = (props) => {
       checkDup(false);
       })
   };
+  const a = (e) =>{
+    props.history.push("/");
+  }
 
   const onSubmitHandler = (e) => {
       let body = {
@@ -215,6 +236,9 @@ const Signup = (props) => {
     >
     <Container>
       <Whitespace>
+        <Backwards>
+          <LeftOutlined onClick={a}/>
+        </Backwards>
       <Title>
         <p>Sign up</p>
       </Title>
@@ -334,7 +358,7 @@ const Signup = (props) => {
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" style={{backgroundColor:"#a31432", border:"none",marginTop:"0.5rem"}}>
+          <Button type="primary" htmlType="submit" style={{backgroundColor:"#a31432", border:"none",margin:"0.5rem 1rem 0"}}>
               회원가입
           </Button>
       </Form.Item>

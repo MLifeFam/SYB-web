@@ -1,5 +1,15 @@
 import React , { Component } from 'react';
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import { 
+    NotificationOutlined,
+    LoadingOutlined,
+    CalendarOutlined,
+    BarsOutlined,
+    AuditOutlined,
+    LayoutOutlined,
+    MessageOutlined,
+} from '@ant-design/icons';
+import {Divider} from 'antd';
 import styled from 'styled-components';
 import oc from 'open-color';
 
@@ -17,18 +27,16 @@ const MenuContent = styled.div`
 
 const MenuItem = styled.div`
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
+  height:3rem;
   width:100%;
   border-radius:5px;
   &:hover {
     background: ${oc.gray[3]};
+    cursor: pointer;
+    font-size:1rem;
   }
-`;
-
-const Spacing = styled.div`
-    margin:0.5rem 0;
-    height:2rem;
 `;
 
 class Menu extends Component{
@@ -37,67 +45,67 @@ class Menu extends Component{
             <MenuContainer>
                 <MenuItem>
                     <Link to="/main" style={{textDecoration: 'none'}}>
-                        <Spacing>
                             <MenuContent>
+                            <NotificationOutlined style={{padding:"0 1rem"}} />
                                 공지사항
                             </MenuContent>
-                        </Spacing>
                     </Link>
                 </MenuItem>
+                <Divider style={{margin:"0"}}/>
                 <MenuItem>
                     <Link to="/status" style={{textDecoration: 'none'}}>
-                        <Spacing>
                             <MenuContent>
+                            <LoadingOutlined style={{padding:"0 1rem"}}/>
                                 조교 부재여부
                             </MenuContent>
-                        </Spacing>
                     </Link>
                 </MenuItem>
+                <Divider style={{margin:"0"}}/>
                 <MenuItem>
                     <Link to="/curriculum" style={{textDecoration: 'none'}}>
-                        <Spacing>
                             <MenuContent>
+                            <BarsOutlined style={{padding:"0 1rem"}}/>
                                 교과과정
                             </MenuContent>
-                        </Spacing>
                     </Link>
                 </MenuItem>
+                <Divider style={{margin:"0"}}/>
                 <MenuItem>
                     <Link to="/notice" style={{textDecoration: 'none'}}>
-                        <Spacing>
-                            <MenuContent>
+                            <MenuContent >
+                            <CalendarOutlined style={{padding:"0 1rem"}}/>
                                 학과공지
                             </MenuContent>
-                        </Spacing>
                     </Link>
                 </MenuItem>
+                <Divider style={{margin:"0"}}/>
                 <MenuItem>
                     <Link to="/professor" style={{textDecoration: 'none'}}>
-                        <Spacing>
                             <MenuContent>
+                            <AuditOutlined style={{padding:"0 1rem"}}/>
                                 교수님 연구실
                             </MenuContent>
-                        </Spacing>
                     </Link>
                 </MenuItem>
+                <Divider style={{margin:"0"}}/>
                 <MenuItem>
                     <Link to="/timetable" style={{textDecoration: 'none'}}>
-                        <Spacing>
                             <MenuContent>
+                            <LayoutOutlined style={{padding:"0 1rem"}}/>
                                 강의실
                             </MenuContent>
-                        </Spacing>
                     </Link>
                 </MenuItem>
+                <Divider style={{margin:"0"}}/>
                 <MenuItem>
                     <Link to="/bestqa" style={{textDecoration: 'none'}}>
-                        <Spacing>
                             <MenuContent>
+                            <MessageOutlined style={{padding:"0 1rem"}}/>
                                 자주 묻는 질문
                             </MenuContent>
-                        </Spacing>
                     </Link>
                 </MenuItem>
+                <Divider style={{margin:"0"}}/>
             </MenuContainer>
         );
     }
