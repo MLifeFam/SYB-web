@@ -4,7 +4,7 @@ import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
 import oc from 'open-color';
 
 const Logo = styled.div`
-    font-size : 5rem;
+    font-size : 2rem;
     letter-spacing:3px;
     color:white;
     font-family:'Rajdhani';
@@ -18,12 +18,12 @@ const Positioner = styled.div`
     display: flex;
     flex-direction: column;
     background-color:${oc.gray[8]};
-    position:absolute;
-    top:100%;
+    position:fixed;
+    height:6.5%;
+    bottom:0%;
     width:100%;
     min-width:800px;
-    z-index:3;
-    opacity:0.2;
+    z-index:0;
 `;
 
 const GradientBorder = styled.div`
@@ -35,7 +35,6 @@ const GradientBorder = styled.div`
 
 const HeaderContents = styled.div`
     width: 100%;
-    height: 300px;
     display: flex;
     flex-direction: row;
     align-items: center;

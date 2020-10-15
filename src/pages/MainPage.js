@@ -22,7 +22,7 @@ const Container = styled.div`
     height:100%;
     min-width:800px;
     min-height:800px;
-    margin-top:3rem;
+    margin-top:4rem;
     margin-left:2rem;
     -ms-user-select: none; 
     -moz-user-select: -moz-none;

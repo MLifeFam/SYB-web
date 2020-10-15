@@ -113,7 +113,7 @@ const Login = (props) => {
                 style={{paddingBottom:"0.5rem"}}
             >
                 <Input 
-                prefix={<UserOutlined className="site-form-item-icon"/>}
+                prefix={<UserOutlined className="site-form-item-icon" style={{paddingRight:"0.5rem"}}/>}
                 onChange={onIdHandler}
                 placeholder="아이디" />
             </Form.Item>
@@ -128,7 +128,7 @@ const Login = (props) => {
                 style={{paddingBottom:"1rem"}}
             >
                 <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
+                prefix={<LockOutlined className="site-form-item-icon" style={{paddingRight:"0.5rem"}}/>}
                 type="password"
                 placeholder="비밀번호"
                 onChange={onPasswordHanlder}

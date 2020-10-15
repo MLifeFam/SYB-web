@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link, Redirect, Route, Switch, withRouter, BrowserRouter as Router } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { logoutUser,authUser} from "../actions/userAction";
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {Button} from 'antd';
 import oc from 'open-color';
 import Swal from 'sweetalert2'
@@ -12,7 +13,7 @@ const MySwal = withReactContent(Swal);
 const Logo = styled.div`
     font-size : 2.5rem;
     letter-spacing:15px;
-    color:#a31432;
+    color:white;
     font-family:'Rajdhani';
 `;
 
@@ -23,36 +24,44 @@ const Spacer = styled.div`
 const Positioner = styled.div`
     display: flex;
     flex-direction: column;
-    background:white;
+    background:#a31432;
     position: fixed;    
     top: 0px;
     width:100%;
     min-width:800px;
     z-index:3;
-    margin:0.5rem 0;
 `;
 
 const Logout = styled.div`
-    font-size : 1rem;
+    font-size : 1.2rem;
     letter-spacing:3px;
-    color:#a31432;
+    color:black;
     font-family:'Rajdhani';
     &:hover {
-        color: ${oc.red[3]};
+        color: ${oc.gray[6]};
         cursor: pointer;
       }
 `;
 
 const GradientBorder = styled.div`
-    height:2px;
-    margin:0rem 1rem 0 2rem;
-    border-radius:5rem;
-    background: linear-gradient(to right, #a31432, #ffcccb);
+    height:10   px;
+    background: linear-gradient(to right, black, white);
+`;
+
+const UserContainer = styled.div`
+    background-color:white;
+    padding:0 3rem;
+    height:70%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    border-radius:55px;
+    border:3px solid ${oc.red[8]};
 `;
 
 const HeaderContents = styled.div`
     width: 100%;
-    height: 55px;
+    height: 75px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -77,10 +86,13 @@ function Header(props) {
                             SYB ADMIN
                         </Logo>
                         <Spacer/>
-                        <Logo style={{fontSize:"1rem",letterSpacing:"1px",paddingRight:"3rem",fontFamily:"Gothic A1"}}>
-                        {username} 님 안녕하세요!
-                        </Logo>
-                        <Logout onClick={onClickHandler}>Logout</Logout>
+                        <UserContainer>
+                            <Logo style={{fontSize:"1.2rem",letterSpacing:"1px",paddingRight:"3rem",fontFamily:"Gothic A1",color:"black"}}>
+                            <UserOutlined style={{color:"white", padding:"5px",fontSize:"1.5rem", marginRight:"1rem",borderRadius:"100%",backgroundColor:"gray"}}/>    
+                            {username}님
+                            </Logo>
+                            <Logout onClick={onClickHandler}>Logout</Logout>
+                        </UserContainer>
                     </HeaderContents>
                 <GradientBorder/>
             </Positioner>
