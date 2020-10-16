@@ -16,14 +16,14 @@ import Auth from "../hoc/auth";
 
 const Container = styled.div`
     display:flex;
-    position:fixed;
+    position:absolute;
     flex-direction:row;
     width:100%;
     height:100%;
     min-width:800px;
     min-height:800px;
     margin-top:4rem;
-    margin-left:2rem;
+    padding-left:1rem;
     -ms-user-select: none; 
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -33,7 +33,7 @@ const Container = styled.div`
 
 const MenuBar = styled.div`
   width:12rem;
-  height:80%;
+  height:85%;
   background-color:${oc.gray[1]};
   border-radius:1rem;
   position:fixed;
@@ -48,9 +48,9 @@ const MenuBar = styled.div`
 
 const Contents = styled.div`
   width:100%;
-  height:80%;
+  height:85%;
   min-width:800px;
-  margin:2rem 3rem 0 13rem;
+  margin:2rem 2rem 0 13rem;
   border-radius:0.5rem;
   background-color:${oc.gray[1]};
   border:2px groove ${oc.gray[4]};

@@ -11,7 +11,7 @@ class Welcome extends Component{
         return(
             <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray",height:"30rem"}}>
                 <div style={{ textAlign: "center", fontSize: "30px", margin:"0 0 2rem 0" , fontFamily:"Gothic A1"}}>
-                 소융봇 관리자 공지사항
+                관리자 공지사항
                 </div>
           </div>
         );

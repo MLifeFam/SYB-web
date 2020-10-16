@@ -22,6 +22,9 @@ const MenuContainer = styled.div`
 
 const MenuContent = styled.div`
     color:${oc.gray[7]};
+    width:11rem;                    // 클릭 박스 조정
+    height:100%;
+    padding:1rem 0;
     font-weight:bold;
 `;
 
