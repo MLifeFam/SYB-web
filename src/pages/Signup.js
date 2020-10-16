@@ -126,6 +126,14 @@ const Signup = (props) => {
 
   const onDuplicationHadnler = (e) => {
     if(_id.length===0){
+      Swal.fire({
+        icon: 'warning',
+        text: '아이디를 입력해주세요',
+        showConfirmButton: true,
+        width:'25rem',
+        timer: 1500
+      })
+
       return ;
     }
 
