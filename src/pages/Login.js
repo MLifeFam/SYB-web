@@ -64,7 +64,8 @@ const Login = (props) => {
         dispatch(loginUser(body))
           .then((res) => {
             const accessToken = res.data.token;
-            if (res.status === 200) {
+            console.log(res.status);
+            if (res.status === 201) {
                 dispatch(loginSuccess(accessToken));
                 dispatch(authUser())
                 .then((res)=>{

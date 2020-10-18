@@ -83,7 +83,7 @@ export function registerUser(dataToSubmit) {
         dispatch({
           type:AUTH_SUCCESS,
         })
-        
+        console.log(res.data.data);
         localStorage.setItem('userid',res.data.data.userid);
         localStorage.setItem('username',res.data.data.username)
 

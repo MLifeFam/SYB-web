@@ -101,6 +101,7 @@ const Signup = (props) => {
   const [form] = Form.useForm();
   const [_id,setId] = useState("");
   const [_password,setPassword] = useState("");
+  const [_department,setDepartment] = useState("");
   const [_email,setEmail] = useState("");
   const [_name,setName] = useState("");
   const [_phonenum,setPhonenum] = useState("");
@@ -123,6 +124,10 @@ const Signup = (props) => {
   const onPhoneHandler = (e) => {
       setPhonenum(e.currentTarget.value);
   };
+
+  const onChangeSelectFunc = React.useCallback((e) => {
+    setDepartment(form.getFieldValue("department"));
+  }, []);
 
   const onDuplicationHadnler = (e) => {
     if(_id.length===0){
@@ -189,6 +194,7 @@ const Signup = (props) => {
         password: _password,
         userid: _id,
         phoneNumber: _phonenum,
+        department:_department,
       };
       console.log(body);
 
@@ -253,7 +259,7 @@ const Signup = (props) => {
 
       <div style={{display:'flex',flexDirection:'row',justifyContent:'center',marginLeft:'6rem'}}>
       <Form.Item
-        style={{width:"20rem", paddingBottom:"1rem"}}
+        style={{width:"20rem", paddingBottom:"1%"}}
         name="id"
         label="아이디"
         rules={[
@@ -270,7 +276,7 @@ const Signup = (props) => {
       </div>
 
       <Form.Item
-        style={{width:"20rem", paddingBottom:"1rem"}}
+        style={{width:"20rem", paddingBottom:"1%"}}
         name="password"
         label="비밀번호"
         rules={[
@@ -285,7 +291,7 @@ const Signup = (props) => {
       </Form.Item>
 
       <Form.Item
-        style={{width:"20rem", paddingBottom:"1rem"}}
+        style={{width:"20rem", paddingBottom:"1%"}}
         name="confirm"
         label="비밀번호 확인"
         dependencies={['password']}
@@ -309,7 +315,7 @@ const Signup = (props) => {
       </Form.Item>
 
       <Form.Item
-        style={{width:"20rem", paddingBottom:"1rem"}}
+        style={{width:"20rem", paddingBottom:"1%"}}
         name="name"
         label="이름"
         rules={[
@@ -323,7 +329,28 @@ const Signup = (props) => {
       </Form.Item>
 
       <Form.Item
-        style={{width:"20rem", paddingBottom:"1rem"}}
+        style={{width:"20rem", paddingBottom:"1%"}}
+        name="department"
+        label="학과"
+        rules={[
+          {
+            required: true,
+            message: '학과를 선택해주세요',
+          },
+        ]}
+      >
+       <Select onChange={onChangeSelectFunc}>
+            <Option value="0">소프트웨어학과</Option>
+            <Option value="1">컴퓨터공학과</Option>
+            <Option value="2">정보보호학과</Option>
+            <Option value="3">데이터사이언스학과</Option>
+            <Option value="4">지능기전공학부</Option>
+            <Option value="5">창의소프트학부</Option>
+          </Select>
+      </Form.Item>
+
+      <Form.Item
+        style={{width:"20rem", paddingBottom:"1%"}}
         name="email"
         label="이메일"
         initialValue=""
@@ -352,7 +379,7 @@ const Signup = (props) => {
       </Form.Item>
 
       <Form.Item
-        style={{width:"20rem", paddingBottom:"1rem"}}
+        style={{width:"20rem", paddingBottom:"1%"}}
         name="phonenumber"
         label="휴대폰 번호"
         rules={[
