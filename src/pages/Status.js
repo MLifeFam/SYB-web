@@ -91,7 +91,7 @@ const Status = () => {
           shouldUpdate={(preValues,currentValues)=>preValues.status !== currentValues.status}
         >
           {({ getFieldValue })=>{
-            return form.getFieldValue('status') === "2" ?
+            return form.getFieldValue('status') === '2' || form.getFieldValue('status')==='기타내용 입력' ?
             (
               <Form.Item label="기타내용" name="comment" rules={[{required:true, messsage:'기타 내용을 입력해주세요'}]}>
                 <TextArea disabled={isDisable} style={{resize:"none"}}/>
