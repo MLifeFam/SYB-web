@@ -84,8 +84,12 @@ export function registerUser(dataToSubmit) {
           type:AUTH_SUCCESS,
         })
         console.log(res.data.data);
+
+        const department = dept(res.data.data.department);
+
         localStorage.setItem('userid',res.data.data.userid);
-        localStorage.setItem('username',res.data.data.username)
+        localStorage.setItem('username',res.data.data.username);
+        localStorage.setItem('department',department);
 
         return res.data.data;
       })
@@ -98,3 +102,29 @@ export function registerUser(dataToSubmit) {
     };
   }
 
+  function dept(num){
+
+    switch(num){
+      case 0:
+        return "컴퓨터공학과";
+        break;
+      case 1:
+        return "소프트웨어학과";
+        break;
+      case 2:
+        return "정보보호학과";
+        break;
+      case 3:
+        return "데이터사이언스학과";
+        break;   
+      case 4:
+        return "지능기전공학부";
+        break;
+      case 5:
+        return "창의소프트학부";
+        break;
+      default:
+        return "";
+    }
+
+  }

@@ -340,8 +340,8 @@ const Signup = (props) => {
         ]}
       >
        <Select onChange={onChangeSelectFunc}>
-            <Option value="0">소프트웨어학과</Option>
-            <Option value="1">컴퓨터공학과</Option>
+            <Option value="0">컴퓨터공학과</Option>
+            <Option value="1">소프트웨어학과</Option>
             <Option value="2">정보보호학과</Option>
             <Option value="3">데이터사이언스학과</Option>
             <Option value="4">지능기전공학부</Option>

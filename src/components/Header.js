@@ -50,7 +50,7 @@ const GradientBorder = styled.div`
 
 const UserContainer = styled.div`
     background-color:white;
-    padding:0 3rem;
+    padding:0 2rem;
     height:70%;
     display:flex;
     flex-direction:row;
@@ -73,6 +73,7 @@ const HeaderContents = styled.div`
 function Header(props) {
     const dispatch = useDispatch();
     const username = localStorage.getItem('username')
+    const dept = localStorage.getItem('department');
     const onClickHandler = () => {
 
         dispatch(logoutUser());
@@ -89,6 +90,7 @@ function Header(props) {
                         <UserContainer>
                             <Logo style={{fontSize:"1.2rem",letterSpacing:"1px",paddingRight:"3rem",fontFamily:"Gothic A1",color:"black"}}>
                             <UserOutlined style={{color:"white", padding:"5px",fontSize:"1.5rem", marginRight:"1rem",borderRadius:"100%",backgroundColor:"gray"}}/>    
+                            {dept}&emsp;
                             {username}님
                             </Logo>
                             <Logout onClick={onClickHandler}>Logout</Logout>

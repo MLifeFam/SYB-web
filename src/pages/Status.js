@@ -3,6 +3,7 @@ import { Form, Select, Input, Button } from "antd";
 import axios from "axios";
 import styled from 'styled-components';
 import { ToastContainer, toast } from "react-toastify";
+import { FormInstance } from 'antd/lib/form';
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
 
@@ -11,13 +12,13 @@ const { TextArea } = Input;
 
 const Status = () => {
   const [form] = Form.useForm();
-  const [department, setDepartment] = React.useState("");
+  const department = localStorage.getItem('department');
   const [isDisable, setDisable] = React.useState(true);
   const getData = React.useCallback(async () => {
     const response = await axios.get(
       `https://mfam.site/status/${department}`
     );
-    console.log(response);
+    console.log(response.data);
     let data = "";
     if (response.data[0].status === 0) {
       data = "근무중";
@@ -31,12 +32,7 @@ const Status = () => {
       status: data,
       comment: response.data[0].comment,
     });
-  }, [department]);
-
-  const onChangeSelectFunc = React.useCallback((e) => {
-    console.log(form.getFieldValue("department"));
-    setDepartment(form.getFieldValue("department"));
-  }, []);
+  });
 
   const onValuesChange = (changedValue, allValue) => {
     console.log(changedValue);
@@ -46,7 +42,7 @@ const Status = () => {
     const response = await axios
       .put(`https://mfam.site/status/${data.department}`, data)
       .catch((error) => {
-        toast.error("에러가 났어요!");
+        return toast.error("에러가 났어요!");
       });
     toast.success("등록에 성공하였습니다!");
     console.log(response);
@@ -76,19 +72,12 @@ const Status = () => {
           fontFamily:"Gothic A1"
         }}
       >
-        <p >학과 조교 상태 수정 페이지</p>
+        <p >{department} 조교 상태 수정 페이지</p>
       </div>
 
       <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
-        <Form.Item label="학과" name="department" required>
-          <Select onChange={onChangeSelectFunc}>
-            <Option value="소프트웨어학과">소프트웨어학과</Option>
-            <Option value="컴퓨터공학과">컴퓨터공학과</Option>
-            <Option value="데이터사이언스학과">데이터사이언스학과</Option>
-            <Option value="정보보호학과">정보보호학과</Option>
-            <Option value="지능기전공학부">지능기전공학부</Option>
-            <Option value="창의소프트학부">창의소프트학부</Option>
-          </Select>
+        <Form.Item label="학과" name="department" value={department} required>
+          <Input readOnly="true"/>
         </Form.Item>
         <Form.Item label="상태" name="status" required>
           <Select>
@@ -97,8 +86,18 @@ const Status = () => {
             <Option value="2">기타내용 입력</Option>
           </Select>
         </Form.Item>
-        <Form.Item label="기타내용" name="comment">
-          <TextArea disabled={isDisable} style={{resize:"none"}}/>
+        <Form.Item
+          noStyle
+          shouldUpdate={(preValues,currentValues)=>preValues.status !== currentValues.status}
+        >
+          {({ getFieldValue })=>{
+            return form.getFieldValue('status') === "2" ?
+            (
+              <Form.Item label="기타내용" name="comment" rules={[{required:true, messsage:'기타 내용을 입력해주세요'}]}>
+                <TextArea disabled={isDisable} style={{resize:"none"}}/>
+              </Form.Item>)
+            : null;
+          }}
         </Form.Item>
         <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
           <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit">
