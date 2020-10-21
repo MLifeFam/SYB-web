@@ -8,6 +8,7 @@ import {
     AuditOutlined,
     LayoutOutlined,
     MessageOutlined,
+    BulbOutlined,
 } from '@ant-design/icons';
 import {Divider} from 'antd';
 import styled from 'styled-components';
@@ -51,6 +52,15 @@ class Menu extends Component{
                             <MenuContent>
                             <NotificationOutlined style={{padding:"0 1rem"}} />
                                 공지사항
+                            </MenuContent>
+                    </Link>
+                </MenuItem>
+                <Divider style={{margin:"0"}}/>
+                <MenuItem>
+                    <Link to="/question" style={{textDecoration: 'none'}}>
+                            <MenuContent>
+                            <BulbOutlined style={{padding:"0 1rem"}} />
+                                질문 추가 및 수정
                             </MenuContent>
                     </Link>
                 </MenuItem>

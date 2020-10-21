@@ -8,6 +8,7 @@ import Welcome from './Welcome';
 import Curriculum from './Curriculum';
 import Status from './Status';
 import Notice from './Notice';
+import Question from './Question';
 import Professor from './Professor';
 import Timetable from './Timetable';
 import Bestqa from './Bestqa';
@@ -73,6 +74,7 @@ const MainPage = (props) => {
                   <Contents>
                     <Switch>
                       <Route path="/status" component={Auth(Status)} exact/>
+                      <Route path="/question" component={Auth(Question)} exact/>
                       <Route path="/curriculum" component={Auth(Curriculum)} exact/>
                       <Route path="/notice" component={Auth(Notice)} exact/>
                       <Route path="/professor" component={Auth(Professor)} exact/>

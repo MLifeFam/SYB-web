@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 const Notice = () => {
     const [form] = Form.useForm();
-    const [department, setDepartment] = React.useState("");
+    const department = localStorage.getItem('department');
     const [data, setData] = React.useState([]);
     const [isDisable, setDisable] = React.useState(true);
     const getData = React.useCallback(async () => {
@@ -26,7 +26,6 @@ const Notice = () => {
 
     const onChangeSelectFunc = React.useCallback((e) => {
       console.log(form.getFieldValue("department"));
-      setDepartment(form.getFieldValue("department"));
     }, []);
   
     const onValuesChange = (changedValue, allValue) => {
@@ -54,15 +53,8 @@ const Notice = () => {
           <p>학과 공지 링크 수정 페이지</p>
         </div>
         <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
-        <Form.Item label="학과" name="department" required>
-          <Select onChange={onChangeSelectFunc}>
-            <Option value="소프트웨어학과">소프트웨어학과</Option>
-            <Option value="컴퓨터공학과">컴퓨터공학과</Option>
-            <Option value="데이터사이언스학과">데이터사이언스학과</Option>
-            <Option value="정보보호학과">정보보호학과</Option>
-            <Option value="지능기전공학부">지능기전공학부</Option>
-            <Option value="창의소프트학부">창의소프트학부</Option>
-          </Select>
+        <Form.Item label="학과" name="department" value={department} required>
+          <Input readOnly="true"/>
         </Form.Item>
         <Form.Item label="링크" name="link" required>
           <Input />
