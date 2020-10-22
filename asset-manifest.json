@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/SYB-web/static/css/main.7cf30ed2.chunk.css",
-    "main.js": "/SYB-web/static/js/main.895ff7d5.chunk.js",
-    "main.js.map": "/SYB-web/static/js/main.895ff7d5.chunk.js.map",
+    "main.js": "/SYB-web/static/js/main.0f8559ec.chunk.js",
+    "main.js.map": "/SYB-web/static/js/main.0f8559ec.chunk.js.map",
     "runtime-main.js": "/SYB-web/static/js/runtime-main.56f6806b.js",
     "runtime-main.js.map": "/SYB-web/static/js/runtime-main.56f6806b.js.map",
     "static/css/2.5b5524e9.chunk.css": "/SYB-web/static/css/2.5b5524e9.chunk.css",
-    "static/js/2.3da55730.chunk.js": "/SYB-web/static/js/2.3da55730.chunk.js",
-    "static/js/2.3da55730.chunk.js.map": "/SYB-web/static/js/2.3da55730.chunk.js.map",
+    "static/js/2.6e89ae82.chunk.js": "/SYB-web/static/js/2.6e89ae82.chunk.js",
+    "static/js/2.6e89ae82.chunk.js.map": "/SYB-web/static/js/2.6e89ae82.chunk.js.map",
     "index.html": "/SYB-web/index.html",
-    "precache-manifest.fb1f5110cf1bd95690f004818d064627.js": "/SYB-web/precache-manifest.fb1f5110cf1bd95690f004818d064627.js",
+    "precache-manifest.47e31c8a9dc20135763a7aa292f5ed88.js": "/SYB-web/precache-manifest.47e31c8a9dc20135763a7aa292f5ed88.js",
     "service-worker.js": "/SYB-web/service-worker.js",
     "static/css/2.5b5524e9.chunk.css.map": "/SYB-web/static/css/2.5b5524e9.chunk.css.map",
     "static/css/main.7cf30ed2.chunk.css.map": "/SYB-web/static/css/main.7cf30ed2.chunk.css.map",
-    "static/js/2.3da55730.chunk.js.LICENSE.txt": "/SYB-web/static/js/2.3da55730.chunk.js.LICENSE.txt"
+    "static/js/2.6e89ae82.chunk.js.LICENSE.txt": "/SYB-web/static/js/2.6e89ae82.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.56f6806b.js",
     "static/css/2.5b5524e9.chunk.css",
-    "static/js/2.3da55730.chunk.js",
+    "static/js/2.6e89ae82.chunk.js",
     "static/css/main.7cf30ed2.chunk.css",
-    "static/js/main.895ff7d5.chunk.js"
+    "static/js/main.0f8559ec.chunk.js"
   ]
 }
