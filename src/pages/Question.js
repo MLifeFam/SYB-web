@@ -38,6 +38,13 @@ const List = ({data}) => {
   };
 
   const onChangeFunc = async (formData) => {
+      // 공백 문자처리
+      for (const [key, value] of Object.entries(formData)) {
+        if(value === undefined || value === null || value === NaN){
+          formData[key]="";
+        }
+      }
+      
     const response = await axios
       .put(`https://mfam.site/knowledgePlus/${data[0]}`, formData)
       .catch((error) => {
@@ -63,7 +70,7 @@ const List = ({data}) => {
       category5: data[5],
       question: data[6],
       questionAnswer: data[7],
-      landingUrl: "",
+      landingUrl: data[8],
       imageinfo: data[9],
     });
   },0);
@@ -94,14 +101,44 @@ const List = ({data}) => {
           onFieldsChange={onValuesChange} 
           style={{width:"95%", padding:"0 5%"}}
         >
-          <Form.Item label="질문" name="question" required>
+         <Form.Item 
+            label="질문" 
+            name="question"
+            rules={[
+              {
+                required: true,
+                message: '질문을 입력해주세요',
+              },
+            ]}
+            required
+          >
             <Input initialvalues={data[6]}/>
           </Form.Item>
-          <Form.Item label="답변" name="questionAnswer" required>
-            <Input initialvalues={data[7]}/>
+          <Form.Item
+            label="답변"
+            name="questionAnswer"
+            rules={[
+              {
+                required: true,
+                message: '답변을 입력해주세요',
+              },
+            ]}
+            required
+          >
+            <Input initialvalues={data[6]}/>
           </Form.Item>
-          <Form.Item label="카테고리 1" name="category1" required>
-            <Input initialvalues={data[1]}/>
+          <Form.Item
+            label="카테고리 1"
+            name="category1"
+            rules={[
+              {
+                required: true,
+                message: '하나 이상의 카테고리를 설정해주세요',
+              },
+            ]}
+            required
+          >
+            <Input initialvalues={data[6]}/>
           </Form.Item>
           <Form.Item label="카테고리 2" name="category2">
             <Input initialvalues={data[2]}/>
@@ -167,6 +204,13 @@ const Question = () => {
   };
 
   const onFinishFunc = async (formData) => {
+    // 공백 문자처리
+    for (const [key, value] of Object.entries(formData)) {
+      if(value === undefined || value === null || value === NaN){
+        formData[key]="";
+      }
+    }
+
     const response = await axios
       .post(`https://mfam.site/knowledgePlus`, formData)
       .catch((error) => {
@@ -227,13 +271,43 @@ const Question = () => {
           onFieldsChange={onValuesChange} 
           style={{width:"95%", padding:"0 5%"}}
         >
-          <Form.Item label="질문" name="question" required>
+          <Form.Item 
+            label="질문" 
+            name="question"
+            rules={[
+              {
+                required: true,
+                message: '질문을 입력해주세요',
+              },
+            ]}
+            required
+          >
             <Input/>
           </Form.Item>
-          <Form.Item label="답변" name="questionAnswer" required>
+          <Form.Item
+            label="답변"
+            name="questionAnswer"
+            rules={[
+              {
+                required: true,
+                message: '답변을 입력해주세요',
+              },
+            ]}
+            required
+          >
             <Input/>
           </Form.Item>
-          <Form.Item label="카테고리 1" name="category1" required>
+          <Form.Item
+            label="카테고리 1"
+            name="category1"
+            rules={[
+              {
+                required: true,
+                message: '하나 이상의 카테고리를 설정해주세요',
+              },
+            ]}
+            required
+          >
             <Input/>
           </Form.Item>
           <Form.Item label="카테고리 2" name="category2">
