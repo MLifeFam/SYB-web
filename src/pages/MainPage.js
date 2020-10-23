@@ -74,7 +74,7 @@ const MainPage = (props) => {
                   <Contents>
                     <Switch>
                       <Route path="/status" component={Auth(Status)} exact/>
-                      <Route path="/question" component={Auth(Question)} exact/>
+                      <Route path="/question" component={Question} exact/>
                       <Route path="/curriculum" component={Auth(Curriculum)} exact/>
                       <Route path="/notice" component={Auth(Notice)} exact/>
                       <Route path="/professor" component={Auth(Professor)} exact/>

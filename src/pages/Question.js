@@ -29,12 +29,14 @@ const List = ({data}) => {
 
   const onDeleteFunc = async (formData) => {
     const response = await axios
-      .delete(`https://mfam.site/knowledgePlus/${data[0]}`, formData)
+      .delete(`https://mfam.site/knowledgePlus/${data.faqno}`, formData)
       .catch((error) => {
         return toast.error("에러가 났어요!");
         console.log(error);
       });
-    toast.success("수정에 성공하였습니다!");
+    toast.success("질문을 삭제했습니다!");
+    setVisible(false);
+    data.props.history.push("/question");
   };
 
   const onChangeFunc = async (formData) => {
@@ -44,16 +46,17 @@ const List = ({data}) => {
           formData[key]="";
         }
       }
-      
+
     const response = await axios
-      .put(`https://mfam.site/knowledgePlus/${data[0]}`, formData)
+      .put(`https://mfam.site/knowledgePlus/${data.faqno}`, formData)
       .catch((error) => {
         return toast.error("에러가 났어요!");
         console.log(error);
       });
-    toast.success("수정에 성공하였습니다!");
+    toast.success("질문을 수정했습니다!");
     console.log(response);
-
+    setVisible(false);
+    data.props.history.push("/question");
   };
 
   const onValuesChange = (changedValue, allValue) => {
@@ -62,25 +65,26 @@ const List = ({data}) => {
 
   setTimeout(function () {
     form.setFieldsValue({
-      faqno:data[0],
-      category1: data[1],
-      category2: data[2],
-      category3: data[3],
-      category4: data[4],
-      category5: data[5],
-      question: data[6],
-      questionAnswer: data[7],
-      landingUrl: data[8],
-      imageinfo: data[9],
+      faqno:data.faqno,
+      category1: data.category1,
+      category2: data.category2,
+      category3: data.category3,
+      category4: data.category4,
+      category5: data.category5,
+      question: data.question,
+      questionAnswer: data.questionAnswer,
+      landingUrl: data.landingUrl,
+      imageinfo: data.imageinfo,
     });
   },0);
 
+
   return (
     <>
-    <Divider orientation="left">{data[10]}</Divider>
+    <Divider orientation="left">{data.count}</Divider>
     <Row justify="start" style={{width:"90%" , border:"1px solid lightgray",padding:"0.8rem 0",margin:"0 1rem", display:"flex",alignItems:"center",borderRadius:"5px"}}>
       <Col flex={9} style={{marginLeft:"2rem"}}>
-        {data[6]}
+        {data.question}
       </Col>
       <Col flex={1}>
         <Button onClick={FormHandler}>수정하기</Button>
@@ -112,7 +116,7 @@ const List = ({data}) => {
             ]}
             required
           >
-            <Input initialvalues={data[6]}/>
+            <Input initialvalues={data.question}/>
           </Form.Item>
           <Form.Item
             label="답변"
@@ -125,7 +129,7 @@ const List = ({data}) => {
             ]}
             required
           >
-            <Input initialvalues={data[6]}/>
+            <Input initialvalues={data.questionAnswer}/>
           </Form.Item>
           <Form.Item
             label="카테고리 1"
@@ -138,25 +142,25 @@ const List = ({data}) => {
             ]}
             required
           >
-            <Input initialvalues={data[6]}/>
+            <Input initialvalues={data.category1}/>
           </Form.Item>
           <Form.Item label="카테고리 2" name="category2">
-            <Input initialvalues={data[2]}/>
+            <Input initialvalues={data.category2}/>
           </Form.Item>
           <Form.Item label="카테고리 3" name="category3">
-            <Input initialvalues={data[3]}/>
+            <Input initialvalues={data.category3}/>
           </Form.Item>
           <Form.Item label="카테고리 4" name="category4">
-            <Input initialvalues={data[4]}/>
+            <Input initialvalues={data.category4}/>
           </Form.Item>
           <Form.Item label="카테고리 5" name="category5">
-            <Input initialvalues={data[5]}/>
+            <Input initialvalues={data.category5}/>
           </Form.Item>
           <Form.Item label="답변링크" name="landingUrl">
-            <Input initialvalues={data[8]}/>
+            <Input initialvalues={data.landingUrl}/>
           </Form.Item>
           <Form.Item label="이미지링크" name="imageinfo">
-            <Input initialvalues={data[9]}/>
+            <Input initialvalues={data.imageinfo}/>
           </Form.Item>
           
           <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
@@ -186,7 +190,7 @@ const List = ({data}) => {
   );
 };
 
-const Question = () => {
+const Question = (props) => {
   const [form] = Form.useForm();
   const [visible,setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
@@ -217,8 +221,10 @@ const Question = () => {
         return toast.error("에러가 났어요!");
         console.log(error);
       });
-    toast.success("수정에 성공하였습니다!");
+    toast.success("질문을 등록했습니다!");
     console.log(response);
+    getData();
+    setVisible(false);
   };
 
   const onValuesChange = (changedValue, allValue) => {
@@ -226,9 +232,11 @@ const Question = () => {
   };
  
   const getData = React.useCallback(async () => {
-    const response = await axios.get(`https://mfam.site/knowledgePlus/kakao`);
-    setData(response.data.values.reverse());
+    const response = await axios.get(`https://mfam.site/knowledgePlus`);
+    setData(response.data.reverse());
+    //setData(response.data.values.reverse());
   }, []);
+
   React.useEffect(() => {
     getData();
   }, []);
@@ -245,7 +253,8 @@ const Question = () => {
         <p >질문 수정 페이지</p>
       </div>
       {data.map((it,i)=>{
-        it[10]=(data.length-i);
+        it.count=data.length-i;
+        it.props=props;
         return(
             <List key = {i} data={it}/>
         )
