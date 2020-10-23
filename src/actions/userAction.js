@@ -30,6 +30,12 @@ export function registerUser(dataToSubmit) {
   //       payload: data,
   //   };
   // }
+
+  export function LoadQuestion(){
+    return axios.get(`https://mfam.site/knowledgePlus`)
+    .then((response => response.data.reverse()))
+    .catch((error)=>error.response);
+  }
   
   export function loginUser(dataToSubmit) {
     const uid = dataToSubmit.userid;
