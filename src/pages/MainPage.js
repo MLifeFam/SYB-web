@@ -43,8 +43,6 @@ const MenuBar = styled.div`
   "&:hover": {
       background: "#efefef"
     }
-
-
 `;
 
 const Contents = styled.div`
@@ -56,8 +54,6 @@ const Contents = styled.div`
   background-color:${oc.gray[1]};
   border:2px groove ${oc.gray[4]};
 `;
-
-
 
 const MainPage = (props) => {
   const userdata = props.data;

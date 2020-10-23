@@ -77,7 +77,7 @@ const Question = (props) => {
         it.count=data.length-i;
         it.props=props;
         return(
-            <QuestionList key = {i} data={it}/>
+            <QuestionList key = {i} data={it} getData={getData}/>
         )
       })}
       <div style={{marginBottom:"2rem"}}/>
@@ -98,7 +98,8 @@ const Question = (props) => {
         <Form 
           form={form} 
           onFinish={onFinishFunc} 
-          onFieldsChange={onValuesChange} 
+          onFieldsChange={onValuesChange}
+          autoComplete="off"
           style={{width:"95%", padding:"0 5%"}}
         >
           <Form.Item 

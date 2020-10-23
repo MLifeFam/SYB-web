@@ -21,6 +21,7 @@ const BestqaData = ({ data }) => {
         <Form
           initialValues={{ id: data.id, question: data.question }}
           onFinish={onFinishFunc}
+          autoComplete="off"
           form={form}
         >
           <Form.Item label={`Top ${data.id} `} name="question">

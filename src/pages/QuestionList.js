@@ -7,7 +7,7 @@ import { FormInstance } from 'antd/lib/form';
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
 
-const QuestionList = ({data}) => {
+const QuestionList = ({data,getData}) => {
     console.log(data);
     const [form] = Form.useForm();
     const [visible,setVisible] = React.useState(false);
@@ -33,8 +33,7 @@ const QuestionList = ({data}) => {
         });
       toast.success("질문을 삭제했습니다!");
       setVisible(false);
-      data.props.history.push("/main");
-      data.props.history.push("/question");
+      getData();
     };
   
     const onChangeFunc = async (formData) => {
@@ -54,8 +53,7 @@ const QuestionList = ({data}) => {
       toast.success("질문을 수정했습니다!");
       console.log(response);
       setVisible(false);
-      data.props.history.push("/main");
-      data.props.history.push("/question");
+      getData();
     };
   
     const onValuesChange = (changedValue, allValue) => {
@@ -101,7 +99,8 @@ const QuestionList = ({data}) => {
           <Form 
             form={form} 
             onFinish={onChangeFunc} 
-            onFieldsChange={onValuesChange} 
+            onFieldsChange={onValuesChange}
+            autoComplete="off"
             style={{width:"95%", padding:"0 5%"}}
           >
            <Form.Item 

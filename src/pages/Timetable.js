@@ -51,7 +51,7 @@ const Timetable = () => {
             Search
           </Button>
         </div>
-        <Form form={form} onFinish={onFinishFunc} style={{width:"30rem"}}>
+        <Form form={form} onFinish={onFinishFunc} autoComplete="off" style={{width:"30rem"}}>
           <Form.Item label="링크" name="link">
             <Input />
           </Form.Item>

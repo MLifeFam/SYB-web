@@ -52,7 +52,7 @@ const Professor = () => {
             Search
           </Button>
         </div>
-        <Form form={form} onFinish={onFinishFunc} style={{width:"30rem"}}>
+        <Form form={form} onFinish={onFinishFunc} autoComplete="off" style={{width:"30rem"}}>
           <Form.Item label="연구실" name="class_position">
             <Input />
           </Form.Item>
