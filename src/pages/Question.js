@@ -12,6 +12,8 @@ const Option = Select.Option;
 const { TextArea } = Input;
 
 const Question = (props) => {
+  const pageSize = 3;
+  // 한 페이지에 담을 데이터 수
   const [form] = Form.useForm();
   const [visible,setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
@@ -30,10 +32,13 @@ const Question = (props) => {
   };
 
   const PageRefresh = (num) => {
-    const _data= data.slice(num-1,num);
+    const _data= data.slice((num-1)*pageSize,(num-1)*pageSize+pageSize);
+    // data page에 따라 자르는 작업
 
     return _data.map((it,i)=>{
-      it.count=data.length-num+1;
+      it.count=data.length-i-(pageSize*(page-1));
+      // 게시글 번호 계산
+    
       it.props=props;
       return(
           <QuestionList key = {i} data={it} getData={getData} setPage={setPage} page={page}/>
@@ -67,6 +72,7 @@ const Question = (props) => {
   };
  
   const onPageChange = (pagenum) => {
+    //pagenum은 1,2,3,4 식으로 전송 됨.
     setPage(pagenum);
     getData();
   }
@@ -102,7 +108,7 @@ const Question = (props) => {
       {PageRefresh(page)}
       <div style={{marginBottom:"2rem"}}/>
       
-      <Pagination current={page} total={data.length} defaultPageSize={1} onChange={onPageChange} style={{marginBottom:"1.5rem"}}/>
+      <Pagination current={page} total={data.length} defaultPageSize={pageSize} onChange={onPageChange} style={{marginBottom:"1.5rem"}}/>
 
       <Button onClick={FormHandler}>
         질문 추가
