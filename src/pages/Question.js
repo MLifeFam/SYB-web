@@ -189,7 +189,7 @@ const Question = (props) => {
             <Input/>
           </Form.Item>
           <Form.Item colon={false} wrapperCol={{ span: 11, offset: 10 }}>
-            <Button icon ={<CloudUploadOutlined />} htmlType="submit" style={{margin:"0 1rem"}}>
+            <Button icon ={<CloudUploadOutlined />} htmlType="submit" style={{margin:"1rem 1rem 0 1rem"}}>
               추가하기
             </Button>
           </Form.Item>
