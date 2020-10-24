@@ -188,8 +188,8 @@ const Question = (props) => {
           <Form.Item label="이미지링크" name="imageinfo">
             <Input/>
           </Form.Item>
-          <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
-            <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit" style={{margin:"0 1rem"}}>
+          <Form.Item colon={false} wrapperCol={{ span: 11, offset: 10 }}>
+            <Button icon ={<CloudUploadOutlined />} htmlType="submit" style={{margin:"0 1rem"}}>
               추가하기
             </Button>
           </Form.Item>

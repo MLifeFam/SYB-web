@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from 'antd/lib/form';
 import "react-toastify/dist/ReactToastify.css";
-import { CloudUploadOutlined } from "@ant-design/icons"
+import { CloudUploadOutlined , ExclamationCircleOutlined } from "@ant-design/icons"
 
 const QuestionList = ({data,getData,setPage,page}) => {
     console.log(data);
@@ -82,7 +82,7 @@ const QuestionList = ({data,getData,setPage,page}) => {
       <>
       <Divider orientation="left">{data.count}</Divider>
       <Row justify="start" style={{width:"90%" , border:"1px solid lightgray",padding:"0.8rem 0",margin:"0 1rem", display:"flex",alignItems:"center",borderRadius:"5px"}}>
-        <Col flex={9} style={{marginLeft:"2rem"}}>
+        <Col flex={9} style={{marginLeft:"2rem",width:"70%"}}>
           {data.question}
         </Col>
         <Col flex={1}>
@@ -163,14 +163,14 @@ const QuestionList = ({data,getData,setPage,page}) => {
               <Input initialvalues={data.imageinfo}/>
             </Form.Item>
             
-            <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
-              <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit" style={{margin:"0 1rem"}}>
+            <Form.Item colon={false} wrapperCol={{ span: 20, offset: 7 }}>
+              <Button icon ={<CloudUploadOutlined />} htmlType="submit">
                 수정하기
               </Button>
+            <Button icon ={<ExclamationCircleOutlined />} type="primary" onClick={onDeleteFunc} style={{backgroundColor:"red", color:"white",border:"none",marginLeft:"3rem"}}>
+                삭제하기
+              </Button>
             </Form.Item>
-            <Button type="primary" onClick={onDeleteFunc} style={{backgroundColor:"red", color:"white",border:"none"}}>
-              삭제하기
-            </Button>
           </Form>
           </Modal>
         </Col>
