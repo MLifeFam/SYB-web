@@ -7,7 +7,7 @@ import { FormInstance } from 'antd/lib/form';
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
 
-const QuestionList = ({data,getData}) => {
+const QuestionList = ({data,getData,setPage,page}) => {
     console.log(data);
     const [form] = Form.useForm();
     const [visible,setVisible] = React.useState(false);
@@ -33,6 +33,7 @@ const QuestionList = ({data,getData}) => {
         });
       toast.success("질문을 삭제했습니다!");
       setVisible(false);
+      setPage(page);
       getData();
     };
   
@@ -53,6 +54,7 @@ const QuestionList = ({data,getData}) => {
       toast.success("질문을 수정했습니다!");
       console.log(response);
       setVisible(false);
+      setPage(page);
       getData();
     };
   

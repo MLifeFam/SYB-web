@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Select, Input, Button,Row, Col, Divider,Modal } from "antd";
+import { Form, Select, Input, Button,Row, Col, Divider,Modal,Pagination } from "antd";
 import axios from "axios";
 import styled from 'styled-components';
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +15,7 @@ const Question = (props) => {
   const [form] = Form.useForm();
   const [visible,setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
+  const [page,setPage] = React.useState(1);
   const num = data[0];
   const FormHandler = () => {
     setVisible(true);
@@ -26,6 +27,18 @@ const Question = (props) => {
 
   const handleCancel = (e) => {
     setVisible(false);
+  };
+
+  const PageRefresh = (num) => {
+    const _data= data.slice(num-1,num);
+
+    return _data.map((it,i)=>{
+      it.count=data.length-num+1;
+      it.props=props;
+      return(
+          <QuestionList key = {i} data={it} getData={getData} setPage={setPage} page={page}/>
+      )
+    })
   };
 
   const onFinishFunc = async (formData) => {
@@ -44,6 +57,7 @@ const Question = (props) => {
       });
     toast.success("질문을 등록했습니다!");
     console.log(response);
+    setPage(1);
     getData();
     setVisible(false);
   };
@@ -52,6 +66,11 @@ const Question = (props) => {
     console.log(changedValue);
   };
  
+  const onPageChange = (pagenum) => {
+    setPage(pagenum);
+    getData();
+  }
+
   const getData = React.useCallback(async () => {
     const response = await axios.get(`https://mfam.site/knowledgePlus`);
     setData(response.data.reverse());
@@ -73,14 +92,18 @@ const Question = (props) => {
       >
         <p >질문 수정 페이지</p>
       </div>
-      {data.map((it,i)=>{
+      {/* {data.map((it,i)=>{
         it.count=data.length-i;
         it.props=props;
         return(
             <QuestionList key = {i} data={it} getData={getData}/>
         )
-      })}
+      })} */}
+      {PageRefresh(page)}
       <div style={{marginBottom:"2rem"}}/>
+      
+      <Pagination current={page} total={data.length} defaultPageSize={1} onChange={onPageChange} style={{marginBottom:"1.5rem"}}/>
+
       <Button onClick={FormHandler}>
         질문 추가
       </Button>
@@ -159,7 +182,6 @@ const Question = (props) => {
           <Form.Item label="이미지링크" name="imageinfo">
             <Input/>
           </Form.Item>
-          
           <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
             <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit" style={{margin:"0 1rem"}}>
               추가하기
