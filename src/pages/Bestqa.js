@@ -24,7 +24,7 @@ const BestqaData = ({ data }) => {
           autoComplete="off"
           form={form}
         >
-          <Form.Item label={`Top ${data.id} `} name="question">
+          <Form.Item label={`TOP ${data.id} `} name="question">
             <Input/>
           </Form.Item>
           <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>

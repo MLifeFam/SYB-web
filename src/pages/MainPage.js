@@ -43,6 +43,9 @@ const MenuBar = styled.div`
   "&:hover": {
       background: "#efefef"
     }
+  // @media (max-width: 767px) {
+  //     display:none;
+  // }
 `;
 
 const Contents = styled.div`

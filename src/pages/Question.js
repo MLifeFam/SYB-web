@@ -12,8 +12,8 @@ const Option = Select.Option;
 const { TextArea } = Input;
 
 const Question = (props) => {
-  const pageSize = 3;
-  // 한 페이지에 담을 데이터 수
+  const pageSize = parseInt(window.innerHeight/200);
+  // 한 페이지에 담을 데이터 수 (height에 따라 개수 다르게 설정)
   const [form] = Form.useForm();
   const [visible,setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
