@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9f4ae50b225ecc676020b34e995ab862",
+    "revision": "45bb282e81e7342f2f46149a9d74f5c5",
     "url": "/SYB-web/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SYB-web/static/css/2.5b5524e9.chunk.css"
   },
   {
-    "revision": "eee70236ad3b423b756e",
+    "revision": "7ae1b57fb226a9530d34",
     "url": "/SYB-web/static/css/main.7cf30ed2.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SYB-web/static/js/2.6072b1bc.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "eee70236ad3b423b756e",
-    "url": "/SYB-web/static/js/main.fdada8ed.chunk.js"
+    "revision": "7ae1b57fb226a9530d34",
+    "url": "/SYB-web/static/js/main.d848ccbf.chunk.js"
   },
   {
     "revision": "124577c4a5d3c7622829",
