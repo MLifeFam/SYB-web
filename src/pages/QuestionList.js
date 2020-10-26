@@ -172,7 +172,8 @@ const QuestionList = ({data,getData,setPage,page}) => {
               </Button>
             </Form.Item>
           </Form>
-          </Modal>
+          </Modal>13
+          
         </Col>
       </Row>
       <ToastContainer

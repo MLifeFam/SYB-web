@@ -49,7 +49,7 @@ const MenuBar = styled.div`
 `;
 
 const Contents = styled.div`
-  width:100%;
+  width:85%;
   height:85%;
   min-width:800px;
   margin:2rem 2rem 0 13rem;

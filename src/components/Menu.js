@@ -43,11 +43,15 @@ const MenuItem = styled.div`
   }
 `;
 
-class Menu extends Component{
-    render(){
+
+
+const Menu = () => {
+    const ScrollTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      };
         return(
             <MenuContainer>
-                <MenuItem>
+                <MenuItem onClick={ScrollTop}>
                     <Link to="/main" style={{textDecoration: 'none'}}>
                             <MenuContent>
                             <NotificationOutlined style={{padding:"0 1rem"}} />
@@ -56,7 +60,7 @@ class Menu extends Component{
                     </Link>
                 </MenuItem>
                 <Divider style={{margin:"0"}}/>
-                <MenuItem>
+                <MenuItem onClick={ScrollTop}>
                     <Link to="/question" style={{textDecoration: 'none'}}>
                             <MenuContent>
                             <BulbOutlined style={{padding:"0 1rem"}} />
@@ -65,7 +69,7 @@ class Menu extends Component{
                     </Link>
                 </MenuItem>
                 <Divider style={{margin:"0"}}/>
-                <MenuItem>
+                <MenuItem onClick={ScrollTop}>
                     <Link to="/status" style={{textDecoration: 'none'}}>
                             <MenuContent>
                             <LoadingOutlined style={{padding:"0 1rem"}}/>
@@ -74,7 +78,7 @@ class Menu extends Component{
                     </Link>
                 </MenuItem>
                 <Divider style={{margin:"0"}}/>
-                <MenuItem>
+                <MenuItem onClick={ScrollTop}>
                     <Link to="/curriculum" style={{textDecoration: 'none'}}>
                             <MenuContent>
                             <BarsOutlined style={{padding:"0 1rem"}}/>
@@ -83,16 +87,16 @@ class Menu extends Component{
                     </Link>
                 </MenuItem>
                 <Divider style={{margin:"0"}}/>
-                <MenuItem>
+                <MenuItem onClick={ScrollTop}>
                     <Link to="/notice" style={{textDecoration: 'none'}}>
                             <MenuContent >
                             <CalendarOutlined style={{padding:"0 1rem"}}/>
                                 학과공지
                             </MenuContent>
                     </Link>
-                </MenuItem>
+                </MenuItem >
                 <Divider style={{margin:"0"}}/>
-                <MenuItem>
+                <MenuItem onClick={ScrollTop}>
                     <Link to="/professor" style={{textDecoration: 'none'}}>
                             <MenuContent>
                             <AuditOutlined style={{padding:"0 1rem"}}/>
@@ -101,7 +105,7 @@ class Menu extends Component{
                     </Link>
                 </MenuItem>
                 <Divider style={{margin:"0"}}/>
-                <MenuItem>
+                <MenuItem onClick={ScrollTop}>
                     <Link to="/timetable" style={{textDecoration: 'none'}}>
                             <MenuContent>
                             <LayoutOutlined style={{padding:"0 1rem"}}/>
@@ -110,7 +114,7 @@ class Menu extends Component{
                     </Link>
                 </MenuItem>
                 <Divider style={{margin:"0"}}/>
-                <MenuItem>
+                <MenuItem onClick={ScrollTop}>
                     <Link to="/bestqa" style={{textDecoration: 'none'}}>
                             <MenuContent>
                             <MessageOutlined style={{padding:"0 1rem"}}/>
@@ -122,6 +126,5 @@ class Menu extends Component{
             </MenuContainer>
         );
     }
-  }
 
 export default Menu;
