@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6c6587fae9ad0a1ef72d5cb6166a7231",
+    "revision": "9031ff640c3a2d7ab595d9e63d2a230c",
     "url": "/SYB-web/index.html"
   },
   {
-    "revision": "a75ec33009ff09310fcf",
+    "revision": "0f4528812966e5293af8",
     "url": "/SYB-web/static/css/2.5b5524e9.chunk.css"
   },
   {
-    "revision": "a7f3cec4ec4802280696",
+    "revision": "7cb89e30697a655d1b79",
     "url": "/SYB-web/static/css/main.7cf30ed2.chunk.css"
   },
   {
-    "revision": "a75ec33009ff09310fcf",
-    "url": "/SYB-web/static/js/2.6072b1bc.chunk.js"
+    "revision": "0f4528812966e5293af8",
+    "url": "/SYB-web/static/js/2.8ebf24f7.chunk.js"
   },
   {
     "revision": "2712bb73ae10d07f00f875dd2c841e45",
-    "url": "/SYB-web/static/js/2.6072b1bc.chunk.js.LICENSE.txt"
+    "url": "/SYB-web/static/js/2.8ebf24f7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a7f3cec4ec4802280696",
-    "url": "/SYB-web/static/js/main.8edf04be.chunk.js"
+    "revision": "7cb89e30697a655d1b79",
+    "url": "/SYB-web/static/js/main.a863553b.chunk.js"
   },
   {
     "revision": "124577c4a5d3c7622829",
