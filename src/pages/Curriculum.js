@@ -48,13 +48,6 @@ const Curriculum = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           onFinish(formData);
-          Swal.fire({
-            icon: 'success',
-            title: '수정 완료',
-            showConfirmButton: false,
-            width:'20rem',
-            timer: 1500
-          })
         }
       });
     }
@@ -66,10 +59,18 @@ const Curriculum = () => {
       const response = await axios
       .put(`https://mfam.site/curriculum/${formData.department}`, formData)
       .then((res)=>{
-        return toast.success("수정에 성공하였습니다!");
+        if(res.status===200){
+          return Swal.fire({
+            icon: 'success',
+            title: '수정 완료',
+            showConfirmButton: false,
+            width:'20rem',
+            timer: 1500
+          })
+        }
       })
-      .catch((error) => {
-        return toast.error("에러가 났어요!");
+      .catch((err)=>{
+        toast.error("서버와의 에러가 발생했습니다!");
       });
     };
 

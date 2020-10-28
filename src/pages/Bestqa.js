@@ -44,8 +44,9 @@ const BestqaData = ({ data }) => {
           toast.error("서버와의 에러가 발생했습니다!");
         }
         })
-      
-      return false;
+        .catch((err)=>{
+          toast.error("서버와의 에러가 발생했습니다!");
+        });
     };
 
     return (
