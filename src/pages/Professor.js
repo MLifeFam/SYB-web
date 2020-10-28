@@ -5,19 +5,49 @@ import { SearchOutlined } from "@ant-design/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal);
 
 const Professor = () => {
     const [form] = Form.useForm();
     const [inputValue, setInputValue] = React.useState("");
     const onFinishFunc = async (data) => {
+      console.log(inputValue);
       const response = await axios
-        .put(`hhttps://mfam.site/professor/${inputValue}`, data)
-        .catch((error) => {
-          toast.error("에러가 났어요!");
+        .put(`https://mfam.site/professor/${inputValue}`, data)
+        .then((res)=>{
+          if(res.status===200){
+            return Swal.fire({
+              icon: 'success',
+              title: '수정 완료',
+              showConfirmButton: false,
+              width:'20rem',
+              timer: 1500
+            })
+          }
+        })
+        .catch((err)=>{
+          toast.error("서버와의 에러가 발생했습니다!");
         });
-      toast.success("수정에 성공하였습니다!");
-      console.log(response);
-    };
+      };
+
+    const confirmFunc = (formData) => {
+      Swal.fire({
+        title: '수정하시겠습니까?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '네',
+        cancelButtonText:'아니요'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          onFinishFunc(formData);
+        }
+      });
+    }
   
     const onChangeFunc = (e) => {
       setInputValue(e.target.value);
