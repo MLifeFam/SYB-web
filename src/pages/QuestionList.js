@@ -6,6 +6,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from 'antd/lib/form';
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined , ExclamationCircleOutlined } from "@ant-design/icons"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal);
 
 const QuestionList = ({data,getData,setPage,page}) => {
     console.log(data);
@@ -23,6 +27,22 @@ const QuestionList = ({data,getData,setPage,page}) => {
     const handleCancel = (e) => {
       setVisible(false);
     };
+
+    const confirmFunc = (formData) => {
+      Swal.fire({
+        title: '삭제하시겠습니까?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '네',
+        cancelButtonText:'아니요'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          onDeleteFunc(formData);
+        }
+      });
+    }
   
     const onDeleteFunc = async (formData) => {
       const response = await axios
@@ -47,15 +67,22 @@ const QuestionList = ({data,getData,setPage,page}) => {
   
       const response = await axios
         .put(`https://mfam.site/knowledgePlus/${data.faqno}`, formData)
+        .then((res)=>{
+          console.log(res.status);
+          if(res.status===200){
+          setVisible(false);
+          setPage(page);
+          getData();
+          toast.success("질문을 수정했습니다!");
+          }
+          else{
+            toast.error("에러가 났어요!");
+          }
+        })
         .catch((error) => {
-          return toast.error("에러가 났어요!");
-          console.log(error);
+          toast.error("에러가 났어요!");
         });
-      toast.success("질문을 수정했습니다!");
-      console.log(response);
-      setVisible(false);
-      setPage(page);
-      getData();
+
     };
   
     const onValuesChange = (changedValue, allValue) => {
@@ -167,7 +194,7 @@ const QuestionList = ({data,getData,setPage,page}) => {
               <Button icon ={<CloudUploadOutlined />} htmlType="submit">
                 수정하기
               </Button>
-            <Button icon ={<ExclamationCircleOutlined />} type="primary" onClick={onDeleteFunc} style={{backgroundColor:"red", color:"white",border:"none",marginLeft:"3rem"}}>
+            <Button icon ={<ExclamationCircleOutlined />} type="primary" onClick={confirmFunc} style={{backgroundColor:"red", color:"white",border:"none",marginLeft:"3rem"}}>
                 삭제하기
               </Button>
             </Form.Item>

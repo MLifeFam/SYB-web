@@ -59,15 +59,18 @@ const Question = (props) => {
 
     const response = await axios
       .post(`https://mfam.site/knowledgePlus`, formData)
+      .then((res)=>{
+        console.log(res);
+        if(res.status===200){
+          toast.success("질문을 등록했습니다!");
+          setPage(1);
+          getData();
+          setVisible(false);
+        }
+      })
       .catch((error) => {
-        return toast.error("에러가 났어요!");
-        console.log(error);
+        toast.error("서버와의 에러가 발생했습니다!");
       });
-    toast.success("질문을 등록했습니다!");
-    console.log(response);
-    setPage(1);
-    getData();
-    setVisible(false);
   };
 
   const onValuesChange = (changedValue, allValue) => {
