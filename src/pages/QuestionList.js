@@ -172,7 +172,7 @@ const QuestionList = ({data,getData,setPage,page}) => {
               </Button>
             </Form.Item>
           </Form>
-          </Modal>13
+          </Modal>
           
         </Col>
       </Row>

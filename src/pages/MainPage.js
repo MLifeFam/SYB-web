@@ -17,12 +17,13 @@ import Auth from "../hoc/auth";
 
 const Container = styled.div`
     display:flex;
-    position:absolute;
+    position:relative;
     flex-direction:row;
     width:100%;
     height:100%;
     min-width:800px;
     min-height:800px;
+    margin-bottom:3rem;
     margin-top:4rem;
     padding-left:1rem;
     -ms-user-select: none; 
@@ -51,6 +52,7 @@ const MenuBar = styled.div`
 const Contents = styled.div`
   width:85%;
   height:85%;
+  min-height:600px;
   min-width:800px;
   margin:2rem 2rem 0 13rem;
   border-radius:0.5rem;

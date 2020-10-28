@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import { Link, Route, useHistory, Switch, BrowserRouter as Router } from "react-router-dom"
 import { 
     NotificationOutlined,
     LoadingOutlined,
@@ -46,9 +46,13 @@ const MenuItem = styled.div`
 
 
 const Menu = () => {
+    let history = useHistory();
     const ScrollTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       };
+    const click = () => {
+        console.log(history.location.pathname);
+    }
         return(
             <MenuContainer>
                 <MenuItem onClick={ScrollTop}>
