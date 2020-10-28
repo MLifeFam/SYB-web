@@ -4,6 +4,10 @@ import { Form, Select, Input, Button } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal);
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -31,15 +35,40 @@ const Notice = () => {
     const onValuesChange = (changedValue, allValue) => {
       console.log(changedValue);
     };
+
+    const confirmFunc = (formData) => {
+      Swal.fire({
+        title: '수정하시겠습니까?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '네',
+        cancelButtonText:'아니요'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          onFinish(formData);
+        }
+      });
+    }
   
     const onFinish = async (formData) => {
       const response = await axios
       .put(`https://mfam.site/notice/${formData.department}`, formData)
-      .catch((error) => {
-        toast.error("에러가 났어요!");
+      .then((res)=>{
+        if(res.status===200){
+          return Swal.fire({
+            icon: 'success',
+            title: '수정 완료',
+            showConfirmButton: false,
+            width:'20rem',
+            timer: 1500
+          })
+        }
+      })
+      .catch((err)=>{
+        toast.error("서버와의 에러가 발생했습니다!");
       });
-    toast.success("수정에 성공하였습니다!");
-    console.log(response);
     };
 
     React.useEffect(() => {
@@ -52,7 +81,7 @@ const Notice = () => {
         <div style={{ textAlign: "center", fontSize: "30px", fontFamily:"Gothic A1" }}>
           <p>학과 공지 링크 수정 페이지</p>
         </div>
-        <Form form={form} onFinish={onFinish} onFieldsChange={onValuesChange} autoComplete="off" style={{width:"30rem"}}>
+        <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} autoComplete="off" style={{width:"30rem"}}>
         <Form.Item label="학과" name="department" value={department} required>
           <Input readOnly="true"/>
         </Form.Item>
