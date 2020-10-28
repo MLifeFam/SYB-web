@@ -31,10 +31,10 @@ const QuestionList = ({data,getData,setPage,page}) => {
           return toast.error("에러가 났어요!");
           console.log(error);
         });
-      toast.success("질문을 삭제했습니다!");
       setVisible(false);
       setPage(page);
       getData();
+      toast.success("질문을 삭제했습니다!");
     };
   
     const onChangeFunc = async (formData) => {

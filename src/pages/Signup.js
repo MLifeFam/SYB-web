@@ -346,7 +346,7 @@ const Signup = (props) => {
             <Option value="3">데이터사이언스학과</Option>
             <Option value="4">지능기전공학부</Option>
             <Option value="5">창의소프트학부</Option>
-          </Select>
+        </Select>
       </Form.Item>
 
       <Form.Item
