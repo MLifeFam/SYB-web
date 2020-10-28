@@ -54,9 +54,12 @@ const Professor = () => {
     };
   
     const onSearchFunc = async () => {
-      console.log(inputValue);
+      let name = inputValue.replace(/(\s*)/g,"");   // 띄어쓰기 제거
+      if(name.length<2){
+        return toast.error("존재하지 않는 이름입니다.");
+      }
       const response = await axios
-        .get(`https://mfam.site/professor/${inputValue}`)
+        .get(`https://mfam.site/professor/${name}`)
         .catch((error) => {
           toast.error("에러가 났어요!");
         });
@@ -70,6 +73,7 @@ const Professor = () => {
         phone_number: response.data[0].phone_number,
       });
     };
+    
     return (
     <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
         <div style={{ textAlign: "center", fontSize: "30px", fontFamily:"Gothic A1" }}>
