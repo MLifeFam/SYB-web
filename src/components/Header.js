@@ -91,7 +91,7 @@ function Header(props) {
                             <Logo style={{fontSize:"1.2rem",letterSpacing:"1px",paddingRight:"3rem",fontFamily:"Gothic A1",color:"black"}}>
                             <UserOutlined style={{color:"white", padding:"5px",fontSize:"1.5rem", marginRight:"1rem",borderRadius:"100%",backgroundColor:"gray"}}/>    
                             {dept}&emsp;
-                            {username}님
+                            {username} 조교님
                             </Logo>
                             <Logout onClick={onClickHandler}>Logout</Logout>
                         </UserContainer>

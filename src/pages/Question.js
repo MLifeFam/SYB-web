@@ -34,8 +34,8 @@ const Question = (props) => {
   const PageRefresh = (num) => {
     const _data= data.slice((num-1)*pageSize,(num-1)*pageSize+pageSize);
     // data page에 따라 자르는 작업
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     // data 새로 불러올시 맨 위로 스크롤
     
     return _data.map((it,i)=>{

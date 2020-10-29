@@ -37,11 +37,13 @@ const MenuItem = styled.div`
   height:3rem;
   width:100%;
   border-radius:5px;
+  transition: all 0.2s;
   &:hover {
     background: ${oc.gray[3]};
     cursor: pointer;
     font-size:1rem;
   }
+
 `;
 
 
@@ -49,11 +51,9 @@ const MenuItem = styled.div`
 const Menu = () => {
     let history = useHistory();
     const ScrollTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      };
-    const click = () => {
-        console.log(history.location.pathname);
-    }
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+     };
+     
         return(
             <MenuContainer>
                 <MenuItem onClick={ScrollTop}>
