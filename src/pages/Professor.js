@@ -1,6 +1,6 @@
-import React from "react";
+import React , {useEffect} from "react";
 import axios from "axios";
-import { Form, Select, Input, Button } from "antd";
+import { AutoComplete, Form, Select, Input, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +11,7 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal);
 
 const Professor = () => {
+    const [list,setlist]=React.useState([]);
     const [form] = Form.useForm();
     const [inputValue, setInputValue] = React.useState("");
     const onFinishFunc = async (data) => {
@@ -48,13 +49,17 @@ const Professor = () => {
         }
       });
     }
+
+    const onSelect = (data) =>{
+      console.log('onSelect',data);
+    }
   
-    const onChangeFunc = (e) => {
-      setInputValue(e.target.value);
+    const onChangeFunc = (name) => {
+      setInputValue(name);
     };
   
     const onSearchFunc = async () => {
-      let name = inputValue.replace(/(\s*)/g,"");   // 띄어쓰기 제거
+      let name = inputValue;
       if(name.length<2){
         return toast.error("존재하지 않는 이름입니다.");
       }
@@ -73,7 +78,20 @@ const Professor = () => {
         phone_number: response.data[0].phone_number,
       });
     };
-    
+
+    useEffect(() => {
+      let p_list = [];
+      axios.get(`https://mfam.site/professor/`)
+      .then((res)=>{
+        res.data.map((v,i)=>{
+            p_list.push({value:v.name})
+        })
+      });
+
+      setlist(p_list);
+    }, [])
+
+
     return (
     <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
         <div style={{ textAlign: "center", fontSize: "30px", fontFamily:"Gothic A1" }}>
@@ -81,17 +99,27 @@ const Professor = () => {
         </div>
         <div style={{ display: "flex", flexDirection: "row", margin: "0 0 2rem 0", width:"30rem"}}>
           <p style={{width:"5rem"}}>성함:</p>
-          <Input style={{ margin: "0 4% 0 0" }} onChange={onChangeFunc} />
-          <Button icon={<SearchOutlined />} onClick={onSearchFunc}>
+          <AutoComplete 
+            style={{width:"100%", marginRight:"1rem"}} 
+            options={list}
+            placeholder="교수님 성함을 입력해주세요"
+            filterOption={(input,option)=>
+              option.value.indexOf(input)===0
+            }
+            onChange={onChangeFunc}
+            requried
+          />
+            {/* <Input style={{ margin: "0 4% 0 0" }} onChange={onChangeFunc} /> */}
+           <Button icon={<SearchOutlined />} onClick={onSearchFunc}>
             Search
           </Button>
         </div>
         <Form form={form} onFinish={onFinishFunc} autoComplete="off" style={{width:"30rem"}}>
-          <Form.Item label="연구실" name="class_position">
+          <Form.Item label="연구실" name="class_position" required>
             <Input />
           </Form.Item>
-          <Form.Item label="전화번호" name="phone_number">
-            <Input />
+          <Form.Item label="전화번호" name="phone_number" required>
+            <Input/>
           </Form.Item>
           <Form.Item wrapperCol={{ span: 11, offset: 11 }}>
             <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit">

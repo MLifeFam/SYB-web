@@ -9,6 +9,7 @@ import {
     LayoutOutlined,
     MessageOutlined,
     BulbOutlined,
+    ClockCircleOutlined,
 } from '@ant-design/icons';
 import {Divider} from 'antd';
 import styled from 'styled-components';
@@ -76,7 +77,7 @@ const Menu = () => {
                 <MenuItem onClick={ScrollTop}>
                     <Link to="/status" style={{textDecoration: 'none'}}>
                             <MenuContent>
-                            <LoadingOutlined style={{padding:"0 1rem"}}/>
+                            <ClockCircleOutlined style={{padding:"0 1rem"}}/>
                                 조교 부재여부
                             </MenuContent>
                     </Link>
