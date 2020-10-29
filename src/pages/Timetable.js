@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import axios from "axios";
-import { Form, Select, Input, Button } from "antd";
+import { Form, Select, Input, Button,AutoComplete } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,10 +11,16 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal);
 
 const Timetable = () => {
+    const [list,setlist]=React.useState([]);
     const [form] = Form.useForm();
     const [inputValue, setInputValue] = React.useState("");
+    const [nameCheck, setNameCheck] = React.useState(false);
 
     const confirmFunc = (formData) => {
+      if(nameCheck === false){
+        return toast.error("강의실 이름을 Seacrh 해주세요!");
+      }
+      
       Swal.fire({
         title: '수정하시겠습니까?',
         icon: 'warning',
@@ -49,8 +55,9 @@ const Timetable = () => {
         });
       };
   
-    const onChangeFunc = (e) => {
-      setInputValue(e.target.value);
+    const onChangeFunc = (name) => {
+      setNameCheck(false);
+      setInputValue(name);
     };
   
     const onSearchFunc = async () => {
@@ -69,11 +76,25 @@ const Timetable = () => {
       }
       else{
         toast.success("강의실 정보를 성공적으로 불러왔습니다.");
+        setNameCheck(true);
         form.setFieldsValue({
           link: response.data[0].link,
         });
       }
     };
+
+    useEffect(() => {
+      let p_list = [];
+      axios.get(`https://mfam.site/timetable/`)
+      .then((res)=>{
+        res.data.map((v,i)=>{
+            p_list.push({value:v.classname});
+        })
+      });
+
+      setlist(p_list);
+    }, [])
+
     return (
     <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
         <div style={{ textAlign: "center", fontSize: "30px" , fontFamily:"Gothic A1"}}>
@@ -81,7 +102,16 @@ const Timetable = () => {
         </div>
         <div style={{ display: "flex", flexDirection: "row", margin: "0 0 2rem 0", width:"30rem"}}>
           <p style={{width:"5rem"}}>강의실:</p>
-          <Input style={{ margin: "0 4% 0 0" }} onChange={onChangeFunc} />
+          <AutoComplete 
+            style={{width:"100%", marginRight:"1rem"}} 
+            options={list}
+            placeholder="강의실을 입력해주세요"
+            filterOption={(input,option)=>
+              option.value.indexOf(input)!==-1
+            }
+            onChange={onChangeFunc}
+            requried
+          />
           <Button icon={<SearchOutlined />} onClick={onSearchFunc}>
             Search
           </Button>

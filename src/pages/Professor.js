@@ -14,8 +14,8 @@ const Professor = () => {
     const [list,setlist]=React.useState([]);
     const [form] = Form.useForm();
     const [inputValue, setInputValue] = React.useState("");
+    const [nameCheck, setNameCheck] = React.useState(false);
     const onFinishFunc = async (data) => {
-      console.log(inputValue);
       const response = await axios
         .put(`https://mfam.site/professor/${inputValue}`, data)
         .then((res)=>{
@@ -35,6 +35,10 @@ const Professor = () => {
       };
 
     const confirmFunc = (formData) => {
+      if(nameCheck === false){
+        return toast.error("교수님 성함 입력 후 Seacrh 해주세요!");
+      }
+
       Swal.fire({
         title: '수정하시겠습니까?',
         icon: 'warning',
@@ -49,12 +53,9 @@ const Professor = () => {
         }
       });
     }
-
-    const onSelect = (data) =>{
-      console.log('onSelect',data);
-    }
   
     const onChangeFunc = (name) => {
+      setNameCheck(false);
       setInputValue(name);
     };
   
@@ -73,6 +74,7 @@ const Professor = () => {
         return toast.error("존재하지 않는 이름입니다.");
       }
       toast.success("교수님 정보를 성공적으로 불러왔습니다.");
+      setNameCheck(true);
       form.setFieldsValue({
         class_position: response.data[0].class_position,
         phone_number: response.data[0].phone_number,
@@ -114,7 +116,7 @@ const Professor = () => {
             Search
           </Button>
         </div>
-        <Form form={form} onFinish={onFinishFunc} autoComplete="off" style={{width:"30rem"}}>
+        <Form form={form} onFinish={confirmFunc} autoComplete="off" style={{width:"30rem"}}>
           <Form.Item label="연구실" name="class_position" required>
             <Input />
           </Form.Item>
