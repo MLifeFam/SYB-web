@@ -78,7 +78,7 @@ const Menu = () => {
                     <Link to="/status" style={{textDecoration: 'none'}}>
                             <MenuContent>
                             <ClockCircleOutlined style={{padding:"0 1rem"}}/>
-                                조교 부재여부
+                                학과 사무실
                             </MenuContent>
                     </Link>
                 </MenuItem>

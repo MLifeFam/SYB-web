@@ -22,7 +22,7 @@ const Status = () => {
     const response = await axios.get(
       `https://mfam.site/status/${department}`
     );
-
+    console.log(response.data);
     let data = "";
     if (response.data[0].status === 0) {
       data = "근무중";
@@ -35,6 +35,8 @@ const Status = () => {
       department: response.data[0].department,
       status: data,
       comment: response.data[0].comment,
+      phoneNumber: response.data[0].phoneNumber,
+      position: response.data[0].position,
     });
   });
 
@@ -101,14 +103,20 @@ const Status = () => {
           fontFamily:"Gothic A1"
         }}
       >
-        <p >{department} 조교 상태 수정 페이지</p>
+        <p >{department} 사무실 수정 페이지</p>
       </div>
 
       <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
-        <Form.Item label="학과" name="department" value={department} required>
+        <Form.Item label="학과" name="department" value={department} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
           <Input readOnly="true"/>
         </Form.Item>
-        <Form.Item label="상태" name="status" required>
+        <Form.Item label="위치" name="position" required>
+          <Input/>
+        </Form.Item>
+        <Form.Item label="전화번호" name="phoneNumber" required>
+          <Input/>
+        </Form.Item>
+        <Form.Item label="조교 부재여부" name="status" required>
           <Select>
             <Option value="0">근무중</Option>
             <Option value="1">부재중</Option>
