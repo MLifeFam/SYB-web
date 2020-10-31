@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
 import axios from "axios";
-import { Form, Select, Input, Button } from "antd";
+import { AutoComplete, Form, Select, Input, Button,Carousel,Image } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from 'styled-components';

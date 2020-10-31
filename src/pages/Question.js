@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Select, Input, Button,Row, Col, Divider,Modal,Pagination } from "antd";
+import { Form, Select, Input, Button,Row, Col, Divider,Modal,Pagination ,Image,Carousel} from "antd";
 import axios from "axios";
 import styled from 'styled-components';
 import { ToastContainer, toast } from "react-toastify";
@@ -194,7 +194,7 @@ const Question = (props) => {
           <Form.Item label="이미지링크" name="imageinfo">
             <Input/>
           </Form.Item>
-          <Form.Item colon={false} wrapperCol={{ span: 11, offset: 10 }}>
+          <Form.Item colon={false} wrapperCol={{ offset: 9 }}>
             <Button icon ={<CloudUploadOutlined />} htmlType="submit" style={{margin:"1rem 1rem 0 1rem"}}>
               추가하기
             </Button>

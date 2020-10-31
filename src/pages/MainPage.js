@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import { AutoComplete, Form, Select, Input, Button,Carousel,Image } from "antd";
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Footer from '../components/Footer'

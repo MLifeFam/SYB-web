@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Form, Select, Input, Button } from "antd";
+import { AutoComplete, Form, Select, Input, Button,Carousel,Image } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
@@ -81,6 +81,31 @@ const Notice = () => {
         <div style={{ textAlign: "center", fontSize: "30px", fontFamily:"Gothic A1" }}>
           <p>학과 공지 링크 수정 페이지</p>
         </div>
+        <Carousel 
+        style={{width:"50rem",height:"30rem",border:"2px groove lightgray",borderRadius:"1rem",margin:"1rem 1rem 3rem"}}
+        >
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777430-73278d80-1bb3-11eb-95de-bb99bceceb26.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777310-a87fab80-1bb2-11eb-90d5-e2bba73f8447.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777440-89354e00-1bb3-11eb-8680-043a8e2e5eb7.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+      </Carousel>
         <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} autoComplete="off" style={{width:"30rem"}}>
         <Form.Item label="학과" name="department" value={department} required>
           <Input readOnly="true"/>
@@ -88,7 +113,7 @@ const Notice = () => {
         <Form.Item label="링크" name="link" required>
           <Input />
         </Form.Item>
-        <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
+        <Form.Item colon={false} wrapperCol={{ offset: 9 }}>
           <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>

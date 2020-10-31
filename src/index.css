@@ -14,3 +14,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* For demo */
+.ant-carousel .slick-slide div{
+  text-align:center;
+}
+
+
+/* Custom Coloring */
+
+.ant-carousel ul.slick-dots li button{
+  background:black;
+  opacity:0.5;
+}
+
+.ant-carousel ul.slick-dots li {
+  margin:0 0.2rem;
+  width:2rem;
+}
+
+.ant-carousel ul.slick-dots li.slick-active button{
+  opacity: 1;
+  background: black;
+}
+
+.ant-carousel ul.slick-dots li.slick-active {
+  width:3rem;
+}

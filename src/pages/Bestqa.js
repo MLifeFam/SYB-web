@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Form, Select, Input, Button } from "antd";
+import { AutoComplete, Form, Select, Input, Button,Carousel,Image } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
@@ -96,6 +96,31 @@ const Bestqa = () => {
         <div style={{ textAlign: "center", fontSize: "30px", margin:"0 0 2rem 0" , fontFamily:"Gothic A1"}}>
           자주 묻는 질문 수정 페이지
         </div>
+        <Carousel 
+        style={{width:"50rem",height:"30rem",border:"2px groove lightgray",borderRadius:"1rem",margin:"1rem 1rem 3rem"}}
+        >
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777430-73278d80-1bb3-11eb-95de-bb99bceceb26.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777310-a87fab80-1bb2-11eb-90d5-e2bba73f8447.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777440-89354e00-1bb3-11eb-8680-043a8e2e5eb7.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+      </Carousel>
         {data.map((it, i) => {
           return <BestqaData key={it.classname} data={it}/>;
         })}

@@ -1,13 +1,13 @@
 import React from "react";
-import { Form, Select, Input, Button } from "antd";
+import { Form, Select, Input, Button, Carousel,Image,Divider } from "antd";
 import axios from "axios";
 import styled from 'styled-components';
 import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from 'antd/lib/form';
 import "react-toastify/dist/ReactToastify.css";
-import { CloudUploadOutlined } from "@ant-design/icons"
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { CloudUploadOutlined } from "@ant-design/icons";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
@@ -103,9 +103,33 @@ const Status = () => {
           fontFamily:"Gothic A1"
         }}
       >
-        <p >{department} 사무실 수정 페이지</p>
+        <p>{department} 사무실 수정 페이지</p>
       </div>
-
+      <Carousel 
+        style={{width:"50rem",height:"30rem",border:"2px groove lightgray",borderRadius:"1rem",margin:"1rem 1rem 3rem"}}
+      >
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777430-73278d80-1bb3-11eb-95de-bb99bceceb26.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777310-a87fab80-1bb2-11eb-90d5-e2bba73f8447.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/97777440-89354e00-1bb3-11eb-8680-043a8e2e5eb7.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+      </Carousel>
       <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
         <Form.Item label="학과" name="department" value={department} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
           <Input readOnly="true"/>
@@ -136,7 +160,7 @@ const Status = () => {
             : null;
           }}
         </Form.Item>
-        <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
+        <Form.Item colon={false} wrapperCol={{ offset: 9 }}>
           <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
