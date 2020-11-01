@@ -108,7 +108,7 @@ const Notice = () => {
       </Carousel>
         <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} autoComplete="off" style={{width:"30rem"}}>
         <Form.Item label="학과" name="department" value={department} required>
-          <Input readOnly="true"/>
+          <Input readOnly={true}/>
         </Form.Item>
         <Form.Item label="링크" name="link" required>
           <Input />

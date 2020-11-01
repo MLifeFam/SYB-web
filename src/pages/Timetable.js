@@ -135,7 +135,6 @@ const Timetable = () => {
               option.value.indexOf(input)!==-1
             }
             onChange={onChangeFunc}
-            requried
           />
           <Button icon={<SearchOutlined />} onClick={onSearchFunc}>
             Search

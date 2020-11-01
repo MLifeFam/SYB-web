@@ -139,13 +139,13 @@ const Status = () => {
       </Carousel>
       <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
         <Form.Item label="학과" name="department" value={department} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
-          <Input readOnly="true"/>
+          <Input readOnly={true}/>
         </Form.Item>
         {/* <Form.Item label="시간" name="time" value={time} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
           <Input readOnly="true"/>
         </Form.Item> */}
         <Form.Item label="이름" name="modifier" value={id} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
-          <Input readOnly="true"/>
+          <Input readOnly={true}/>
         </Form.Item>
         <Form.Item label="위치" name="position" required>
           <Input/>

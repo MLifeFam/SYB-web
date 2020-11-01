@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Form, Select, Input, Button,Row, Col, Divider,Modal } from "antd";
 import axios from "axios";
 import styled from 'styled-components';
@@ -88,8 +88,8 @@ const QuestionList = ({data,getData,setPage,page}) => {
     const onValuesChange = (changedValue, allValue) => {
       console.log(changedValue);
     };
-  
-    setTimeout(function () {
+    
+    useEffect(() => {
       form.setFieldsValue({
         faqno:data.faqno,
         category1: data.category1,
@@ -102,9 +102,8 @@ const QuestionList = ({data,getData,setPage,page}) => {
         landingUrl: data.landingUrl,
         imageinfo: data.imageinfo,
       });
-    },0);
-  
-  
+    });
+
     return (
       <>
       <Divider orientation="left">{data.count}</Divider>

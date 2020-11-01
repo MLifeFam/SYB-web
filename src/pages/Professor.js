@@ -134,7 +134,6 @@ const Professor = () => {
               option.value.indexOf(input)===0
             }
             onChange={onChangeFunc}
-            requried
           />
             {/* <Input style={{ margin: "0 4% 0 0" }} onChange={onChangeFunc} /> */}
            <Button icon={<SearchOutlined />} onClick={onSearchFunc}>

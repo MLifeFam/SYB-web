@@ -9,7 +9,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal);
 
-const BestqaData = ({ data }) => {
+const BestqaData = ({ data,key }) => {
     const [form] = Form.useForm();
     const confirmFunc = (formData) => {
       Swal.fire({
