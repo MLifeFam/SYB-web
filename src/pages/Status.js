@@ -15,6 +15,8 @@ const Option = Select.Option;
 const { TextArea } = Input;
 
 const Status = () => {
+  const id = localStorage.getItem('username');
+  //const [time,setTime] = React.useState(new Date().toLocaleString());
   const [form] = Form.useForm();
   const department = localStorage.getItem('department');
   const [isDisable, setDisable] = React.useState(true);
@@ -35,13 +37,16 @@ const Status = () => {
       department: response.data[0].department,
       status: data,
       comment: response.data[0].comment,
-      phoneNumber: response.data[0].phoneNumber,
       position: response.data[0].position,
+      phoneNumber: response.data[0].phoneNumber,
+      // time: time,
+      modifier: localStorage.getItem('username'), 
     });
   });
 
   const onValuesChange = (changedValue, allValue) => {
     console.log(changedValue);
+    console.log(Date().toLocaleDateString);
   };
 
   const confirmFunc = (formData) => {
@@ -55,6 +60,8 @@ const Status = () => {
       cancelButtonText:'아니요'
     }).then((result) => {
       if (result.isConfirmed) {
+        // setTime(new Date().toLocaleString());
+        console.log(formData);
         onFinish(formData);
       }
     });
@@ -132,6 +139,12 @@ const Status = () => {
       </Carousel>
       <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
         <Form.Item label="학과" name="department" value={department} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
+          <Input readOnly="true"/>
+        </Form.Item>
+        {/* <Form.Item label="시간" name="time" value={time} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
+          <Input readOnly="true"/>
+        </Form.Item> */}
+        <Form.Item label="이름" name="modifier" value={id} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
           <Input readOnly="true"/>
         </Form.Item>
         <Form.Item label="위치" name="position" required>
