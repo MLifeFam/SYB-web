@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/SYB-web/precache-manifest.8f697f0ae84ee0bafac2bde0a50e396b.js"
+  "/SYB-web/precache-manifest.087adbe8d22bec6e89e948e94c51354a.js"
 );
 
 self.addEventListener('message', (event) => {
