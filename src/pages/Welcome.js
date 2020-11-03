@@ -5,49 +5,49 @@ import styled from 'styled-components';
 import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from 'antd/lib/form';
 import "react-toastify/dist/ReactToastify.css";
-import { CloudUploadOutlined } from "@ant-design/icons";
-import AssistantNotice from "./AssistanceNotice"
+import { CloudUploadOutlined,LoadingOutlined } from "@ant-design/icons";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal);
 
 const Option = Select.Option;
 const { TextArea } = Input;
 
 const Welcome = (props) => {
+  const name = localStorage.getItem('username');
   const department = localStorage.getItem('department');
-  const pageSize = parseInt(window.innerHeight/150);
-  // 한 페이지에 담을 데이터 수 (height에 따라 개수 다르게 설정)
   const [form] = Form.useForm();
-  const [visible, Visible] = React.useState(false);
+  const [visible, setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
-  const [page,setPage] = React.useState(1);
   const num = data[0];
+
+  const confirmFunc = (formData) => {
+    Swal.fire({
+      title: '수정하시겠습니까?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '네',
+      cancelButtonText:'아니요'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onFinishFunc(formData);
+      }
+    });
+  }
+
   const FormHandler = () => {
-    Visible(true);
+    setVisible(true);
   };
 
   const handleOk = (e) => {
-    Visible(false);
+    setVisible(false);
   };
 
   const handleCancel = (e) => {
-    Visible(false);
-  };
-
-  const PageRefresh = (num) => {
-    const _data= data.slice((num-1)*pageSize,(num-1)*pageSize+pageSize);
-    // data page에 따라 자르는 작업
-
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-    // data 새로 불러올시 맨 위로 스크롤
-    
-    return _data.map((it,i)=>{
-      it.count=data.length-i-(pageSize*(page-1));
-      // 게시글 번호 계산
-  
-      it.props=props;
-      return(
-          <AssistantNotice key = {i} data={it} getData={getData} setPage={setPage} page={page}/>
-      )
-    })
+    setVisible(false);
   };
 
   const onFinishFunc = async (formData) => {
@@ -57,39 +57,90 @@ const Welcome = (props) => {
         formData[key]="";
       }
     }
-
+    formData.modifier=name;
     const response = await axios
-      .post(`https://mfam.site/assistantNotice/${department}`, formData)
+      .put(`https://mfam.site/assistantNotice/${department}`, formData)
       .then((res)=>{
-        console.log(res);
         if(res.status===200){
-          toast.success("공지사항을 등록했습니다!");
-          setPage(1);
-          getData();
-          Visible(false);
-        }
+        Swal.fire({
+          icon: 'success',
+          title: '수정 완료',
+          showConfirmButton: false,
+          width:'20rem',
+          timer: 1500
+        })
+        setVisible(false);
+        getData();
+      }
+      else{
+        toast.error("서버와의 에러가 발생했습니다!");
+      }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err)=>{
         toast.error("서버와의 에러가 발생했습니다!");
       });
   };
 
+  const loadContent = () => {
+    console.log(visible);
+    if(visible === true){
+      return (
+        <Form 
+        form={form} 
+        onFinish={confirmFunc} 
+        onFieldsChange={onValuesChange}
+        autoComplete="off"
+      >
+        <Form.Item
+          name="content"
+          rules={[
+            {
+              required: true,
+              message: '내용을 입력해주세요',
+            },
+          ]}
+          required
+        >
+          <TextArea style={{fontSize:"1rem",width:"50rem", resize:"none",padding:"1rem"}} autoSize={true} resize="none"/>
+        </Form.Item>
+        <div style={{marginBottom:"1rem"}}/>
+        <Divider/>
+        <p style={{width:"100%", color:"gray"}}>수정하기 버튼을 눌러주세요 </p>
+        <Form.Item colon={false} wrapperCol={{ offset: 10 }}>
+          <Button icon ={<CloudUploadOutlined />} htmlType="submit">
+            수정하기
+          </Button>
+        </Form.Item>
+      </Form>
+      );
+    }
+    else{
+      return (
+        <>
+          <TextArea value={data.content} style={{fontSize:"1rem", width:"50rem", resize:"none",padding:"1rem"}} bordered={false}autoSize={true} readOnly={true}/>
+          <div style={{marginBottom:"1rem"}}/>
+          <Divider/>
+          <p style={{width:"100%", color:"gray"}}>{data.modifier} 조교님<br/>({data.time})</p>
+          <Button onClick={FormHandler}>
+            수정하기
+          </Button>
+        </>
+      );
+    }
+  }
+
   const onValuesChange = (changedValue, allValue) => {
     console.log(changedValue);
   };
- 
-  const onPageChange = (pagenum) => {
-    //pagenum은 1,2,3,4 식으로 전송 됨.
-    setPage(pagenum);
-    getData();
-  }
 
   const getData = React.useCallback(async () => {
     const response = await axios.get(`https://mfam.site/assistantNotice/${department}`);
-    setData(response.data.reverse());
-    //setData(response.data.values.reverse());
-  }, []);
+    setData(response.data[0]);
+
+    form.setFieldsValue({
+      content: response.data[0].content,
+    });
+  }, [department]);
 
   React.useEffect(() => {
     getData();
@@ -104,54 +155,12 @@ const Welcome = (props) => {
           fontFamily:"Gothic A1"
         }}
       >
-        <p > 공지사항 </p>
+        <p>{department} 공지사항 </p>
+        
       </div>
-      {PageRefresh(page)}
-      <div style={{marginBottom:"2rem"}}/>
-      
-      <Pagination current={page} total={data.length} defaultPageSize={pageSize} onChange={onPageChange} style={{marginBottom:"1.5rem"}}/>
-
-      <Button onClick={FormHandler}>
-        공지사항 등록
-      </Button>
-      <Modal
-          title="공지사항 등록"
-          visible={visible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={[
-            null,
-            null,
-          ]}  //ok와 cancel 버튼을 없애기 위함
-          width="40rem"
-        >
-        <Form 
-          form={form} 
-          onFinish={onFinishFunc} 
-          onFieldsChange={onValuesChange}
-          autoComplete="off"
-          style={{width:"95%", padding:"0 5%"}}
-        >
-          <Form.Item 
-            label="내용" 
-            name="content"
-            rules={[
-              {
-                required: true,
-                message: '내용을 입력해주세요',
-              },
-            ]}
-            required
-          >
-            <TextArea/>
-          </Form.Item>
-          <Form.Item colon={false} wrapperCol={{ offset: 9 }}>
-            <Button icon ={<CloudUploadOutlined />} htmlType="submit" style={{margin:"1rem 1rem 0 1rem"}}>
-              추가하기
-            </Button>
-          </Form.Item>
-        </Form>
-        </Modal>
+      <div style ={{display:"flex",flexDirection:"column", justifyContent:"center", alignItems:"center", padding:"2rem 2rem"}}>
+      {loadContent()}
+      </div>
     </div>
   );
 };
