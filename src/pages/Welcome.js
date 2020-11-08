@@ -50,6 +50,10 @@ const Welcome = (props) => {
     setVisible(false);
   };
 
+  const CancleModify = () => {
+    setVisible(false);
+  }
+
   const onFinishFunc = async (formData) => {
     // 공백 문자처리
     for (const [key, value] of Object.entries(formData)) {
@@ -101,15 +105,20 @@ const Welcome = (props) => {
           ]}
           required
         >
-          <TextArea style={{fontSize:"1rem",width:"50rem", resize:"none",padding:"1rem"}} autoSize={true} resize="none"/>
+          <TextArea style={{fontSize:"1rem",width:"50rem", resize:"none",padding:"1rem",textAlign:"center"}} autoSize={true} resize="none"/>
         </Form.Item>
         <div style={{marginBottom:"1rem"}}/>
         <Divider/>
-        <p style={{width:"100%", color:"gray"}}>수정하기 버튼을 눌러주세요 </p>
+        <p style={{width:"100%", color:"gray", marginBottom:"2rem"}}>수정 하시려면 수정하기 버튼을, 취소하려면 취소 버튼을 눌러주세요 </p>
         <Form.Item colon={false} wrapperCol={{ offset: 10 }}>
-          <Button icon ={<CloudUploadOutlined />} htmlType="submit">
+        <div style={{display:"inline-block"}}> 
+          <Button htmlType="submit" style={{margin:"0 1rem"}}>
             수정하기
           </Button>
+          <Button onClick={CancleModify} style={{margin:"0 1rem"}}>
+            취소
+          </Button>
+        </div>
         </Form.Item>
       </Form>
       );
@@ -117,7 +126,7 @@ const Welcome = (props) => {
     else{
       return (
         <>
-          <TextArea value={data.content} style={{fontSize:"1rem", width:"50rem", resize:"none",padding:"1rem"}} bordered={false}autoSize={true} readOnly={true}/>
+          <TextArea value={data.content} style={{fontSize:"1rem",width:"50rem", resize:"none",padding:"1rem",textAlign:"center"}} bordered={false}autoSize={true} readOnly={true}/>
           <div style={{marginBottom:"1rem"}}/>
           <Divider/>
           <p style={{width:"100%", color:"gray"}}>{data.modifier} 조교님<br/>({data.time})</p>

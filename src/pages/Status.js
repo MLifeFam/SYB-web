@@ -110,34 +110,37 @@ const Status = () => {
           fontFamily:"Gothic A1"
         }}
       >
-        <p>{department} 사무실 수정 페이지</p>
+        <p style={{fontSize:"2rem"}}>{department} 사무실 수정 페이지<Divider style={{margin:"0",backgroundColor:"lightgray"}} /></p>
       </div>
       <Carousel 
-        style={{width:"50rem",height:"30rem",border:"2px groove lightgray",borderRadius:"1rem",margin:"1rem 1rem 3rem"}}
+        style={{width:"50rem",height:"32rem",margin:"1rem 1rem 2rem"}}
       >
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777430-73278d80-1bb3-11eb-95de-bb99bceceb26.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98467656-d0f25000-2219-11eb-9316-3c87afb395f6.png"
+              width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777310-a87fab80-1bb2-11eb-90d5-e2bba73f8447.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98467777-786f8280-221a-11eb-81cf-d6c2ccadd3c6.png"
+              width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777440-89354e00-1bb3-11eb-8680-043a8e2e5eb7.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98467778-79a0af80-221a-11eb-96ae-118a238e5542.png"
+              width="100%"
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/98467811-b8cf0080-221a-11eb-8d3a-794ccea45924.png"
+              width="100%"
             />
           </div>
       </Carousel>
-      <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} style={{width:"30rem"}}>
+      <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} style={{width:"40rem"}}>
         <Form.Item label="학과" name="department" value={department} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
           <Input readOnly={true}/>
         </Form.Item>
@@ -173,8 +176,8 @@ const Status = () => {
             : null;
           }}
         </Form.Item>
-        <Form.Item colon={false} wrapperCol={{ offset: 9 }}>
-          <Button type="primary" icon ={<CloudUploadOutlined />} htmlType="submit">
+        <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
+          <Button icon ={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
         </Form.Item>

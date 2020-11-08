@@ -51,7 +51,7 @@ const MenuBar = styled.div`
 `;
 
 const Contents = styled.div`
-  width:85%;
+  width:90%;
   height:85%;
   min-height:600px;
   min-width:800px;

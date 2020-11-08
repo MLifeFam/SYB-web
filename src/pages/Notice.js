@@ -73,7 +73,7 @@ const Notice = () => {
 
     React.useEffect(() => {
       getData();
-      // eslint-disable-next-line
+      
     }, [department, getData]);
 
     return (
@@ -86,21 +86,28 @@ const Notice = () => {
         >
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777430-73278d80-1bb3-11eb-95de-bb99bceceb26.png"
+              src="https://user-images.githubusercontent.com/51112542/98467522-22e6a600-2219-11eb-84e6-4d529bfc9082.png"
               width="85%"
               style={{marginTop:"3rem"}}
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777310-a87fab80-1bb2-11eb-90d5-e2bba73f8447.png"
+              src="https://user-images.githubusercontent.com/51112542/98467524-24b06980-2219-11eb-82e6-6dcf07cbda88.png"
               width="85%"
               style={{marginTop:"3rem"}}
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777440-89354e00-1bb3-11eb-8680-043a8e2e5eb7.png"
+              src="https://user-images.githubusercontent.com/51112542/98467526-25e19680-2219-11eb-9656-25c06150ecf6.png"
+              width="85%"
+              style={{marginTop:"3rem"}}
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/98467527-2712c380-2219-11eb-934e-4ff4baf15713.png"
               width="85%"
               style={{marginTop:"3rem"}}
             />
