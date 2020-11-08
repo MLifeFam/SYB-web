@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { AutoComplete, Form, Select, Input, Button,Carousel,Image } from "antd";
+import { AutoComplete, Form, Select, Input, Button,Carousel,Image,Divider } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
@@ -82,34 +82,31 @@ const Curriculum = () => {
     return (
       <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
         <div style={{ textAlign: "center", fontSize: "30px", fontFamily:"Gothic A1"}}>
-          <p>교과 과정 링크 수정 페이지</p>
-        </div>
-        <Carousel 
-        style={{width:"50rem",height:"30rem",border:"2px groove lightgray",borderRadius:"1rem",margin:"1rem 1rem 3rem"}}
-        >
+          <p style={{fontSize:"2rem"}}>{department} 교과과정 수정 페이지<Divider style={{margin:"0",backgroundColor:"lightgray"}} /></p>
+      </div>
+      <Carousel 
+        style={{width:"50rem",height:"32rem",margin:"1rem 1rem 2rem"}}
+      >
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777430-73278d80-1bb3-11eb-95de-bb99bceceb26.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98468769-55939d00-221f-11eb-9ead-db3cce00f58c.png"
+              width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777310-a87fab80-1bb2-11eb-90d5-e2bba73f8447.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98468774-575d6080-221f-11eb-97ad-fe254308449e.png"
+              width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/97777440-89354e00-1bb3-11eb-8680-043a8e2e5eb7.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98468778-59272400-221f-11eb-95f0-4df3d930c7bb.png"
+              width="100%"
             />
           </div>
       </Carousel>
-        <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} autoComplete="off" style={{width:"30rem"}}>
+        <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} autoComplete="off" style={{width:"40rem"}}>
         <Form.Item label="학과" name="department" value={department} required>
           <Input readOnly={true}/>
         </Form.Item>

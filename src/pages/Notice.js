@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { AutoComplete, Form, Select, Input, Button,Carousel,Image } from "antd";
+import { AutoComplete, Form, Select, Input, Button,Carousel,Image,Divider } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons"
@@ -79,41 +79,31 @@ const Notice = () => {
     return (
       <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
         <div style={{ textAlign: "center", fontSize: "30px", fontFamily:"Gothic A1" }}>
-          <p>학과 공지 링크 수정 페이지</p>
-        </div>
-        <Carousel 
-        style={{width:"50rem",height:"30rem",border:"2px groove lightgray",borderRadius:"1rem",margin:"1rem 1rem 3rem"}}
-        >
+        <p style={{fontSize:"2rem"}}>{department} 공지 링크 페이지<Divider style={{margin:"0",backgroundColor:"lightgray"}} /></p>
+      </div>
+      <Carousel 
+        style={{width:"50rem",height:"32rem",margin:"1rem 1rem 2rem"}}
+      >
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/98467522-22e6a600-2219-11eb-84e6-4d529bfc9082.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98468604-8f17d880-221e-11eb-90fc-43a1acad45c6.png"
+              width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/98467524-24b06980-2219-11eb-82e6-6dcf07cbda88.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98468606-90e19c00-221e-11eb-9dde-738e963f0458.png"
+              width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/98467526-25e19680-2219-11eb-9656-25c06150ecf6.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
-            />
-          </div>
-          <div>
-            <Image
-              src="https://user-images.githubusercontent.com/51112542/98467527-2712c380-2219-11eb-934e-4ff4baf15713.png"
-              width="85%"
-              style={{marginTop:"3rem"}}
+              src="https://user-images.githubusercontent.com/51112542/98468607-9212c900-221e-11eb-8763-c018eebf650f.png"
+              width="100%"
             />
           </div>
       </Carousel>
-        <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} autoComplete="off" style={{width:"30rem"}}>
+        <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} autoComplete="off" style={{width:"40rem"}}>
         <Form.Item label="학과" name="department" value={department} required>
           <Input readOnly={true}/>
         </Form.Item>

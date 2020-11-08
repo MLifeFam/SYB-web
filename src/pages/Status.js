@@ -117,25 +117,25 @@ const Status = () => {
       >
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/98467656-d0f25000-2219-11eb-9316-3c87afb395f6.png"
+              src="https://user-images.githubusercontent.com/51112542/98468848-ae633580-221f-11eb-9afd-762834755b54.png"
               width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/98467777-786f8280-221a-11eb-81cf-d6c2ccadd3c6.png"
+              src="https://user-images.githubusercontent.com/51112542/98468849-af946280-221f-11eb-975b-d12318fc58ad.png"
               width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/98467778-79a0af80-221a-11eb-96ae-118a238e5542.png"
+              src="https://user-images.githubusercontent.com/51112542/98468851-b0c58f80-221f-11eb-9868-c9392a9bf029.png"
               width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/98467811-b8cf0080-221a-11eb-8d3a-794ccea45924.png"
+              src="https://user-images.githubusercontent.com/51112542/98468853-b1f6bc80-221f-11eb-9928-35e67889354c.png"
               width="100%"
             />
           </div>
