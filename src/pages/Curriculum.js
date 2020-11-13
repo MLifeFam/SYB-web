@@ -149,12 +149,8 @@ const Curriculum = () => {
         <Form.Item label="링크" name="link" required>
           <Input />
         </Form.Item>
-        <Form.Item colon={false} wrapperCol={{ offset: 9 }}>
-          <Button
-            type="primary"
-            icon={<CloudUploadOutlined />}
-            htmlType="submit"
-          >
+        <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
+          <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
         </Form.Item>

@@ -58,22 +58,27 @@ const BestqaData = ({ data, key }) => {
   };
 
   return (
-    <div style={{ width: "30rem" }}>
+    <div
+      style={{
+        width: "100%",
+      }}
+    >
       <Form
         initialValues={{ id: data.id, question: data.question }}
         onFinish={confirmFunc}
         autoComplete="off"
         form={form}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
       >
         <Form.Item label={`TOP ${data.id} `} name="question">
-          <Input />
+          <Input style={{ width: "30vw" }} />
         </Form.Item>
         <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
-          <Button
-            type="primary"
-            icon={<CloudUploadOutlined />}
-            htmlType="submit"
-          >
+          <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
         </Form.Item>

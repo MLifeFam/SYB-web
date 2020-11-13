@@ -75,8 +75,6 @@ export function authUser(props) {
     },
   };
 
-  console.log(header);
-
   return (dispatch) => {
     return axios
       .get("https://mfam.site/auth/check", header, { widthCredentials: true })
@@ -84,7 +82,6 @@ export function authUser(props) {
         dispatch({
           type: AUTH_SUCCESS,
         });
-        console.log(res.data.data);
 
         const department = dept(res.data.data.department);
 

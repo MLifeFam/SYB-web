@@ -178,12 +178,8 @@ const Professor = () => {
         <Form.Item label="전화번호" name="phone_number" required>
           <Input />
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 9 }}>
-          <Button
-            type="primary"
-            icon={<CloudUploadOutlined />}
-            htmlType="submit"
-          >
+        <Form.Item wrapperCol={{ offset: 11 }}>
+          <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
         </Form.Item>

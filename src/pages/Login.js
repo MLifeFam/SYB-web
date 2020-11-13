@@ -67,13 +67,11 @@ const Login = (props) => {
       userid: _id,
       password: _password,
     };
-    console.log(body);
 
     dispatch(loginUser(body))
       .then((res) => {
         const accessToken = res.data.result.token;
-        console.log(res);
-        console.log(res.status);
+
         if (res.status === 200) {
           dispatch(loginSuccess(accessToken));
           dispatch(authUser()).then((res) => {

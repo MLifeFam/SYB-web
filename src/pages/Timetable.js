@@ -174,12 +174,8 @@ const Timetable = () => {
         <Form.Item label="링크" name="link">
           <Input />
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 9 }}>
-          <Button
-            type="primary"
-            icon={<CloudUploadOutlined />}
-            htmlType="submit"
-          >
+        <Form.Item wrapperCol={{ offset: 11 }}>
+          <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
         </Form.Item>

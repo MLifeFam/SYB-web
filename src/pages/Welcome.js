@@ -132,7 +132,7 @@ const Welcome = (props) => {
           <p style={{ width: "100%", color: "gray", marginBottom: "2rem" }}>
             수정 하시려면 수정하기 버튼을, 취소하려면 취소 버튼을 눌러주세요{" "}
           </p>
-          <Form.Item colon={false} wrapperCol={{ offset: 10 }}>
+          <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
             <div style={{ display: "inline-block" }}>
               <Button htmlType="submit" style={{ margin: "0 1rem" }}>
                 수정하기

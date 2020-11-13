@@ -13,6 +13,7 @@ import {
   Checkbox,
   Button,
   AutoComplete,
+  Modal,
 } from "antd";
 import { QuestionCircleOutlined, LeftOutlined } from "@ant-design/icons";
 import styled from "styled-components";
@@ -96,14 +97,29 @@ const Backwards = styled.div`
 
 const Signup = (props) => {
   const [form] = Form.useForm();
+  const [emailAuthform] = Form.useForm();
   const [_id, setId] = useState("");
   const [_password, setPassword] = useState("");
   const [_department, setDepartment] = useState("");
   const [_email, setEmail] = useState("");
   const [_name, setName] = useState("");
   const [_phonenum, setPhonenum] = useState("");
-  const [id_duplication, checkDup] = useState("false");
+  const [id_duplication, checkDup] = useState(false);
+  const [email_check, checkEmail] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [email_auth, setEmailAuth] = useState("");
   const sejongemail = "@sejong.ac.kr";
+
+  const handleOk = (e) => {
+    setVisible(false);
+    setEmailAuth("");
+  };
+
+  const handleCancel = (e) => {
+    setVisible(false);
+    setEmailAuth("");
+  };
+
   const dispatch = useDispatch();
   const onIdHandler = (e) => {
     setId(e.currentTarget.value);
@@ -114,6 +130,7 @@ const Signup = (props) => {
   };
   const onEmailHandler = (e) => {
     setEmail(e.currentTarget.value);
+    checkEmail(false);
   };
   const onNameHandler = (e) => {
     setName(e.currentTarget.value);
@@ -122,9 +139,82 @@ const Signup = (props) => {
     setPhonenum(e.currentTarget.value);
   };
 
+  const onEmailCheckSubmit = (e) => {
+    console.log({
+      email: _email,
+      authNumber: email_auth,
+    });
+    axios
+      .post("https://mfam.site/mail/verify", {
+        email: _email,
+        authNumber: email_auth,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res);
+          handleCancel();
+          setEmail(true);
+          Swal.fire({
+            icon: "success",
+            title: "이메일이 인증되었습니다.",
+            showConfirmButton: false,
+            width: "20rem",
+            timer: 2000,
+          });
+        } else {
+          Swal.fire({
+            icon: "warning",
+            text: "인증번호가 옳지 않습니다.",
+            showConfirmButton: true,
+            width: "25rem",
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "warning",
+          text: "서버와의 연결이 옳지 않습니다.",
+          showConfirmButton: true,
+          width: "25rem",
+          timer: 1500,
+        });
+      });
+  };
+
+  const onEmailCheckHandler = (e) => {
+    setEmailAuth(e.currentTarget.value);
+  };
+
   const onChangeSelectFunc = React.useCallback((e) => {
     setDepartment(form.getFieldValue("department"));
   }, []);
+
+  const onEmailHadnler = (e) => {
+    if (_email.indexOf(sejongemail) === _email.length - sejongemail.length) {
+    }
+    setVisible(true);
+    setEmailAuth("");
+    //세종대이메일 검사
+
+    axios
+      .post("https://mfam.site/mail/send", { to: _email })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log({ to: _email });
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "warning",
+          text: "이메일이 발송되지 않았습니다.",
+          showConfirmButton: true,
+          width: "25rem",
+          timer: 1500,
+        });
+      });
+  };
 
   const onDuplicationHadnler = (e) => {
     if (_id.length === 0) {
@@ -142,22 +232,20 @@ const Signup = (props) => {
     axios
       .post("https://mfam.site/auth/idCheck", { userid: _id })
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           Swal.fire({
             icon: "success",
-            text: res.data.message,
+            text: res.data.result,
             showConfirmButton: true,
             width: "25rem",
             timer: 1500,
           });
 
           checkDup(true);
-          console.log(id_duplication);
         } else {
           Swal.fire({
             icon: "warning",
-            text: res.data.message,
+            text: res.data.result,
             showConfirmButton: true,
             width: "25rem",
             timer: 1500,
@@ -179,7 +267,7 @@ const Signup = (props) => {
         checkDup(false);
       });
   };
-  const a = (e) => {
+  const linktoMain = (e) => {
     props.history.push("/");
   };
 
@@ -198,6 +286,19 @@ const Signup = (props) => {
         icon: "error",
         title: "가입 실패",
         text: "아이디 중복검사를 완료해주세요",
+        showConfirmButton: true,
+        width: "25rem",
+        timer: 2000,
+      });
+
+      return;
+    }
+
+    if (email_check === false) {
+      Swal.fire({
+        icon: "error",
+        title: "가입 실패",
+        text: "이메일 인증을 완료해주세요",
         showConfirmButton: true,
         width: "25rem",
         timer: 2000,
@@ -234,194 +335,257 @@ const Signup = (props) => {
   };
 
   return (
-    <Form
-      {...formItemLayout}
-      form={form}
-      name="register"
-      onFinish={onSubmitHandler}
-      autoComplete="off"
-      scrollToFirstError
-    >
-      <Container>
-        <Whitespace>
-          <Backwards>
-            <LeftOutlined onClick={a} />
-          </Backwards>
-          <Title>
-            <p>Sign up</p>
-          </Title>
+    <div>
+      <Form
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onSubmitHandler}
+        autoComplete="off"
+        scrollToFirstError
+      >
+        <Container>
+          <Whitespace>
+            <Backwards>
+              <LeftOutlined onClick={linktoMain} />
+            </Backwards>
+            <Title>
+              <p>Sign up</p>
+            </Title>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              marginLeft: "6rem",
-            }}
-          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                marginLeft: "6rem",
+              }}
+            >
+              <Form.Item
+                style={{ width: "20rem", paddingBottom: "1%" }}
+                name="id"
+                label="아이디"
+                rules={[
+                  {
+                    required: true,
+                    message: "아이디를 입력해주세요.",
+                  },
+                ]}
+              >
+                <Input onChange={onIdHandler} />
+              </Form.Item>
+              <Button
+                style={{
+                  position: "relatvive",
+                  width: "5rem",
+                  fontSize: "0.7rem",
+                  marginLeft: "1rem",
+                }}
+                onClick={onDuplicationHadnler}
+              >
+                중복검사
+              </Button>
+            </div>
+
             <Form.Item
               style={{ width: "20rem", paddingBottom: "1%" }}
-              name="id"
-              label="아이디"
+              name="password"
+              label="비밀번호"
               rules={[
                 {
                   required: true,
-                  message: "아이디를 입력해주세요.",
+                  message: "패스워드를 입력해주세요.",
+                },
+              ]}
+              hasFeedback
+            >
+              <Input.Password onChange={onPasswordHanlder} />
+            </Form.Item>
+
+            <Form.Item
+              style={{ width: "20rem", paddingBottom: "1%" }}
+              name="confirm"
+              label="비밀번호 확인"
+              dependencies={["password"]}
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "패스워드를 확인해주세요",
+                },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject("비밀번호가 일치하지 않습니다!");
+                  },
+                }),
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              style={{ width: "20rem", paddingBottom: "1%" }}
+              name="name"
+              label="이름"
+              rules={[
+                {
+                  required: true,
+                  message: "이름을 입력해주세요.",
                 },
               ]}
             >
-              <Input onChange={onIdHandler} />
+              <Input onChange={onNameHandler} />
             </Form.Item>
-            <Button
-              style={{
-                position: "relatvive",
-                width: "5rem",
-                fontSize: "0.7rem",
-                marginLeft: "1rem",
-              }}
-              onClick={onDuplicationHadnler}
+
+            <Form.Item
+              style={{ width: "20rem", paddingBottom: "1%" }}
+              name="department"
+              label="학과"
+              rules={[
+                {
+                  required: true,
+                  message: "학과를 선택해주세요",
+                },
+              ]}
             >
-              중복검사
-            </Button>
-          </div>
+              <Select onChange={onChangeSelectFunc}>
+                <Option value="0">컴퓨터공학과</Option>
+                <Option value="1">소프트웨어학과</Option>
+                <Option value="2">정보보호학과</Option>
+                <Option value="3">데이터사이언스학과</Option>
+                <Option value="4">지능기전공학부</Option>
+                <Option value="5">디자인이노베이션</Option>
+                <Option value="6">만화애니메이션텍</Option>
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            style={{ width: "20rem", paddingBottom: "1%" }}
-            name="password"
-            label="비밀번호"
-            rules={[
-              {
-                required: true,
-                message: "패스워드를 입력해주세요.",
-              },
-            ]}
-            hasFeedback
-          >
-            <Input.Password onChange={onPasswordHanlder} />
-          </Form.Item>
-
-          <Form.Item
-            style={{ width: "20rem", paddingBottom: "1%" }}
-            name="confirm"
-            label="비밀번호 확인"
-            dependencies={["password"]}
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: "패스워드를 확인해주세요",
-              },
-              ({ getFieldValue }) => ({
-                validator(rule, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject("비밀번호가 일치하지 않습니다!");
-                },
-              }),
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            style={{ width: "20rem", paddingBottom: "1%" }}
-            name="name"
-            label="이름"
-            rules={[
-              {
-                required: true,
-                message: "이름을 입력해주세요.",
-              },
-            ]}
-          >
-            <Input onChange={onNameHandler} />
-          </Form.Item>
-
-          <Form.Item
-            style={{ width: "20rem", paddingBottom: "1%" }}
-            name="department"
-            label="학과"
-            rules={[
-              {
-                required: true,
-                message: "학과를 선택해주세요",
-              },
-            ]}
-          >
-            <Select onChange={onChangeSelectFunc}>
-              <Option value="0">컴퓨터공학과</Option>
-              <Option value="1">소프트웨어학과</Option>
-              <Option value="2">정보보호학과</Option>
-              <Option value="3">데이터사이언스학과</Option>
-              <Option value="4">지능기전공학부</Option>
-              <Option value="5">디자인이노베이션</Option>
-              <Option value="6">만화애니메이션텍</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            style={{ width: "20rem", paddingBottom: "1%" }}
-            name="email"
-            label="이메일"
-            initialValue=""
-            hasFeedback
-            rules={[
-              {
-                type: "email",
-                message: "올바른 이메일이 아닙니다",
-              },
-              {
-                required: true,
-                message: "이메일을 입력해주세요.",
-              },
-              ({ getFieldValue }) => ({
-                validator(rule, value) {
-                  if (
-                    value.indexOf(sejongemail) ===
-                      value.length - sejongemail.length ||
-                    !value
-                  ) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject("");
-                },
-              }),
-            ]}
-          >
-            <Input onChange={onEmailHandler} placeholder="abc@sejong.ac.kr" />
-          </Form.Item>
-
-          <Form.Item
-            style={{ width: "20rem", paddingBottom: "1%" }}
-            name="phonenumber"
-            label="휴대폰 번호"
-            rules={[
-              {
-                required: true,
-                message: "휴대폰 번호를 입력해주세요.",
-              },
-            ]}
-          >
-            <Input onChange={onPhoneHandler} />
-          </Form.Item>
-
-          <Form.Item {...tailFormItemLayout}>
-            <Button
-              type="primary"
-              htmlType="submit"
+            <div
               style={{
-                backgroundColor: "#a31432",
-                border: "none",
-                margin: "0.5rem 1rem 0",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                marginLeft: "6rem",
               }}
             >
-              회원가입
-            </Button>
+              <Form.Item
+                style={{ width: "20rem", paddingBottom: "1%" }}
+                name="email"
+                label="이메일"
+                initialValue=""
+                hasFeedback
+                rules={[
+                  {
+                    type: "email",
+                    message: "올바른 이메일이 아닙니다",
+                  },
+                  {
+                    required: true,
+                    message: "이메일을 입력해주세요.",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(rule, value) {
+                      if (
+                        value.indexOf(sejongemail) ===
+                          value.length - sejongemail.length ||
+                        !value
+                      ) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject("");
+                    },
+                  }),
+                ]}
+              >
+                <Input
+                  onChange={onEmailHandler}
+                  placeholder="abc@sejong.ac.kr"
+                />
+              </Form.Item>
+              <Button
+                style={{
+                  position: "relatvive",
+                  width: "5rem",
+                  fontSize: "0.7rem",
+                  marginLeft: "1rem",
+                }}
+                onClick={onEmailHadnler}
+              >
+                메일인증
+              </Button>
+            </div>
+
+            <Form.Item
+              style={{ width: "20rem", paddingBottom: "1%" }}
+              name="phonenumber"
+              label="휴대폰 번호"
+              rules={[
+                {
+                  required: true,
+                  message: "휴대폰 번호를 입력해주세요.",
+                },
+              ]}
+            >
+              <Input onChange={onPhoneHandler} />
+            </Form.Item>
+
+            <Form.Item {...tailFormItemLayout}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{
+                  backgroundColor: "#a31432",
+                  border: "none",
+                  margin: "0.5rem 1rem 0",
+                }}
+              >
+                회원가입
+              </Button>
+            </Form.Item>
+          </Whitespace>
+        </Container>
+      </Form>
+
+      <Modal
+        title="이메일 인증"
+        visible={visible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[null, null]} //ok와 cancel 버튼을 없애기 위함
+        width="40rem"
+      >
+        <Form
+          form={emailAuthform}
+          name="emailCheck"
+          onFinish={onEmailCheckSubmit}
+          autoComplete="off"
+          style={{ width: "auto" }}
+        >
+          <Form.Item
+            style={{ width: "auto" }}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: "인증번호를 입력해주세요.",
+              },
+            ]}
+          >
+            <p>{_email}로 인증번호를 보냈습니다.</p>
+
+            <Input
+              onChange={onEmailCheckHandler}
+              placeholder="인증번호를 입력해주세요"
+            />
           </Form.Item>
-        </Whitespace>
-      </Container>
-    </Form>
+          <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
+            <Button htmlType="submit">인증하기</Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+    </div>
   );
 };
 
