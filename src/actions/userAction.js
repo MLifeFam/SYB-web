@@ -88,7 +88,6 @@ export function authUser(props) {
 
         const department = dept(res.data.data.department);
 
-        localStorage.setItem("userid", res.data.data.userid);
         localStorage.setItem("username", res.data.data.username);
         localStorage.setItem("department", department);
 

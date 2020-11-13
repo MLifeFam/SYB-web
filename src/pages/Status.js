@@ -1,9 +1,9 @@
 import React from "react";
-import { Form, Select, Input, Button, Carousel,Image,Divider } from "antd";
+import { Form, Select, Input, Button, Carousel, Image, Divider } from "antd";
 import axios from "axios";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
-import { FormInstance } from 'antd/lib/form';
+import { FormInstance } from "antd/lib/form";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
@@ -15,15 +15,13 @@ const Option = Select.Option;
 const { TextArea } = Input;
 
 const Status = () => {
-  const id = localStorage.getItem('username');
+  const id = localStorage.getItem("username");
   //const [time,setTime] = React.useState(new Date().toLocaleString());
   const [form] = Form.useForm();
-  const department = localStorage.getItem('department');
+  const department = localStorage.getItem("department");
   const [isDisable, setDisable] = React.useState(true);
   const getData = React.useCallback(async () => {
-    const response = await axios.get(
-      `https://mfam.site/status/${department}`
-    );
+    const response = await axios.get(`https://mfam.site/status/${department}`);
     console.log(response.data);
     let data = "";
     if (response.data[0].status === 0) {
@@ -40,7 +38,7 @@ const Status = () => {
       position: response.data[0].position,
       phoneNumber: response.data[0].phoneNumber,
       // time: time,
-      modifier: localStorage.getItem('username'), 
+      modifier: localStorage.getItem("username"),
     });
   });
 
@@ -51,13 +49,13 @@ const Status = () => {
 
   const confirmFunc = (formData) => {
     Swal.fire({
-      title: '수정하시겠습니까?',
-      icon: 'warning',
+      title: "수정하시겠습니까?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '네',
-      cancelButtonText:'아니요'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "네",
+      cancelButtonText: "아니요",
     }).then((result) => {
       if (result.isConfirmed) {
         // setTime(new Date().toLocaleString());
@@ -65,26 +63,27 @@ const Status = () => {
         onFinish(formData);
       }
     });
-  }
+  };
 
   const onFinish = async (data) => {
+    data.modifier = localStorage.getItem("username");
     const response = await axios
       .put(`https://mfam.site/status/${data.department}`, data)
-      .then((res)=>{
-        if(res.status===200){
+      .then((res) => {
+        if (res.status === 200) {
           return Swal.fire({
-            icon: 'success',
-            title: '수정 완료',
+            icon: "success",
+            title: "수정 완료",
             showConfirmButton: false,
-            width:'20rem',
-            timer: 1500
-          })
+            width: "20rem",
+            timer: 1500,
+          });
         }
       })
-      .catch((err)=>{
+      .catch((err) => {
         toast.error("서버와의 에러가 발생했습니다!");
       });
-    };
+  };
 
   React.useEffect(() => {
     console.log(form.getFieldValue("status"));
@@ -102,59 +101,98 @@ const Status = () => {
   }, [department, getData]);
 
   return (
-    <div style={{margin: "3% 10%", padding:"1% 0%", display:"flex",alignItems:"center", flexDirection:"column", background:"white", borderRadius:"0.5rem",border:"2px solid lightgray"}}>
+    <div
+      style={{
+        margin: "3% 10%",
+        padding: "1% 0%",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        background: "white",
+        borderRadius: "0.5rem",
+        border: "2px solid lightgray",
+      }}
+    >
       <div
         style={{
           textAlign: "center",
           fontSize: "30px",
-          fontFamily:"Gothic A1"
+          fontFamily: "Gothic A1",
         }}
       >
-        <p style={{fontSize:"2rem"}}>{department} 사무실 수정 페이지<Divider style={{margin:"0",backgroundColor:"lightgray"}} /></p>
+        <p style={{ fontSize: "2rem" }}>
+          {department} 사무실 수정 페이지
+          <Divider style={{ margin: "0", backgroundColor: "lightgray" }} />
+        </p>
       </div>
-      <Carousel 
-        style={{width:"50rem",height:"32rem",margin:"1rem 1rem 2rem"}}
+      <Carousel
+        style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}
       >
-          <div>
-            <Image
-              src="https://user-images.githubusercontent.com/51112542/98468848-ae633580-221f-11eb-9afd-762834755b54.png"
-              width="100%"
-            />
-          </div>
-          <div>
-            <Image
-              src="https://user-images.githubusercontent.com/51112542/98468849-af946280-221f-11eb-975b-d12318fc58ad.png"
-              width="100%"
-            />
-          </div>
-          <div>
-            <Image
-              src="https://user-images.githubusercontent.com/51112542/98468851-b0c58f80-221f-11eb-9868-c9392a9bf029.png"
-              width="100%"
-            />
-          </div>
-          <div>
-            <Image
-              src="https://user-images.githubusercontent.com/51112542/98468853-b1f6bc80-221f-11eb-9928-35e67889354c.png"
-              width="100%"
-            />
-          </div>
+        <div>
+          <Image
+            src="https://user-images.githubusercontent.com/51112542/98468848-ae633580-221f-11eb-9afd-762834755b54.png"
+            width="100%"
+          />
+        </div>
+        <div>
+          <Image
+            src="https://user-images.githubusercontent.com/51112542/98468849-af946280-221f-11eb-975b-d12318fc58ad.png"
+            width="100%"
+          />
+        </div>
+        <div>
+          <Image
+            src="https://user-images.githubusercontent.com/51112542/98468851-b0c58f80-221f-11eb-9868-c9392a9bf029.png"
+            width="100%"
+          />
+        </div>
+        <div>
+          <Image
+            src="https://user-images.githubusercontent.com/51112542/98468853-b1f6bc80-221f-11eb-9928-35e67889354c.png"
+            width="100%"
+          />
+        </div>
       </Carousel>
-      <Form form={form} onFinish={confirmFunc} onFieldsChange={onValuesChange} style={{width:"40rem"}}>
-        <Form.Item label="학과" name="department" value={department} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
-          <Input readOnly={true}/>
+      <Form
+        form={form}
+        onFinish={confirmFunc}
+        onFieldsChange={onValuesChange}
+        style={{ width: "40rem" }}
+      >
+        <Form.Item
+          label="학과"
+          name="department"
+          value={department}
+          style={{
+            width: "0rem",
+            height: "0rem",
+            visibility: "hidden",
+            margin: "0",
+          }}
+        >
+          <Input readOnly={true} />
         </Form.Item>
         {/* <Form.Item label="시간" name="time" value={time} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
           <Input readOnly="true"/>
         </Form.Item> */}
-        <Form.Item label="이름" name="modifier" value={id} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
-          <Input readOnly={true}/>
+        <Form.Item
+          label="이름"
+          name="modifier"
+          value={id}
+          style={{
+            width: "0rem",
+            height: "0rem",
+            visibility: "hidden",
+            margin: "0",
+          }}
+        >
+          <Input readOnly={true} />
         </Form.Item>
         <Form.Item label="위치" name="position" required>
-          <Input/>
+          <Input />
         </Form.Item>
         <Form.Item label="전화번호" name="phoneNumber" required>
-          <Input/>
+          <Input />
         </Form.Item>
         <Form.Item label="조교 부재여부" name="status" required>
           <Select>
@@ -165,19 +203,27 @@ const Status = () => {
         </Form.Item>
         <Form.Item
           noStyle
-          shouldUpdate={(preValues,currentValues)=>preValues.status !== currentValues.status}
+          shouldUpdate={(preValues, currentValues) =>
+            preValues.status !== currentValues.status
+          }
         >
-          {({ getFieldValue })=>{
-            return form.getFieldValue('status') === '2' || form.getFieldValue('status')==='기타내용 입력' ?
-            (
-              <Form.Item label="기타내용" name="comment" rules={[{required:true, messsage:'기타 내용을 입력해주세요'}]}>
-                <TextArea disabled={isDisable} style={{resize:"none"}}/>
-              </Form.Item>)
-            : null;
+          {({ getFieldValue }) => {
+            return form.getFieldValue("status") === "2" ||
+              form.getFieldValue("status") === "기타내용 입력" ? (
+              <Form.Item
+                label="기타내용"
+                name="comment"
+                rules={[
+                  { required: true, messsage: "기타 내용을 입력해주세요" },
+                ]}
+              >
+                <TextArea disabled={isDisable} style={{ resize: "none" }} />
+              </Form.Item>
+            ) : null;
           }}
         </Form.Item>
         <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
-          <Button icon ={<CloudUploadOutlined />} htmlType="submit">
+          <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>
         </Form.Item>

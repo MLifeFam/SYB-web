@@ -67,12 +67,14 @@ const Login = (props) => {
       userid: _id,
       password: _password,
     };
+    console.log(body);
 
     dispatch(loginUser(body))
       .then((res) => {
-        const accessToken = res.data.token;
+        const accessToken = res.data.result.token;
+        console.log(res);
         console.log(res.status);
-        if (res.status === 201) {
+        if (res.status === 200) {
           dispatch(loginSuccess(accessToken));
           dispatch(authUser()).then((res) => {
             if (res) {
@@ -84,7 +86,7 @@ const Login = (props) => {
           Swal.fire({
             icon: "error",
             title: "로그인 실패",
-            text: res.data.message,
+            text: res.data.result,
             showConfirmButton: true,
             width: "25rem",
             timer: 2000,

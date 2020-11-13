@@ -143,7 +143,7 @@ const Signup = (props) => {
       .post("https://mfam.site/auth/idCheck", { userid: _id })
       .then((res) => {
         console.log(res);
-        if (res.status === 201) {
+        if (res.status === 200) {
           Swal.fire({
             icon: "success",
             text: res.data.message,
@@ -192,7 +192,6 @@ const Signup = (props) => {
       phoneNumber: _phonenum,
       department: _department,
     };
-    console.log(body);
 
     if (id_duplication === false) {
       Swal.fire({
@@ -213,7 +212,7 @@ const Signup = (props) => {
           Swal.fire({
             icon: "error",
             title: "가입 실패",
-            text: res.data.message,
+            text: res.data.result,
             showConfirmButton: true,
             width: "25rem",
             timer: 2000,

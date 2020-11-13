@@ -64,8 +64,7 @@ const Curriculum = () => {
   };
 
   const onFinish = async (formData) => {
-    // let data = {userid:localStorage.getItem('userid')};
-    // Object.assign(data,formData);
+    formData.modifier = localStorage.getItem("username");
     // formdata에 userid 추가
     const response = await axios
       .put(`https://mfam.site/curriculum/${formData.department}`, formData)
