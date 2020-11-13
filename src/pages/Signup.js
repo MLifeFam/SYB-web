@@ -107,7 +107,7 @@ const Signup = (props) => {
   const [id_duplication, checkDup] = useState(false);
   const [email_check, checkEmail] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [email_auth, setEmailAuth] = useState("");
+  const [email_auth, setEmailAuth] = useState(0);
   const sejongemail = "@sejong.ac.kr";
 
   const handleOk = (e) => {
@@ -150,13 +150,12 @@ const Signup = (props) => {
         authNumber: email_auth,
       })
       .then((res) => {
-        if (res.status === 200) {
-          console.log(res);
+        if (res.status === 201) {
           handleCancel();
           setEmail(true);
           Swal.fire({
             icon: "success",
-            title: "이메일이 인증되었습니다.",
+            text: "인증되었습니다.",
             showConfirmButton: false,
             width: "20rem",
             timer: 2000,
@@ -173,18 +172,28 @@ const Signup = (props) => {
       })
       .catch((error) => {
         console.log(error);
+
         Swal.fire({
           icon: "warning",
-          text: "서버와의 연결이 옳지 않습니다.",
+          text: "인증번호가 옳지 않습니다.",
           showConfirmButton: true,
           width: "25rem",
           timer: 1500,
         });
+
+        // Swal.fire({
+        //   icon: "warning",
+        //   text: "서버와의 연결이 옳지 않습니다.",
+        //   showConfirmButton: true,
+        //   width: "25rem",
+        //   timer: 1500,
+        // });
       });
   };
 
   const onEmailCheckHandler = (e) => {
     setEmailAuth(e.currentTarget.value);
+    console.log(email_auth);
   };
 
   const onChangeSelectFunc = React.useCallback((e) => {
@@ -193,9 +202,9 @@ const Signup = (props) => {
 
   const onEmailHadnler = (e) => {
     if (_email.indexOf(sejongemail) === _email.length - sejongemail.length) {
+      setVisible(true);
     }
-    setVisible(true);
-    setEmailAuth("");
+
     //세종대이메일 검사
 
     axios
