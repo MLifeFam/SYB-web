@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
 import {
   AutoComplete,
   Form,
@@ -8,6 +9,7 @@ import {
   Button,
   Carousel,
   Image,
+  Divider,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,12 +17,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { getDefaultNormalizer } from "@testing-library/react";
 
 const MySwal = withReactContent(Swal);
 
 const Timetable = () => {
+  const name = localStorage.getItem("username");
   const [list, setlist] = React.useState([]);
   const [form] = Form.useForm();
+  const [data, setData] = React.useState({});
   const [inputValue, setInputValue] = React.useState("");
   const [nameCheck, setNameCheck] = React.useState(false);
 
@@ -45,6 +50,8 @@ const Timetable = () => {
   };
 
   const onFinishFunc = async (data) => {
+    data.modifier = name;
+    console.log(data);
     const response = await axios
       .put(`https://mfam.site/timetable/${inputValue}`, data)
       .then((res) => {
@@ -57,6 +64,7 @@ const Timetable = () => {
             timer: 1500,
           });
         }
+        onSearchFunc();
       })
       .catch((err) => {
         toast.error("서버와의 에러가 발생했습니다!");
@@ -78,12 +86,20 @@ const Timetable = () => {
       .catch((error) => {
         toast.error("에러가 났어요!");
       });
+
     console.log(response);
     if (response.data.length === 0) {
       return toast.error("존재하지 않는 강의실입니다.");
     } else {
       toast.success("강의실 정보를 성공적으로 불러왔습니다.");
       setNameCheck(true);
+      setData({
+        modifier: response.data[0].modifier + " 조교님",
+        time:
+          "(" +
+          moment(response.data[0].time).add(9, "hours").format("LLL") +
+          ")",
+      });
       form.setFieldsValue({
         link: response.data[0].link,
       });
@@ -174,7 +190,13 @@ const Timetable = () => {
         <Form.Item label="링크" name="link">
           <Input />
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 11 }}>
+        <Divider />
+        <p style={{ width: "100%", color: "gray" }}>
+          {data.modifier}
+          <br />
+          {data.time}
+        </p>
+        <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
           <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>

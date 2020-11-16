@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   AutoComplete,
@@ -37,6 +37,7 @@ const BestqaData = ({ data, key }) => {
 
   const onFinishFunc = async (formData) => {
     formData.modifier = localStorage.getItem("username");
+
     const response = await axios
       .put(`https://mfam.site/bestqa/${data.id}`, formData)
       .then((res) => {

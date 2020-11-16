@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import {
   Form,
   Select,
@@ -85,7 +86,6 @@ const Welcome = (props) => {
             timer: 1500,
           });
           setVisible(false);
-          getData();
         } else {
           toast.error("서버와의 에러가 발생했습니다!");
         }
@@ -181,7 +181,11 @@ const Welcome = (props) => {
       `https://mfam.site/assistantNotice/${department}`
     );
     console.log(response);
-    setData(response.data.result[0]);
+    setData({
+      content: response.data.result[0].content,
+      modifier: response.data.result[0].modifier,
+      time: moment(response.data.result[0].time).add(9, "hours").format("LLL"),
+    });
 
     form.setFieldsValue({
       content: response.data.result[0].content,

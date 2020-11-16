@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import moment from "moment";
 import axios from "axios";
 import {
   AutoComplete,
@@ -8,6 +9,7 @@ import {
   Button,
   Carousel,
   Image,
+  Divider,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,12 +23,13 @@ const MySwal = withReactContent(Swal);
 const Professor = () => {
   const [list, setlist] = React.useState([]);
   const [form] = Form.useForm();
+  const [data, getData] = React.useState({});
   const [inputValue, setInputValue] = React.useState("");
   const [nameCheck, setNameCheck] = React.useState(false);
-  const onFinishFunc = async (data) => {
-    data.modifier = localStorage.getItem("username");
+  const onFinishFunc = async (_data) => {
+    _data.modifier = localStorage.getItem("username");
     const response = await axios
-      .put(`https://mfam.site/professor/${inputValue}`, data)
+      .put(`https://mfam.site/professor/${inputValue}`, _data)
       .then((res) => {
         if (res.status === 200) {
           return Swal.fire({
@@ -68,6 +71,16 @@ const Professor = () => {
     setInputValue(name);
   };
 
+  const showModifier = () => {
+    return (
+      <p style={{ width: "100%", color: "gray" }}>
+        {data.modifier}
+        <br />
+        {data.time}
+      </p>
+    );
+  };
+
   const onSearchFunc = async () => {
     let name = inputValue;
     if (name.length < 2) {
@@ -79,11 +92,18 @@ const Professor = () => {
         toast.error("에러가 났어요!");
       });
     console.log(response);
+
     if (response.data.length === 0) {
       return toast.error("존재하지 않는 이름입니다.");
     }
     toast.success("교수님 정보를 성공적으로 불러왔습니다.");
     setNameCheck(true);
+    getData({
+      modifier: response.data[0].modifier + " 조교님",
+      time:
+        "(" + moment(response.data[0].time).add(9, "hours").format("LLL") + ")",
+    });
+
     form.setFieldsValue({
       class_position: response.data[0].class_position,
       phone_number: response.data[0].phone_number,
@@ -178,7 +198,9 @@ const Professor = () => {
         <Form.Item label="전화번호" name="phone_number" required>
           <Input />
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 11 }}>
+        <Divider />
+        {showModifier()}
+        <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
           <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기
           </Button>

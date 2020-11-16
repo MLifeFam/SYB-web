@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { Form, Select, Input, Button, Carousel, Image, Divider } from "antd";
 import axios from "axios";
 import styled from "styled-components";
@@ -20,6 +21,7 @@ const Status = () => {
   const [form] = Form.useForm();
   const department = localStorage.getItem("department");
   const [isDisable, setDisable] = React.useState(true);
+  const [data, setData] = React.useState({});
   const getData = React.useCallback(async () => {
     const response = await axios.get(`https://mfam.site/status/${department}`);
     console.log(response.data);
@@ -31,6 +33,10 @@ const Status = () => {
     } else {
       data = "기타내용 입력";
     }
+    setData({
+      modifier: response.data[0].modifier,
+      time: moment(response.data[0].time).add(9, "hours").format("LLL"),
+    });
     form.setFieldsValue({
       department: response.data[0].department,
       status: data,
@@ -38,7 +44,6 @@ const Status = () => {
       position: response.data[0].position,
       phoneNumber: response.data[0].phoneNumber,
       // time: time,
-      modifier: localStorage.getItem("username"),
     });
   });
 
@@ -79,6 +84,7 @@ const Status = () => {
             timer: 1500,
           });
         }
+        getData();
       })
       .catch((err) => {
         toast.error("서버와의 에러가 발생했습니다!");
@@ -86,7 +92,6 @@ const Status = () => {
   };
 
   React.useEffect(() => {
-    console.log(form.getFieldValue("status"));
     if (form.getFieldValue("status") === "2") {
       setDisable(true);
     } else {
@@ -98,7 +103,7 @@ const Status = () => {
     console.log(department);
     if (department === "") return;
     getData();
-  }, [department, getData]);
+  }, [department]);
 
   return (
     <div
@@ -222,6 +227,11 @@ const Status = () => {
             ) : null;
           }}
         </Form.Item>
+        <Divider />
+        <p style={{ width: "100%", color: "gray" }}>
+          {data.modifier} 조교님
+          <br />({data.time})
+        </p>
         <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
           <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기

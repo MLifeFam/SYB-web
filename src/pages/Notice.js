@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import axios from "axios";
 import {
   AutoComplete,
@@ -22,6 +23,7 @@ const Option = Select.Option;
 const { TextArea } = Input;
 
 const Notice = () => {
+  const name = localStorage.getItem("username");
   const [form] = Form.useForm();
   const department = localStorage.getItem("department");
   const [data, setData] = React.useState([]);
@@ -29,7 +31,10 @@ const Notice = () => {
   const getData = React.useCallback(async () => {
     const response = await axios.get(`https://mfam.site/notice/${department}`);
     console.log(response);
-    setData(response.data);
+    setData({
+      modifier: response.data[0].modifier,
+      time: moment(response.data[0].time).add(9, "hours").format("LLL"),
+    });
 
     form.setFieldsValue({
       department: response.data[0].department,
@@ -62,6 +67,7 @@ const Notice = () => {
   };
 
   const onFinish = async (formData) => {
+    formData.modifier = name;
     const response = await axios
       .put(`https://mfam.site/notice/${formData.department}`, formData)
       .then((res) => {
@@ -144,6 +150,11 @@ const Notice = () => {
         <Form.Item label="링크" name="link" required>
           <Input />
         </Form.Item>
+        <Divider />
+        <p style={{ width: "100%", color: "gray" }}>
+          {data.modifier} 조교님
+          <br />({data.time})
+        </p>
         <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
           <Button icon={<CloudUploadOutlined />} htmlType="submit">
             수정하기
