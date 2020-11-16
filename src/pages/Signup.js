@@ -202,7 +202,7 @@ const Signup = (props) => {
 
   const onEmailHadnler = (e) => {
     if (_email.indexOf(sejongemail) === _email.length - sejongemail.length) {
-      setVisible(true);
+      return setVisible(true);
     }
 
     //세종대이메일 검사

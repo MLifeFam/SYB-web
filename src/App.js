@@ -4,7 +4,7 @@ import {
   Route,
   Switch,
   withRouter,
-  BrowserRouter as Router,
+  HashRouter as Router,
 } from "react-router-dom";
 import styled from "styled-components";
 import Login from "./pages/Login";
