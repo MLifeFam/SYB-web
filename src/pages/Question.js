@@ -13,6 +13,7 @@ import {
   Carousel,
 } from "antd";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
@@ -24,7 +25,7 @@ const Option = Select.Option;
 const { TextArea } = Input;
 
 const Question = (props) => {
-  const pageSize = parseInt(window.innerHeight / 150);
+  const pageSize = parseInt(window.innerHeight / 100);
   // 한 페이지에 담을 데이터 수 (height에 따라 개수 다르게 설정)
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
@@ -136,16 +137,15 @@ const Question = (props) => {
       >
         <p>질문 수정 페이지</p>
       </div>
-      {/* {data.map((it,i)=>{
-        it.count=data.length-i;
-        it.props=props;
-        return(
-            <QuestionList key = {i} data={it} getData={getData}/>
-        )
-      })} */}
+      소융봇에서 제공 할 질문과 답변을 관리하는 페이지입니다.
+      <div style={{ display: "flex", flexDirection: "row", margin: "5px 0" }}>
+        <Link to="/userquestion">
+          <u>유저들의 질문</u>
+        </Link>{" "}
+        에서 질문을 골라보세요 😊
+      </div>
       {PageRefresh(page)}
       <div style={{ marginBottom: "2rem" }} />
-
       <Pagination
         current={page}
         total={data.length}
@@ -153,7 +153,6 @@ const Question = (props) => {
         onChange={onPageChange}
         style={{ marginBottom: "1.5rem" }}
       />
-
       <Button onClick={FormHandler}>질문 추가</Button>
       <Modal
         title="질문추가"
