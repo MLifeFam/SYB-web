@@ -107,6 +107,7 @@ const Professor = () => {
     form.setFieldsValue({
       class_position: response.data[0].class_position,
       phone_number: response.data[0].phone_number,
+      email: response.data[0].email,
     });
   };
 
@@ -196,6 +197,9 @@ const Professor = () => {
           <Input />
         </Form.Item>
         <Form.Item label="전화번호" name="phone_number" required>
+          <Input />
+        </Form.Item>
+        <Form.Item label="이메일" name="email" required>
           <Input />
         </Form.Item>
         <Divider />
