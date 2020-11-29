@@ -78,7 +78,7 @@ const Question = (props) => {
         formData[key] = "";
       }
     }
-
+    formData.modifier = localStorage.getItem("username");
     const response = await axios
       .post(`https://mfam.site/knowledgePlus`, formData)
       .then((res) => {
@@ -88,6 +88,17 @@ const Question = (props) => {
           setPage(1);
           getData();
           setVisible(false);
+          form.setFieldsValue({
+            faqno: "",
+            category1: "",
+            category2: "",
+            category3: "",
+            category4: "",
+            question: "",
+            questionAnswer: "",
+            landingUrl: "",
+            imageinfo: "",
+          });
         }
       })
       .catch((error) => {
@@ -159,6 +170,7 @@ const Question = (props) => {
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
+        maskClosable={false}
         footer={[null, null]} //ok와 cancel 버튼을 없애기 위함
         width="40rem"
       >

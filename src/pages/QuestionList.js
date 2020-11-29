@@ -67,7 +67,7 @@ const QuestionList = ({ data, getData, setPage, page }) => {
         formData[key] = "";
       }
     }
-
+    formData.modifier = localStorage.getItem("username");
     const response = await axios
       .put(`https://mfam.site/knowledgePlus/${data.faqno}`, formData)
       .then((res) => {
@@ -130,6 +130,7 @@ const QuestionList = ({ data, getData, setPage, page }) => {
             visible={visible}
             onOk={handleOk}
             onCancel={handleCancel}
+            maskClosable={false}
             footer={[null, null]} //ok와 cancel 버튼을 없애기 위함
             width="40rem"
           >
