@@ -17,6 +17,7 @@ import {
   BulbOutlined,
   ClockCircleOutlined,
   QuestionCircleOutlined,
+  WarningOutlined,
 } from "@ant-design/icons";
 import { Divider } from "antd";
 import styled from "styled-components";
@@ -77,6 +78,7 @@ const Menu = () => {
           </MenuContent>
         </Link>
       </MenuItem>
+      <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
         <Link to="/userquestion" style={{ textDecoration: "none" }}>
           <MenuContent>
@@ -85,6 +87,16 @@ const Menu = () => {
           </MenuContent>
         </Link>
       </MenuItem>
+      <Divider style={{ margin: "0" }} />
+      <MenuItem onClick={ScrollTop}>
+        <Link to="/datamodify" style={{ textDecoration: "none" }}>
+          <MenuContent>
+            <WarningOutlined style={{ padding: "0 1rem" }} />
+            데이터 수정 요청
+          </MenuContent>
+        </Link>
+      </MenuItem>
+
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
         <Link to="/status" style={{ textDecoration: "none" }}>
@@ -139,7 +151,6 @@ const Menu = () => {
           </MenuContent>
         </Link>
       </MenuItem>
-      <Divider style={{ margin: "0" }} />
     </MenuContainer>
   );
 };

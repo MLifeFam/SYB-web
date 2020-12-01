@@ -113,10 +113,7 @@ const Curriculum = () => {
           fontFamily: "Gothic A1",
         }}
       >
-        <p style={{ fontSize: "2rem" }}>
-          {department} 교과과정 수정 페이지
-          <Divider style={{ margin: "0", backgroundColor: "lightgray" }} />
-        </p>
+        <p style={{ fontSize: "2rem" }}>{department} 교과과정 수정 페이지</p>
       </div>
       <Carousel
         style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}

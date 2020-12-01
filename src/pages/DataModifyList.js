@@ -14,7 +14,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-const Userquestionlist = ({ data, getData, setPage, page }) => {
+const DataModifylist = ({ data, getData, setPage, page }) => {
   const confirmFunc = (formData) => {
     Swal.fire({
       title: "삭제하시겠습니까?",
@@ -33,14 +33,14 @@ const Userquestionlist = ({ data, getData, setPage, page }) => {
 
   const onDeleteFunc = async (formData) => {
     const response = await axios
-      .delete(`https://mfam.site/question/${data.idx}`, formData)
+      .delete(`https://mfam.site/fixRequest/${data.idx}`, formData)
       .catch((error) => {
         return toast.error("에러가 났어요!");
         console.log(error);
       });
     setPage(page);
     getData();
-    toast.success("질문을 삭제했습니다!");
+    toast.success("요청을 삭제했습니다!");
   };
 
   return (
@@ -60,12 +60,12 @@ const Userquestionlist = ({ data, getData, setPage, page }) => {
       >
         <Col
           flex={1}
-          style={{ textAlign: "center", width: "15%", fontWeight: "bold" }}
+          style={{ paddingLeft: "2rem", width: "5%", fontWeight: "bold" }}
         >
-          {data.department}
+          {data.idx + 1}
         </Col>
-        <Col flex={8} style={{ marginLeft: "2rem", width: "50%" }}>
-          {data.content}
+        <Col flex={8} style={{ paddingLeft: "2rem", width: "60%" }}>
+          {data.question}
         </Col>
         <Col flex={2} style={{ width: "15%" }}>
           {data.time}
@@ -95,4 +95,4 @@ const Userquestionlist = ({ data, getData, setPage, page }) => {
   );
 };
 
-export default Userquestionlist;
+export default DataModifylist;

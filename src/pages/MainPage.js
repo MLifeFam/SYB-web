@@ -22,6 +22,7 @@ import Userquestion from "./Userquestion";
 import Professor from "./Professor";
 import Timetable from "./Timetable";
 import Bestqa from "./Bestqa";
+import datamodify from "./DataModify";
 import oc from "open-color";
 import Auth from "../hoc/auth";
 
@@ -92,6 +93,7 @@ const MainPage = (props) => {
               <Route path="/professor" component={Auth(Professor)} exact />
               <Route path="/timetable" component={Auth(Timetable)} exact />
               <Route path="/bestqa" component={Auth(Bestqa)} exact />
+              <Route path="/datamodify" component={Auth(datamodify)} exact />
               <Route path="/main" component={Auth(Welcome)} exact />
             </Switch>
           </Contents>
