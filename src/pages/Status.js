@@ -128,7 +128,7 @@ const Status = () => {
         <p style={{ fontSize: "2rem" }}>{department} 사무실 수정 페이지</p>
       </div>
       <Carousel
-        style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}
+        style={{ width: "50rem", height: "32rem", margin: "0 1rem 2rem" }}
       >
         <div>
           <Image
