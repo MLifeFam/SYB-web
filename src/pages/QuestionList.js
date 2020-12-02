@@ -198,7 +198,11 @@ const QuestionList = ({ data, getData, setPage, page }) => {
               <Form.Item label="이미지링크" name="imageinfo">
                 <Input initialvalues={data.imageinfo} />
               </Form.Item>
-
+              <Divider />
+              <p style={{ width: "100%", color: "gray" }}>
+                {data.modifier} 조교님
+                <br />({data.time})
+              </p>
               <Form.Item colon={false} wrapperCol={{ span: 20, offset: 7 }}>
                 <Button icon={<CloudUploadOutlined />} htmlType="submit">
                   수정하기
