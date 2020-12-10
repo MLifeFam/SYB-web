@@ -11,6 +11,7 @@
     "antd": "^4.8.3",
     "axios": "^0.20.0",
     "global": "^4.4.0",
+    "material-ui-dropzone": "^3.5.0",
     "moment": "^2.29.1",
     "open-color": "^1.7.0",
     "react": "^16.14.0",

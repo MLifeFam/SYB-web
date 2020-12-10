@@ -14,7 +14,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-const DataModifylist = ({ data, getData, setPage, page }) => {
+const DataModifylist = ({ data, getData, setPage, page, count }) => {
   const confirmFunc = (formData) => {
     Swal.fire({
       title: "삭제하시겠습니까?",
@@ -62,7 +62,7 @@ const DataModifylist = ({ data, getData, setPage, page }) => {
           flex={1}
           style={{ paddingLeft: "2rem", width: "5%", fontWeight: "bold" }}
         >
-          {data.idx + 1}
+          {count}
         </Col>
         <Col flex={8} style={{ paddingLeft: "2rem", width: "60%" }}>
           {data.question}

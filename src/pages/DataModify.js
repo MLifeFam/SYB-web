@@ -64,6 +64,7 @@ const DataModify = (props) => {
         <DataModifylist
           key={i}
           data={it}
+          count={data.length - i - pageSize * (page - 1)}
           getData={getData}
           setPage={setPage}
           page={page}
@@ -84,6 +85,7 @@ const DataModify = (props) => {
 
   const getData = React.useCallback(async () => {
     const response = await axios.get(`https://mfam.site/fixRequest`);
+
     response.data.map((i, it) => {
       count += 1;
     });
