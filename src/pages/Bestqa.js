@@ -126,11 +126,10 @@ const Bestqa = () => {
         style={{
           textAlign: "center",
           fontSize: "30px",
-          margin: "0 0 2rem 0",
           fontFamily: "Gothic A1",
         }}
       >
-        자주 묻는 질문 수정 페이지
+        <p>자주 묻는 질문 수정 페이지</p>
       </div>
       <Carousel
         style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}
