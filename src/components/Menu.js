@@ -18,6 +18,7 @@ import {
   ClockCircleOutlined,
   QuestionCircleOutlined,
   WarningOutlined,
+  LockOutlined,
 } from "@ant-design/icons";
 import { Divider } from "antd";
 import styled from "styled-components";
@@ -55,6 +56,7 @@ const MenuItem = styled.div`
 
 const Menu = () => {
   let history = useHistory();
+  const name = localStorage.getItem("username");
   const ScrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -151,6 +153,14 @@ const Menu = () => {
           </MenuContent>
         </Link>
       </MenuItem>
+      { name === ("이종민" || "허균" || "홍은호") ?(<MenuItem onClick={ScrollTop}>
+        <Link to="/adminpage" style={{ textDecoration: "none" }}>
+          <MenuContent>
+            <LockOutlined style={{ padding: "0 1rem" }} />
+            관리자페이지
+          </MenuContent>
+        </Link>
+      </MenuItem>):null}
     </MenuContainer>
   );
 };
