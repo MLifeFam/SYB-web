@@ -66,7 +66,7 @@ const Contents = styled.div`
   height: 85%;
   min-height: 600px;
   min-width: 800px;
-  margin: 2rem 2rem 0 13rem;
+  margin: 2rem 2rem 1rem 13rem;
   border-radius: 0.5rem;
   background-color: ${oc.gray[1]};
   border: 2px groove ${oc.gray[4]};
