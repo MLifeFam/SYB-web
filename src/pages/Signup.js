@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState,useEffect } from "react";
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { registerUser } from "../actions/userAction";
 import { useDispatch } from "react-redux";
@@ -108,6 +108,7 @@ const Signup = (props) => {
   const [email_check, checkEmail] = useState(false);
   const [visible, setVisible] = useState(false);
   const [email_auth, setEmailAuth] = useState(0);
+  const [dep,setDep] = useState([]);
   const sejongemail = "@sejong.ac.kr";
 
   const handleOk = (e) => {
@@ -139,31 +140,45 @@ const Signup = (props) => {
     setPhonenum(e.currentTarget.value);
   };
 
+  const loadDep = () => {
+    axios
+      .get("https://sjswbot.site/dep")
+      .then((res) => {
+        setDep(res.data.result);
+        console.log(dep);
+      })
+      .catch((error) => {
+        console.log("에러발생")
+      });
+  }
+
   const onEmailCheckSubmit = (e) => {
     console.log({
       email: _email,
       authNumber: email_auth,
     });
     axios
-      .post("https://mfam.site/mail/verify", {
+      .post("https://sjswbot.site/mail/verify", {
         email: _email,
         authNumber: email_auth,
       })
       .then((res) => {
-        if (res.status === 201) {
+        console.log(res)
+        if (res.status === 200) {
           handleCancel();
           setEmail(true);
           Swal.fire({
             icon: "success",
-            text: "인증되었습니다.",
+            text: res.data.message,
             showConfirmButton: false,
             width: "20rem",
             timer: 2000,
           });
-        } else {
+        } 
+        else {
           Swal.fire({
             icon: "warning",
-            text: "인증번호가 옳지 않습니다.",
+            text: res.data.message,
             showConfirmButton: true,
             width: "25rem",
             timer: 1500,
@@ -172,22 +187,13 @@ const Signup = (props) => {
       })
       .catch((error) => {
         console.log(error);
-
         Swal.fire({
           icon: "warning",
-          text: "인증번호가 옳지 않습니다.",
+          text: "인증을 실패 하였습니다.",
           showConfirmButton: true,
           width: "25rem",
           timer: 1500,
         });
-
-        // Swal.fire({
-        //   icon: "warning",
-        //   text: "서버와의 연결이 옳지 않습니다.",
-        //   showConfirmButton: true,
-        //   width: "25rem",
-        //   timer: 1500,
-        // });
       });
   };
 
@@ -201,14 +207,20 @@ const Signup = (props) => {
   }, []);
 
   const onEmailHadnler = (e) => {
-    if (_email.indexOf(sejongemail) === _email.length - sejongemail.length) {
-      return setVisible(true);
+    if (_email.indexOf(sejongemail) !== _email.length - sejongemail.length) {
+      return Swal.fire({
+        icon: "warning",
+        text: "세종대학교 조교 이메일(@sejong.ac.kr) 형식이 아닙니다",
+        showConfirmButton: true,
+        width: "auto",
+      });
     }
+    // 세종대 이메일 검사
 
-    //세종대이메일 검사
+    setVisible(true);
 
     axios
-      .post("https://mfam.site/mail/send", { to: _email })
+      .post("https://sjswbot.site/mail/send", { to: _email })
       .then((res) => {
         if (res.status === 200) {
           console.log({ to: _email });
@@ -239,12 +251,13 @@ const Signup = (props) => {
     }
 
     axios
-      .post("https://mfam.site/auth/idCheck", { userid: _id })
+      .post("https://sjswbot.site/auth/idCheck", {userid:_id})
       .then((res) => {
+        console.log(res)
         if (res.status === 200) {
           Swal.fire({
             icon: "success",
-            text: res.data.result,
+            text: res.data.message,
             showConfirmButton: true,
             width: "25rem",
             timer: 1500,
@@ -254,7 +267,7 @@ const Signup = (props) => {
         } else {
           Swal.fire({
             icon: "warning",
-            text: res.data.result,
+            text: res.data.message,
             showConfirmButton: true,
             width: "25rem",
             timer: 1500,
@@ -264,10 +277,9 @@ const Signup = (props) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         Swal.fire({
           icon: "warning",
-          text: "중복된 아이디 입니다.",
+          text: error.response.data.message,
           showConfirmButton: true,
           width: "25rem",
           timer: 1500,
@@ -275,12 +287,15 @@ const Signup = (props) => {
 
         checkDup(false);
       });
+
+      checkDup(true);
   };
   const linktoMain = (e) => {
     props.history.push("/");
   };
 
   const onSubmitHandler = (e) => {
+
     let body = {
       email: _email,
       username: _name,
@@ -342,6 +357,10 @@ const Signup = (props) => {
         console.log(err);
       });
   };
+
+  useEffect(()=>{
+    loadDep()
+  },[]);
 
   return (
     <div>
@@ -461,13 +480,7 @@ const Signup = (props) => {
               ]}
             >
               <Select onChange={onChangeSelectFunc}>
-                <Option value="0">컴퓨터공학과</Option>
-                <Option value="1">소프트웨어학과</Option>
-                <Option value="2">정보보호학과</Option>
-                <Option value="3">데이터사이언스학과</Option>
-                <Option value="4">지능기전공학부</Option>
-                <Option value="5">디자인이노베이션</Option>
-                <Option value="6">만화애니메이션텍</Option>
+                {dep.map(i => (i.department != "관리자") ? <Option value={i.idx}>{i.department}</Option>:null)}
               </Select>
             </Form.Item>
 
@@ -562,6 +575,7 @@ const Signup = (props) => {
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
+        maskClosable={false}
         footer={[null, null]} //ok와 cancel 버튼을 없애기 위함
         width="40rem"
       >

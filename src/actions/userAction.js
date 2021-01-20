@@ -18,9 +18,16 @@ export function registerUser(dataToSubmit) {
     });
 
     return axios
-      .post("https://mfam.site/auth/signup", dataToSubmit)
-      .then((response) => response)
-      .catch((error) => error.response);
+      .post("https://sjswbot.site/auth/signup", dataToSubmit)
+      .then((response) => {
+        console.log(response);
+        return response;
+      }
+      )
+      .catch((error) => {
+        console.log(error);
+        return error.response;
+      })
   };
 }
 
@@ -42,7 +49,7 @@ export function loginUser(dataToSubmit) {
     });
 
     return axios
-      .post("https://mfam.site/auth/login", dataToSubmit)
+      .post("https://sjswbot.site/auth/login", dataToSubmit)
       .then((response) => response)
       .catch((error) => error.response);
   };
@@ -77,12 +84,11 @@ export function authUser(props) {
 
   return (dispatch) => {
     return axios
-      .get("https://mfam.site/auth/check", header, { widthCredentials: true })
+      .get("https://sjswbot.site/auth/check", header, { widthCredentials: true })
       .then((res) => {
         dispatch({
           type: AUTH_SUCCESS,
         });
-
         const department = dept(res.data.data.department);
 
         localStorage.setItem("username", res.data.data.username);
@@ -91,6 +97,7 @@ export function authUser(props) {
         return res.data.data;
       })
       .catch((error) => {
+        console.log(error);
         dispatch({
           type: AUTH_FAILED,
         });
