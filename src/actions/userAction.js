@@ -78,7 +78,7 @@ export function authUser(props) {
   const token = localStorage.getItem("user_token");
   const header = {
     headers: {
-      authorization: `Bearer ${token}`,
+      authorization: `${token}`,
     },
   };
 
@@ -89,12 +89,13 @@ export function authUser(props) {
         dispatch({
           type: AUTH_SUCCESS,
         });
-        const department = dept(res.data.data.department);
+        console.log(res);
 
-        localStorage.setItem("username", res.data.data.username);
-        localStorage.setItem("department", department);
+        localStorage.setItem("username", res.data.result[0].user);
+        localStorage.setItem("department", res.data.result[0].department);
+        localStorage.setItem("role",res.data.result[0].role);
 
-        return res.data.data;
+        return res.data.result[0];
       })
       .catch((error) => {
         console.log(error);

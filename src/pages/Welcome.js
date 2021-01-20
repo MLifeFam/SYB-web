@@ -75,7 +75,7 @@ const Welcome = (props) => {
     }
     formData.modifier = name;
     const response = await axios
-      .put(`https://mfam.site/assistantNotice/${department}`, formData)
+      .put(`https://sjswbot.site/assistantNotice/${department}`, formData)
       .then((res) => {
         if (res.status === 200) {
           Swal.fire({
@@ -178,7 +178,7 @@ const Welcome = (props) => {
 
   const getData = React.useCallback(async () => {
     const response = await axios.get(
-      `https://mfam.site/assistantNotice/${department}`
+      `https://sjswbot.site/assistantNotice/${department}`
     );
     console.log(response);
     setData({

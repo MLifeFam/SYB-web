@@ -70,9 +70,10 @@ const Login = (props) => {
 
     dispatch(loginUser(body))
       .then((res) => {
-        const accessToken = res.data.result.token;
-
+        console.log(res)
+        
         if (res.status === 200) {
+          const accessToken = res.data.result[0].token;
           dispatch(loginSuccess(accessToken));
           dispatch(authUser()).then((res) => {
             if (res) {
@@ -84,7 +85,7 @@ const Login = (props) => {
           Swal.fire({
             icon: "error",
             title: "로그인 실패",
-            text: res.data.result,
+            text: res.data.message,
             showConfirmButton: true,
             width: "25rem",
             timer: 2000,
@@ -93,6 +94,14 @@ const Login = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          text: "로그인이 실패 하였습니다.",
+          title: "로그인실패",
+          showConfirmButton: true,
+          width: "25rem",
+          timer: 2000,
+        });
       });
   };
 
