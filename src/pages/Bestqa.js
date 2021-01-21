@@ -36,10 +36,15 @@ const BestqaData = ({ data, key }) => {
   };
 
   const onFinishFunc = async (formData) => {
-    formData.modifier = localStorage.getItem("username");
-
+    const token = localStorage.getItem("user_token");
+    const header = {
+      headers: {
+        authorization: `${token}`,
+      },
+    };
+    console.log(formData);
     const response = await axios
-      .put(`https://mfam.site/bestqa/${data.id}`, formData)
+      .put(`https://sjswbot.site/bestqa/${data.idx}`, formData,header,{ widthCredentials: true })
       .then((res) => {
         if (res.status === 200) {
           Swal.fire({
@@ -65,7 +70,7 @@ const BestqaData = ({ data, key }) => {
       }}
     >
       <Form
-        initialValues={{ id: data.id, question: data.question }}
+        initialValues={{ id: data.idx, question: data.question }}
         onFinish={confirmFunc}
         autoComplete="off"
         form={form}
@@ -75,7 +80,7 @@ const BestqaData = ({ data, key }) => {
           justifyContent: "center",
         }}
       >
-        <Form.Item label={`TOP ${data.id} `} name="question">
+        <Form.Item label={`TOP ${data.idx} `} name="question">
           <Input style={{ width: "30vw" }} />
         </Form.Item>
         <Form.Item colon={false} wrapperCol={{ span: 11, offset: 11 }}>
@@ -102,9 +107,9 @@ const BestqaData = ({ data, key }) => {
 const Bestqa = () => {
   const [data, setData] = React.useState([]);
   const getData = React.useCallback(async () => {
-    const response = await axios.get("https://mfam.site/bestqa");
+    const response = await axios.get("https://sjswbot.site/bestqa");
     console.log(response);
-    setData(response.data);
+    setData(response.data.result);
   }, []);
   React.useEffect(() => {
     getData();
@@ -160,7 +165,7 @@ const Bestqa = () => {
         </div>
       </Carousel>
       {data.map((it, i) => {
-        return <BestqaData key={it.classname} data={it} />;
+        return <BestqaData key={i} data={it} />;
       })}
     </div>
   );
