@@ -23,33 +23,31 @@ const Status = () => {
   const [isDisable, setDisable] = React.useState(true);
   const [data, setData] = React.useState({});
   const getData = React.useCallback(async () => {
-    const response = await axios.get(`https://mfam.site/status/${department}`);
-    console.log(response.data);
+    const response = await axios.get(`https://sjswbot.site/status/${department}`);
+    console.log(response);
     let data = "";
-    if (response.data[0].status === 0) {
+    if (response.data.result.status === 1) {
       data = "근무중";
-    } else if (response.data[0].status === 1) {
-      data = "부재중";
-    } else {
-      data = "기타내용 입력";
+    } else if (response.data.result.status === 2) {
+      data = "휴가중";
     }
     setData({
-      modifier: response.data[0].modifier,
-      time: moment(response.data[0].time).add(9, "hours").format("LLL"),
+      modifier: response.data.result.User.username,
+      time: moment(response.data.result.time).format("LLL"),
+      // 시간 안더해줘도 됨 (21-01-21)
     });
     form.setFieldsValue({
-      department: response.data[0].department,
+      // department: response.data.result.department,
       status: data,
-      comment: response.data[0].comment,
-      position: response.data[0].position,
-      phoneNumber: response.data[0].phoneNumber,
+      comment: response.data.result.comment,
+      position: response.data.result.position,
+      phoneNumber: response.data.result.phoneNumber,
       // time: time,
     });
   });
 
   const onValuesChange = (changedValue, allValue) => {
-    console.log(changedValue);
-    console.log(Date().toLocaleDateString);
+
   };
 
   const confirmFunc = (formData) => {
@@ -71,9 +69,24 @@ const Status = () => {
   };
 
   const onFinish = async (data) => {
-    data.modifier = localStorage.getItem("username");
+    // data.modifier = localStorage.getItem("username");
+    // 기존 modifier 넣어준 것 뺌
+    const token = localStorage.getItem("user_token");
+    const header = {
+      headers: {
+        authorization: `${token}`,
+      },
+    };
+
+    if(data.status === "근무중"){
+      data.status = 1;
+    }
+    else if (data.status === "휴가중"){
+      data.status = 2;
+    }
+    
     const response = await axios
-      .put(`https://mfam.site/status/${data.department}`, data)
+      .put(`https://sjswbot.site/status/${department}`, data, header, { widthCredentials: true })
       .then((res) => {
         if (res.status === 200) {
           return Swal.fire({
@@ -92,11 +105,7 @@ const Status = () => {
   };
 
   React.useEffect(() => {
-    if (form.getFieldValue("status") === "2") {
-      setDisable(true);
-    } else {
-      setDisable(false);
-    }
+    setDisable(false);
   }, [form.data]);
 
   React.useEffect(() => {
@@ -161,7 +170,7 @@ const Status = () => {
         onFieldsChange={onValuesChange}
         style={{ width: "40rem" }}
       >
-        <Form.Item
+        {/* <Form.Item
           label="학과"
           name="department"
           value={department}
@@ -173,11 +182,11 @@ const Status = () => {
           }}
         >
           <Input readOnly={true} />
-        </Form.Item>
+        </Form.Item> */}
         {/* <Form.Item label="시간" name="time" value={time} style={{width:"0rem", height:"0rem" , visibility:"hidden", margin:"0"}}>
           <Input readOnly="true"/>
         </Form.Item> */}
-        <Form.Item
+        {/* <Form.Item
           label="이름"
           name="modifier"
           value={id}
@@ -189,7 +198,7 @@ const Status = () => {
           }}
         >
           <Input readOnly={true} />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="위치" name="position" required>
           <Input />
         </Form.Item>
@@ -198,31 +207,19 @@ const Status = () => {
         </Form.Item>
         <Form.Item label="조교 부재여부" name="status" required>
           <Select>
-            <Option value="0">근무중</Option>
-            <Option value="1">부재중</Option>
-            <Option value="2">기타내용 입력</Option>
+            <Option value="1">근무중</Option>
+            <Option value="2">휴가중</Option>
           </Select>
         </Form.Item>
         <Form.Item
-          noStyle
-          shouldUpdate={(preValues, currentValues) =>
-            preValues.status !== currentValues.status
-          }
+          label="기타내용"
+          name="comment"
+          // rules={[
+          //   { required: true, messsage: "코멘트르 입력해주세요" },
+          // ]}\
+          required
         >
-          {({ getFieldValue }) => {
-            return form.getFieldValue("status") === "2" ||
-              form.getFieldValue("status") === "기타내용 입력" ? (
-              <Form.Item
-                label="기타내용"
-                name="comment"
-                rules={[
-                  { required: true, messsage: "기타 내용을 입력해주세요" },
-                ]}
-              >
-                <TextArea disabled={isDisable} style={{ resize: "none" }} />
-              </Form.Item>
-            ) : null;
-          }}
+          <TextArea disabled={isDisable} style={{ resize: "none" }} />
         </Form.Item>
         <Divider />
         <p style={{ width: "100%", color: "gray" }}>

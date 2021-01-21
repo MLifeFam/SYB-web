@@ -8,6 +8,7 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
 } from "./types";
+import React, { Component, useState } from "react";
 import axios from "axios";
 import { request } from "../utils/axios";
 
@@ -104,32 +105,4 @@ export function authUser(props) {
         });
       });
   };
-}
-
-function dept(num) {
-  switch (num) {
-    case 0:
-      return "컴퓨터공학과";
-      break;
-    case 1:
-      return "소프트웨어학과";
-      break;
-    case 2:
-      return "정보보호학과";
-      break;
-    case 3:
-      return "데이터사이언스학과";
-      break;
-    case 4:
-      return "지능기전공학부";
-      break;
-    case 5:
-      return "디자인이노베이션";
-      break;
-    case 6:
-      return "만화애니메이션텍";
-      break;
-    default:
-      return "";
-  }
 }
