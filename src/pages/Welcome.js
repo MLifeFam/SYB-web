@@ -13,6 +13,8 @@ import {
   Image,
   Carousel,
 } from "antd";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
@@ -92,8 +94,8 @@ const Welcome = (props) => {
             width: "20rem",
             timer: 1500,
           });
-          setVisible(false);
           getData();
+          setVisible(false);
         } else {
           toast.error("서버와의 에러가 발생했습니다!");
         }
@@ -122,7 +124,7 @@ const Welcome = (props) => {
             ]}
             required
           >
-            <TextArea
+            {/* <TextArea
               style={{
                 fontSize: "1rem",
                 width: "50rem",
@@ -132,15 +134,16 @@ const Welcome = (props) => {
               }}
               autoSize={true}
               resize="none"
-            />
+            /> */}
+            <ReactQuill theme="snow" value={data.content} style={{width:"50rem",height:"auto"}}/>
           </Form.Item>
           <div style={{ marginBottom: "1rem" }} />
           <Divider />
           <p style={{ width: "100%", color: "gray", marginBottom: "2rem" }}>
             수정 하시려면 수정하기 버튼을, 취소하려면 취소 버튼을 눌러주세요{" "}
           </p>
-          <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
-            <div style={{ display: "inline-block" }}>
+          <Form.Item >
+            <div style={{ display: "inline-block" ,float:"right"}}>
               <Button htmlType="submit" style={{ margin: "0 1rem" }}>
                 수정하기
               </Button>
@@ -153,8 +156,8 @@ const Welcome = (props) => {
       );
     } else {
       return (
-        <>
-          <TextArea
+        <div>
+          {/* <TextArea
             value={data.content}
             style={{
               fontSize: "1rem",
@@ -166,15 +169,16 @@ const Welcome = (props) => {
             bordered={false}
             autoSize={true}
             readOnly={true}
-          />
+          /> */}
+          <div dangerouslySetInnerHTML={{ __html: data.content }} style={{width:"50rem"}}></div>
           <div style={{ marginBottom: "1rem" }} />
           <Divider />
           <p style={{ width: "100%", color: "gray" }}>
             {data.modifier} 조교님
             <br />({data.time})
           </p>
-          <Button onClick={FormHandler}>수정하기</Button>
-        </>
+          <Button onClick={FormHandler} style={{float:"right"}}>수정하기</Button>
+        </div>
       );
     }
   };
@@ -225,7 +229,6 @@ const Welcome = (props) => {
     >
       <div
         style={{
-          textAlign: "center",
           fontSize: "30px",
           fontFamily: "Gothic A1",
         }}
