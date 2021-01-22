@@ -67,6 +67,13 @@ const Welcome = (props) => {
   };
 
   const onFinishFunc = async (formData) => {
+    const token = localStorage.getItem("user_token");
+    const header = {
+      headers: {
+        authorization: `${token}`,
+      },
+    };
+    
     // 공백 문자처리
     for (const [key, value] of Object.entries(formData)) {
       if (value === undefined || value === null || value === NaN) {
@@ -75,7 +82,7 @@ const Welcome = (props) => {
     }
     formData.modifier = name;
     const response = await axios
-      .put(`https://sjswbot.site/assistantNotice/${department}`, formData)
+      .put(`https://sjswbot.site/assistantNotice/${department}`, formData,header,{ widthCredentials: true })
       .then((res) => {
         if (res.status === 200) {
           Swal.fire({
@@ -86,6 +93,7 @@ const Welcome = (props) => {
             timer: 1500,
           });
           setVisible(false);
+          getData();
         } else {
           toast.error("서버와의 에러가 발생했습니다!");
         }
@@ -96,7 +104,6 @@ const Welcome = (props) => {
   };
 
   const loadContent = () => {
-    console.log(visible);
     if (visible === true) {
       return (
         <Form
@@ -177,18 +184,25 @@ const Welcome = (props) => {
   };
 
   const getData = React.useCallback(async () => {
+    const token = localStorage.getItem("user_token");
+    const header = {
+      headers: {
+        authorization: `${token}`,
+      },
+    };
+
     const response = await axios.get(
-      `https://sjswbot.site/assistantNotice/${department}`
+      `https://sjswbot.site/assistantNotice/${department}`, header, { widthCredentials: true }
     );
     console.log(response);
     setData({
-      content: response.data.result[0].content,
-      modifier: response.data.result[0].modifier,
-      time: moment(response.data.result[0].time).add(9, "hours").format("LLL"),
+      content: response.data.result.content,
+      modifier: response.data.result.User.username,
+      time: moment(response.data.result.time).format("LLL"),
     });
 
     form.setFieldsValue({
-      content: response.data.result[0].content,
+      content: response.data.result.content,
     });
   }, [department]);
 
