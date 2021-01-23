@@ -29,16 +29,16 @@ const Notice = () => {
   const [data, setData] = React.useState([]);
   const [isDisable, setDisable] = React.useState(true);
   const getData = React.useCallback(async () => {
-    const response = await axios.get(`https://mfam.site/notice/${department}`);
+    const response = await axios.get(`https://sjswbot.site/notice/${department}`);
     console.log(response);
     setData({
-      modifier: response.data[0].modifier,
-      time: moment(response.data[0].time).add(9, "hours").format("LLL"),
+      modifier: response.data.result.User.username,
+      time: moment(response.data.result.time).format("LLL"),
     });
 
     form.setFieldsValue({
-      department: response.data[0].department,
-      link: response.data[0].link,
+      department: response.data.result.department,
+      link: response.data.result.link,
     });
   }, [department]);
 
@@ -67,9 +67,16 @@ const Notice = () => {
   };
 
   const onFinish = async (formData) => {
-    formData.modifier = name;
+    // formData.modifier = name;
+    const token = localStorage.getItem("user_token");
+    const header = {
+      headers: {
+        authorization: `${token}`,
+      },
+    };
+
     const response = await axios
-      .put(`https://mfam.site/notice/${formData.department}`, formData)
+      .put(`https://sjswbot.site/notice/${department}`, formData  , header, { widthCredentials: true })
       .then((res) => {
         if (res.status === 200) {
           return Swal.fire({
@@ -79,6 +86,8 @@ const Notice = () => {
             width: "20rem",
             timer: 1500,
           });
+
+          getData();
         }
       })
       .catch((err) => {
@@ -88,7 +97,7 @@ const Notice = () => {
 
   React.useEffect(() => {
     getData();
-  }, [department, getData]);
+  }, []);
 
   return (
     <div

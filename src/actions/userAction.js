@@ -95,6 +95,7 @@ export function authUser(props) {
         localStorage.setItem("username", res.data.result[0].user);
         localStorage.setItem("department", res.data.result[0].department);
         localStorage.setItem("role",res.data.result[0].role);
+        localStorage.setItem("department_name",dep(res.data.result[0].department));
 
         return res.data.result[0];
       })
@@ -105,4 +106,10 @@ export function authUser(props) {
         });
       });
   };
+}
+
+function dep(num) {
+  return axios
+  .get("https://sjswbot.site/dep")
+  .then((res) => res.data.result[num-1].department)
 }
