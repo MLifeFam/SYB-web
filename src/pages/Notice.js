@@ -26,6 +26,7 @@ const Notice = () => {
   const name = localStorage.getItem("username");
   const [form] = Form.useForm();
   const department = localStorage.getItem("department");
+  const deptname = localStorage.getItem("dept_name");
   const [data, setData] = React.useState([]);
   const [isDisable, setDisable] = React.useState(true);
   const getData = React.useCallback(async () => {
@@ -119,7 +120,7 @@ const Notice = () => {
           fontFamily: "Gothic A1",
         }}
       >
-        <p>{department} 공지 링크 페이지</p>
+        <p>{deptname} 공지 링크 페이지</p>
       </div>
       <Carousel
         style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}

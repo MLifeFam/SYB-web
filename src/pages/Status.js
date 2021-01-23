@@ -20,6 +20,7 @@ const Status = () => {
   //const [time,setTime] = React.useState(new Date().toLocaleString());
   const [form] = Form.useForm();
   const department = localStorage.getItem("department");
+  const deptname = localStorage.getItem("dept_name");
   const [isDisable, setDisable] = React.useState(true);
   const [data, setData] = React.useState({});
   const getData = React.useCallback(async () => {
@@ -134,7 +135,7 @@ const Status = () => {
           fontFamily: "Gothic A1",
         }}
       >
-        <p>{department} 사무실 수정 페이지</p>
+        <p>{deptname} 사무실 수정 페이지</p>
       </div>
       <Carousel
         style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}

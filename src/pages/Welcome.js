@@ -32,6 +32,7 @@ const { TextArea } = Input;
 const Welcome = (props) => {
   const name = localStorage.getItem("username");
   const department = localStorage.getItem("department");
+  const deptname = localStorage.getItem("dept_name");
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
@@ -233,7 +234,7 @@ const Welcome = (props) => {
           fontFamily: "Gothic A1",
         }}
       >
-        <p>{department} 공지사항 </p>
+        <p>{deptname} 공지사항 </p>
       </div>
       <div
         style={{

@@ -90,13 +90,16 @@ export function authUser(props) {
         dispatch({
           type: AUTH_SUCCESS,
         });
-        console.log(res);
-
+        let dept = "";
+        
+        axios
+        .get("https://sjswbot.site/dep")
+        .then((res2) => {
+          localStorage.setItem("dept_name",res2.data.result[res.data.result[0].department-1].department);
+        }) 
         localStorage.setItem("username", res.data.result[0].user);
         localStorage.setItem("department", res.data.result[0].department);
         localStorage.setItem("role",res.data.result[0].role);
-        localStorage.setItem("department_name",dep(res.data.result[0].department));
-
         return res.data.result[0];
       })
       .catch((error) => {
@@ -111,5 +114,6 @@ export function authUser(props) {
 function dep(num) {
   return axios
   .get("https://sjswbot.site/dep")
-  .then((res) => res.data.result[num-1].department)
+  .then((res) => res.data.result[num-1].department
+  )
 }

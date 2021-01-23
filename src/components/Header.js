@@ -80,7 +80,7 @@ const HeaderContents = styled.div`
 function Header(props) {
   const dispatch = useDispatch();
   const username = localStorage.getItem("username");
-  const dept = localStorage.getItem("department");
+  const dept = localStorage.getItem("dept_name");
   const onClickHandler = () => {
     dispatch(logoutUser());
     localStorage.clear();

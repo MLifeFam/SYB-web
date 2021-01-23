@@ -25,6 +25,7 @@ const { TextArea } = Input;
 const Curriculum = () => {
   const [form] = Form.useForm();
   const department = localStorage.getItem("department");
+  const deptname = localStorage.getItem("dept_name");
   const [data, setData] = React.useState([]);
   const [isDisable, setDisable] = React.useState(true);
   const getData = React.useCallback(async () => {
@@ -78,7 +79,7 @@ const Curriculum = () => {
     };
     
     const response = await axios
-      .put(`https://sjswbot.site/curriculum/${department}`, formData,header, { widthCredentials: true })
+      .put(`https://sjswbot.site/curriculum/${department}`, formData , header, { widthCredentials: true })
       .then((res) => {
         if (res.status === 200) {
           return Swal.fire({
@@ -120,7 +121,7 @@ const Curriculum = () => {
           fontFamily: "Gothic A1",
         }}
       >
-        <p>{department} 교과과정 수정 페이지</p>
+        <p>{deptname} 교과과정 수정 페이지</p>
       </div>
       <Carousel
         style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}
