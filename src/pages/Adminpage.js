@@ -29,7 +29,26 @@ const { TextArea } = Input;
 
 const AdminPage = (props) => {
   const name = localStorage.getItem("username");
-  const department = localStorage.getItem("department");
+  const pageSize = parseInt(window.innerHeight / 50);
+  let count = 0;
+  const [size, setSize] = React.useState(0);
+  // 한 페이지에 담을 데이터 수 (height에 따라 개수 다르게 설정)
+  const [form] = Form.useForm();
+  const [visible, setVisible] = React.useState(false);
+  const [data, setData] = React.useState([]);
+  const [page, setPage] = React.useState(1);
+  const num = data[0];
+  const FormHandler = () => {
+    setVisible(true);
+  };
+
+  const handleOk = (e) => {
+    setVisible(false);
+  };
+
+  const handleCancel = (e) => {
+    setVisible(false);
+  };
 
   return (
       <>
