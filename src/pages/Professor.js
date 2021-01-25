@@ -27,9 +27,15 @@ const Professor = () => {
   const [inputValue, setInputValue] = React.useState("");
   const [nameCheck, setNameCheck] = React.useState(false);
   const onFinishFunc = async (_data) => {
-    _data.modifier = localStorage.getItem("username");
+    const token = localStorage.getItem("user_token");
+    const header = {
+      headers: {
+        authorization: `${token}`,
+      },
+    };
+
     const response = await axios
-      .put(`https://mfam.site/professor/${inputValue}`, _data)
+      .put(`https://sjswbot.site/professor/${inputValue}`, _data , header, { widthCredentials: true })
       .then((res) => {
         if (res.status === 200) {
           return Swal.fire({
@@ -40,6 +46,8 @@ const Professor = () => {
             timer: 1500,
           });
         }
+
+        getData();
       })
       .catch((err) => {
         toast.error("서버와의 에러가 발생했습니다!");
@@ -87,7 +95,7 @@ const Professor = () => {
       return toast.error("존재하지 않는 이름입니다.");
     }
     const response = await axios
-      .get(`https://mfam.site/professor/${name}`)
+      .get(`https://sjswbot.site/professor/${name}`)
       .catch((error) => {
         toast.error("에러가 났어요!");
       });
@@ -99,24 +107,25 @@ const Professor = () => {
     toast.success("교수님 정보를 성공적으로 불러왔습니다.");
     setNameCheck(true);
     getData({
-      modifier: response.data[0].modifier + " 조교님",
+      modifier: response.data.result.User.username + " 조교님",
       time:
-        "(" + moment(response.data[0].time).add(9, "hours").format("LLL") + ")",
+        "(" + moment(response.data.result.time).format("LLL") + ")",
     });
 
     form.setFieldsValue({
-      class_position: response.data[0].class_position,
-      phone_number: response.data[0].phone_number,
-      email: response.data[0].email,
+      classPosition: response.data.result.classPosition,
+      phoneNumber: response.data.result.phoneNumber,
+      email: response.data.result.email,
     });
   };
 
   useEffect(() => {
     let p_list = [];
-    axios.get(`https://mfam.site/professor/`).then((res) => {
-      res.data.map((v, i) => {
-        p_list.push({ value: v.name });
-      });
+    axios.get(`https://sjswbot.site/professor/`).then((res) => {
+      console.log(res);
+      // res.data.map((v, i) => {
+      //   p_list.push({ value: v.name });
+      // });
     });
 
     setlist(p_list);
@@ -193,10 +202,10 @@ const Professor = () => {
         autoComplete="off"
         style={{ width: "30rem" }}
       >
-        <Form.Item label="연구실" name="class_position" required>
+        <Form.Item label="연구실" name="classPosition" required>
           <Input />
         </Form.Item>
-        <Form.Item label="전화번호" name="phone_number" required>
+        <Form.Item label="전화번호" name="phoneNumber" required>
           <Input />
         </Form.Item>
         <Form.Item label="이메일" name="email" required>
