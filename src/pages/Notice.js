@@ -38,7 +38,7 @@ const Notice = () => {
     });
 
     form.setFieldsValue({
-      department: response.data.result.department,
+      department: deptname,
       link: response.data.result.link,
     });
   }, [department]);
@@ -68,7 +68,6 @@ const Notice = () => {
   };
 
   const onFinish = async (formData) => {
-    // formData.modifier = name;
     const token = localStorage.getItem("user_token");
     const header = {
       headers: {

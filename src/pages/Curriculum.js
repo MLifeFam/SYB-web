@@ -39,7 +39,7 @@ const Curriculum = () => {
     });
 
     form.setFieldsValue({
-      department: response.data.result.department,
+      department: deptname,
       link: response.data.result.link,
     });
   }, [department]);
