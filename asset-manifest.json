@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/SYB-web/static/css/main.4ec5c018.chunk.css",
-    "main.js": "/SYB-web/static/js/main.d15436da.chunk.js",
-    "main.js.map": "/SYB-web/static/js/main.d15436da.chunk.js.map",
+    "main.js": "/SYB-web/static/js/main.1611bae9.chunk.js",
+    "main.js.map": "/SYB-web/static/js/main.1611bae9.chunk.js.map",
     "runtime-main.js": "/SYB-web/static/js/runtime-main.80cb23b8.js",
     "runtime-main.js.map": "/SYB-web/static/js/runtime-main.80cb23b8.js.map",
     "static/css/2.1e2289a4.chunk.css": "/SYB-web/static/css/2.1e2289a4.chunk.css",
-    "static/js/2.95b4f83a.chunk.js": "/SYB-web/static/js/2.95b4f83a.chunk.js",
-    "static/js/2.95b4f83a.chunk.js.map": "/SYB-web/static/js/2.95b4f83a.chunk.js.map",
+    "static/js/2.c6f71742.chunk.js": "/SYB-web/static/js/2.c6f71742.chunk.js",
+    "static/js/2.c6f71742.chunk.js.map": "/SYB-web/static/js/2.c6f71742.chunk.js.map",
     "index.html": "/SYB-web/index.html",
     "static/css/2.1e2289a4.chunk.css.map": "/SYB-web/static/css/2.1e2289a4.chunk.css.map",
     "static/css/main.4ec5c018.chunk.css.map": "/SYB-web/static/css/main.4ec5c018.chunk.css.map",
-    "static/js/2.95b4f83a.chunk.js.LICENSE.txt": "/SYB-web/static/js/2.95b4f83a.chunk.js.LICENSE.txt"
+    "static/js/2.c6f71742.chunk.js.LICENSE.txt": "/SYB-web/static/js/2.c6f71742.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.80cb23b8.js",
     "static/css/2.1e2289a4.chunk.css",
-    "static/js/2.95b4f83a.chunk.js",
+    "static/js/2.c6f71742.chunk.js",
     "static/css/main.4ec5c018.chunk.css",
-    "static/js/main.d15436da.chunk.js"
+    "static/js/main.1611bae9.chunk.js"
   ]
 }
