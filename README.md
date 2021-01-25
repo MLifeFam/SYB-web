@@ -1,1 +1,1 @@
-#### SYB ADMIN : https://mlifefam.github.io/SYB-web/
+#### SYB ADMIN : https://sjswbot.github.io/SYB-web/
