@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import moment from "moment";
 import axios from "axios";
+import moment from "moment";
 import {
   AutoComplete,
   Form,
   Select,
   Input,
-  Button,
   notification,
+  Button,
   Carousel,
   Image,
   Divider,
@@ -16,21 +16,23 @@ import { SearchOutlined } from "@ant-design/icons";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { getDefaultNormalizer } from "@testing-library/react";
 
 const MySwal = withReactContent(Swal);
 const openNotification = (type,comment) => {
-    notification[type]({
-      description: comment,
-      placement: "bottomRight",
-      duration: 2,
-      width: "auto",
-    });
+  notification[type]({
+    description: comment,
+    placement: "bottomRight",
+    duration: 2,
+    width: "auto",
+  });
 };
 
-const ProfessorModify = () => {
+const TimetableModify = () => {
+  const name = localStorage.getItem("username");
   const [list, setlist] = React.useState([]);
   const [form] = Form.useForm();
-  const [data, getData] = React.useState({});
+  const [data, setData] = React.useState({});
   const [inputValue, setInputValue] = React.useState("");
   const [nameCheck, setNameCheck] = React.useState(false);
   const token = localStorage.getItem("user_token");
@@ -42,7 +44,7 @@ const ProfessorModify = () => {
 
   const onDeleteFunc = async () => {
     if (nameCheck === false) {
-        return openNotification('error', '성함을 입력 후 search 버튼을 눌러주세요');
+        return openNotification('error', '강의실을 입력 후 Search 버튼을 눌러주세요');
     }
 
     Swal.fire({
@@ -69,30 +71,9 @@ const ProfessorModify = () => {
     });
   };
 
-  const onFinishFunc = async (_data) => {
-    const response = await axios
-      .put(`https://sjswbot.site/professor/${inputValue}`, _data , header, { widthCredentials: true })
-      .then((res) => {
-        if (res.status === 200) {
-          return Swal.fire({
-            icon: "success",
-            title: "수정되었습니다.",
-            showConfirmButton: false,
-            width: "auto",
-            timer: 1500,
-          });
-        }
-
-        getData();
-      })
-      .catch((err) => {
-        
-      });
-  };
-
   const confirmFunc = (formData) => {
     if (nameCheck === false) {
-        return openNotification('error', '성함을 입력 후 search 버튼을 눌러주세요');
+      return openNotification('error', '강의실을 입력 후 Search 버튼을 눌러주세요');
     }
 
     Swal.fire({
@@ -110,54 +91,65 @@ const ProfessorModify = () => {
     });
   };
 
+  const onFinishFunc = async (data) => {
+    data.modifier = name;
+    console.log(data);
+    const response = await axios
+      .put(`https://mfam.site/timetable/${inputValue}`, data)
+      .then((res) => {
+        if (res.status === 200) {
+          return Swal.fire({
+            icon: "success",
+            title: "수정 완료",
+            showConfirmButton: false,
+            width: "20rem",
+            timer: 1500,
+          });
+        }
+        onSearchFunc();
+      })
+      .catch((err) => {
+        openNotification('error', '서버와의 에러가 발생했습니다.');
+      });
+  };
+
   const onChangeFunc = (name) => {
     setNameCheck(false);
     setInputValue(name);
   };
 
-  const showModifier = () => {
-    return (
-      <p style={{ width: "100%", color: "gray" }}>
-        {data.modifier}
-        <br />
-        {data.time}
-      </p>
-    );
-  };
-
   const onSearchFunc = async () => {
-    let name = inputValue;
-    if (name.length < 2) {
-        return openNotification('error', '존재하지 않는 이름입니다.');
+    let value = inputValue.replace(/(\s*)/g, ""); // 띄어쓰기 제거
+    if (value.length < 1) {
+      return openNotification('error', '강의실을 입력 후 Search 버튼을 눌러주세요');
     }
     const response = await axios
-      .get(`https://sjswbot.site/professor/${name}`)
+      .get(`https://sjswbot.site/timetable/${value}`)
       .catch((error) => {
+        openNotification('error', '서버와의 에러가 발생했습니다.');
       });
+
     console.log(response);
-
     if (!response.data.result) {
-      return openNotification('error', '존재하지 않는 이름입니다.');
-    }
-    openNotification('success','데이터를 성공적으로 불러왔습니다.');
-    setNameCheck(true);
-    getData({
-      modifier: response.data.result.User.username + " 조교님",
-      time:
+      return openNotification('error', '존재하지 않는 강의실 입니다.');
+    } else {
+      openNotification('success', '강의실 정보를 성공적으로 불러왔습니다.');
+      setNameCheck(true);
+      setData({
+        modifier: response.data.result.User.username + " 조교님",
+        time:
         "(" + moment(response.data.result.time).format("LLL") + ")",
-    });
-
-    form.setFieldsValue({
-      classPosition: response.data.result.classPosition,
-      phoneNumber: response.data.result.phoneNumber,
-      email: response.data.result.email,
-    });
+      });
+      form.setFieldsValue({
+        link: response.data[0].link,
+      });
+    }
   };
 
   useEffect(() => {
     return () => {
         let p_list = [];
-        axios.get(`https://sjswbot.site/professor/`).then((res) => {
+        axios.get(`https://sjswbot.site/timetable/`).then((res) => {
         console.log(res.data.result.rows);
         res.data.result.rows.map((v, i) => {
             p_list.push({ value: v.name });
@@ -176,25 +168,24 @@ const ProfessorModify = () => {
         background: "white",
       }}
     >
-
       <Carousel
         style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045727-22f9f380-25d5-11eb-8a36-a2135d9fb51d.png"
+            src="https://user-images.githubusercontent.com/51112542/99046546-3eb1c980-25d6-11eb-91d1-9e65182a72cb.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045910-5fc5ea80-25d5-11eb-8f68-7b071a52350e.png"
+            src="https://user-images.githubusercontent.com/51112542/99046550-3fe2f680-25d6-11eb-8f35-49df97a88419.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045316-7cadee00-25d4-11eb-9b20-8c5bb4fbb247.png"
+            src="https://user-images.githubusercontent.com/51112542/99046554-41142380-25d6-11eb-8be4-b10796d051f3.png"
             width="100%"
           />
         </div>
@@ -207,15 +198,14 @@ const ProfessorModify = () => {
           width: "30rem",
         }}
       >
-        <p style={{ width: "5rem" }}>성함:</p>
+        <p style={{ width: "6rem" }}>강의실:</p>
         <AutoComplete
           style={{ width: "100%", marginRight: "1rem" }}
           options={list}
-          placeholder="교수님 성함을 입력해주세요"
-          filterOption={(input, option) => option.value.indexOf(input) === 0}
+          placeholder="강의실을 입력해주세요"
+          filterOption={(input, option) => option.value.indexOf(input) !== -1}
           onChange={onChangeFunc}
         />
-        {/* <Input style={{ margin: "0 4% 0 0" }} onChange={onChangeFunc} /> */}
         <Button icon={<SearchOutlined />} onClick={onSearchFunc}>
           Search
         </Button>
@@ -226,17 +216,15 @@ const ProfessorModify = () => {
         autoComplete="off"
         style={{ width: "30rem" }}
       >
-        <Form.Item label="연구실" name="classPosition" required>
-          <Input />
-        </Form.Item>
-        <Form.Item label="전화번호" name="phoneNumber" required>
-          <Input />
-        </Form.Item>
-        <Form.Item label="이메일" name="email" required>
+        <Form.Item label="링크" name="link">
           <Input />
         </Form.Item>
         <Divider />
-        {showModifier()}
+        <p style={{ width: "100%", color: "gray" }}>
+          {data.modifier}
+          <br />
+          {data.time}
+        </p>
         <Form.Item>
             <center>
                 <Button icon={<CloudUploadOutlined />} htmlType="submit" style={{float:'left', marginLeft:'7rem'}}>
@@ -252,4 +240,4 @@ const ProfessorModify = () => {
   );
 };
 
-export default ProfessorModify;
+export default TimetableModify;
