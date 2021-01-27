@@ -204,7 +204,7 @@ const ProfessorModify = () => {
           display: "flex",
           flexDirection: "row",
           margin: "0 0 2rem 0",
-          width: "30rem",
+          width: "40rem",
         }}
       >
         <p style={{ width: "5rem" }}>성함:</p>
@@ -224,7 +224,7 @@ const ProfessorModify = () => {
         form={form}
         onFinish={confirmFunc}
         autoComplete="off"
-        style={{ width: "30rem" }}
+        style={{ width: "40rem" }}
       >
         <Form.Item label="연구실" name="classPosition" required>
           <Input />
@@ -239,10 +239,10 @@ const ProfessorModify = () => {
         {showModifier()}
         <Form.Item>
             <center>
-                <Button icon={<CloudUploadOutlined />} htmlType="submit" style={{float:'left', marginLeft:'7rem'}}>
+                <Button icon={<CloudUploadOutlined />} htmlType="submit" style={{float:'left', marginLeft:'12rem'}}>
                     수정하기
                 </Button>
-                <Button icon={<CloudUploadOutlined />} onClick={onDeleteFunc} style={{float:'right',marginRight:'7rem'}}>
+                <Button icon={<CloudUploadOutlined />} onClick={onDeleteFunc} style={{float:'right',marginRight:'12rem'}}>
                     삭제하기
                 </Button>
             </center>

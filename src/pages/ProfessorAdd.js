@@ -8,6 +8,7 @@ import {
   Input,
   Button,
   Carousel,
+  notification,
   Image,
   Divider,
 } from "antd";
@@ -19,6 +20,14 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
+const openNotification = (type,comment) => {
+  notification[type]({
+    description: comment,
+    placement: "bottomRight",
+    duration: 2,
+    width: "auto",
+  });
+};
 
 const ProfessorAdd = () => {
   const [form] = Form.useForm();
@@ -45,11 +54,9 @@ const ProfessorAdd = () => {
             timer: 1500,
           });
         }
-
-        getData();
       })
       .catch((err) => {
-        toast.error("서버와의 에러가 발생했습니다!");
+        openNotification('error', '서버와의 에러가 발생했습니다.');
       });
   };
 
@@ -108,7 +115,7 @@ const ProfessorAdd = () => {
         form={form}
         onFinish={onFinishFunc}
         autoComplete="off"
-        style={{ width: "30rem" }}
+        style={{ width: "40rem" }}
       >
         <Form.Item label="성함" name="name" required>
           <Input />

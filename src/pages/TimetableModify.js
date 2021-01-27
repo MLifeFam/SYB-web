@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import axios from "axios";
 import moment from "moment";
 import {
@@ -12,6 +12,7 @@ import {
   Image,
   Divider,
 } from "antd";
+import ImageUploader from 'react-images-upload';
 import { SearchOutlined } from "@ant-design/icons";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
@@ -30,17 +31,23 @@ const openNotification = (type,comment) => {
 
 const TimetableModify = () => {
   const name = localStorage.getItem("username");
-  const [list, setlist] = React.useState([]);
+  const [list, setlist] = useState([]);
   const [form] = Form.useForm();
-  const [data, setData] = React.useState({});
-  const [inputValue, setInputValue] = React.useState("");
-  const [nameCheck, setNameCheck] = React.useState(false);
+  const [data, setData] = useState({});
+  const [fileList, setFileList] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [nameCheck, setNameCheck] = useState(false);
   const token = localStorage.getItem("user_token");
   const header = {
     headers: {
       authorization: `${token}`,
     },
   };
+
+  const meta = {
+    title:'title 1',
+    contents: 'contents 1',
+  }
 
   const onDeleteFunc = async () => {
     if (nameCheck === false) {
@@ -57,7 +64,7 @@ const TimetableModify = () => {
       cancelButtonText: "아니요",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://sjswbot.site/professor/${inputValue}`, header, { widthCredentials: true })
+        axios.delete(`https://sjswbot.site/timetable/${inputValue}`, header, { widthCredentials: true })
         .then(()=>
         Swal.fire({
             icon: "success",
@@ -70,6 +77,40 @@ const TimetableModify = () => {
       }
     });
   };
+
+  const handleUpload = async () => {
+    const formData = new FormData();
+
+    formData.append('img',fileList[0]);
+    // fileList.forEach(file => formData.append('img',file));
+
+    for(let key in meta) {
+      formData.append(key,meta[key]);
+    }
+    console.log(formData);
+    await axios
+      .put(`https://sjswbot.site/timetable/${inputValue}`, formData , header , { widthCredentials: true })
+      .then((res)=>{
+        if(res.status === 200){
+            return Swal.fire({
+              icon: "success",
+              title: `등록되었습니다.`,
+              showConfirmButton: false,
+              width: "auto",
+              timer: 1500,
+            }).then(()=>{
+              onSearchFunc();
+            }
+            );
+          }
+
+        
+
+      })
+      .catch((err) => {
+        openNotification('error','서버와의 에러가 발생했습니다.');
+      });
+  }
 
   const confirmFunc = (formData) => {
     if (nameCheck === false) {
@@ -86,31 +127,9 @@ const TimetableModify = () => {
       cancelButtonText: "아니요",
     }).then((result) => {
       if (result.isConfirmed) {
-        onFinishFunc(formData);
+        handleUpload();
       }
     });
-  };
-
-  const onFinishFunc = async (data) => {
-    data.modifier = name;
-    console.log(data);
-    const response = await axios
-      .put(`https://mfam.site/timetable/${inputValue}`, data)
-      .then((res) => {
-        if (res.status === 200) {
-          return Swal.fire({
-            icon: "success",
-            title: "수정 완료",
-            showConfirmButton: false,
-            width: "20rem",
-            timer: 1500,
-          });
-        }
-        onSearchFunc();
-      })
-      .catch((err) => {
-        openNotification('error', '서버와의 에러가 발생했습니다.');
-      });
   };
 
   const onChangeFunc = (name) => {
@@ -139,10 +158,11 @@ const TimetableModify = () => {
         modifier: response.data.result.User.username + " 조교님",
         time:
         "(" + moment(response.data.result.time).format("LLL") + ")",
+        link: response.data.result.link,
       });
-      form.setFieldsValue({
-        link: response.data[0].link,
-      });
+      // form.setFieldsValue({
+      //   link: response.data.result.link,
+      // });
     }
   };
 
@@ -195,7 +215,7 @@ const TimetableModify = () => {
           display: "flex",
           flexDirection: "row",
           margin: "0 0 2rem 0",
-          width: "30rem",
+          width: "40rem",
         }}
       >
         <p style={{ width: "6rem" }}>강의실:</p>
@@ -214,23 +234,52 @@ const TimetableModify = () => {
         form={form}
         onFinish={confirmFunc}
         autoComplete="off"
-        style={{ width: "30rem" }}
+        style={{ width: "40rem" }}
       >
-        <Form.Item label="링크" name="link">
-          <Input />
-        </Form.Item>
+        {
+          data.link?
+          <Form.Item
+            label = "현재 시간표"
+          >
+            <Image src={"https://sjswbot.site"+data.link} style={{maxWidth:"40rem"}}></Image>
+          </Form.Item>
+          :null
+        }
+        {
+          data.link?
+          <Form.Item 
+            label="수정 시간표" 
+            name="img" 
+          >
+            <ImageUploader
+                  withIcon={true}
+                  withPreview={true}
+                  buttonText='이미지를 업로드해주세요'
+                  onChange = {(pictureFiles,pictureDataURLs)=>setFileList(pictureFiles)}
+                  imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                  maxFileSize={5242880}
+                  singleImage
+            />
+          </Form.Item>
+          :null
+        }   
+
         <Divider />
-        <p style={{ width: "100%", color: "gray" }}>
-          {data.modifier}
-          <br />
-          {data.time}
-        </p>
-        <Form.Item>
+        {
+          data.modifier
+          ?<p style={{ width: "100%", color: "gray",cursor:"pointer" }}>
+            {data.modifier}
+            <br />
+            {data.time}
+          </p>
+          :null
+        }
+        <Form.Item style={{margin:'3rem 0 0'}}>
             <center>
-                <Button icon={<CloudUploadOutlined />} htmlType="submit" style={{float:'left', marginLeft:'7rem'}}>
+                <Button icon={<CloudUploadOutlined />} htmlType="submit" style={{float:'left', marginLeft:'12rem'}}>
                     수정하기
                 </Button>
-                <Button icon={<CloudUploadOutlined />} onClick={onDeleteFunc} style={{float:'right',marginRight:'7rem'}}>
+                <Button icon={<CloudUploadOutlined />} onClick={onDeleteFunc} style={{float:'right',marginRight:'12rem'}}>
                     삭제하기
                 </Button>
             </center>
