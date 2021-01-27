@@ -221,33 +221,44 @@ const ProfessorModify = () => {
         </Button>
       </div>
       <Form
-        form={form}
-        onFinish={confirmFunc}
-        autoComplete="off"
-        style={{ width: "40rem" }}
-      >
-        <Form.Item label="연구실" name="classPosition" required>
-          <Input />
-        </Form.Item>
-        <Form.Item label="전화번호" name="phoneNumber" required>
-          <Input />
-        </Form.Item>
-        <Form.Item label="이메일" name="email" required>
-          <Input />
-        </Form.Item>
-        <Divider />
-        {showModifier()}
-        <Form.Item>
-            <center>
-                <Button icon={<CloudUploadOutlined />} htmlType="submit" style={{float:'left', marginLeft:'12rem'}}>
-                    수정하기
-                </Button>
-                <Button icon={<CloudUploadOutlined />} onClick={onDeleteFunc} style={{float:'right',marginRight:'12rem'}}>
-                    삭제하기
-                </Button>
-            </center>
-        </Form.Item>
-      </Form>
+          form={form}
+          onFinish={confirmFunc}
+          autoComplete="off"
+          style={{ width: "40rem" }}
+        >
+          {
+            nameCheck === true
+            ? <>
+              <Form.Item label="연구실" name="classPosition" required>
+                <Input />
+              </Form.Item>
+              <Form.Item label="전화번호" name="phoneNumber" required>
+                <Input />
+              </Form.Item>
+              <Form.Item label="이메일" name="email" required>
+                <Input />
+              </Form.Item>
+              
+            </>
+            :null
+          }
+          <Divider />
+          {
+            nameCheck === true
+            ?showModifier()
+            :null
+          }
+          <Form.Item>
+              <center>
+                  <Button icon={<CloudUploadOutlined />} htmlType="submit" style={{float:'left', marginLeft:'12rem'}}>
+                      수정하기
+                  </Button>
+                  <Button icon={<CloudUploadOutlined />} onClick={onDeleteFunc} style={{float:'right',marginRight:'12rem'}}>
+                      삭제하기
+                  </Button>
+              </center>
+          </Form.Item>
+        </Form>
     </div>
   );
 };
