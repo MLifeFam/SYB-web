@@ -85,9 +85,7 @@ const Notice = () => {
             showConfirmButton: false,
             width: "20rem",
             timer: 1500,
-          });
-
-          getData();
+          }).then(()=>getData());
         }
       })
       .catch((err) => {

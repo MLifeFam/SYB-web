@@ -94,9 +94,10 @@ const Welcome = (props) => {
             showConfirmButton: false,
             width: "20rem",
             timer: 1500,
+          }).then(()=>{
+            getData()
+            setVisible(false);
           });
-          getData();
-          setVisible(false);
         } else {
           toast.error("서버와의 에러가 발생했습니다!");
         }
