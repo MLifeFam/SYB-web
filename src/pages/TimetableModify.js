@@ -103,9 +103,8 @@ const TimetableModify = () => {
               width: "auto",
               timer: 1500,
             }).then(()=>{
-              getData();
-            }
-            );
+              onSearchFunc();
+            });
           }
       })
       .catch((err) => {
@@ -145,7 +144,6 @@ const TimetableModify = () => {
       openNotification('error', '서버와의 에러가 발생했습니다.');
     });
 
-    console.log(response);
     if (!response.data.result) {
       return openNotification('error', '존재하지 않는 강의실 입니다.');
     } else {
@@ -153,8 +151,7 @@ const TimetableModify = () => {
       setNameCheck(true);
       setData({
         modifier: response.data.result.User.username + " 조교님",
-        time:
-        "(" + moment(response.data.result.time).format("LLL") + ")",
+        time: moment(response.data.result.updatedAt).format("LLL"),
         link: response.data.result.link,
       });
     }

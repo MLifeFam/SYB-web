@@ -69,8 +69,6 @@ const ProfessorModify = () => {
               phoneNumber: "",
               email: "",
             });
-            setNameCheck(false);
-            setInputValue("");
           })
         );
       }
@@ -78,6 +76,7 @@ const ProfessorModify = () => {
   };
 
   const onFinishFunc = async (_data) => {
+    console.log(inputValue);
     const response = await axios
       .put(`https://sjswbot.site/professor/${inputValue}`, _data , header, { widthCredentials: true })
       .then((res) => {
@@ -88,11 +87,10 @@ const ProfessorModify = () => {
             showConfirmButton: false,
             width: "auto",
             timer: 1500,
-          }).then(()=>{
-            getData();
-          });
+          }).then(()=>
+            onSearchFunc()
+          );
         }
-        
       })
       .catch((err) => {
         
@@ -135,6 +133,7 @@ const ProfessorModify = () => {
   };
 
   const getData = React.useCallback(async () => {
+
     const response = await axios
       .get(`https://sjswbot.site/professor/${inputValue}`)
       .catch((error) => {
@@ -148,8 +147,7 @@ const ProfessorModify = () => {
     setNameCheck(true);
     setData({
       modifier: response.data.result.User.username + " 조교님",
-      time:
-        "(" + moment(response.data.result.time).format("LLL") + ")",
+      time: moment(response.data.result.updatedAt).format("LLL"),
     });
 
     form.setFieldsValue({
@@ -168,7 +166,6 @@ const ProfessorModify = () => {
       .get(`https://sjswbot.site/professor/${name}`)
       .catch((error) => {
       });
-    console.log(response);
 
     if (!response.data.result) {
       return openNotification('error', '존재하지 않는 이름입니다.');
@@ -177,8 +174,7 @@ const ProfessorModify = () => {
     setNameCheck(true);
     setData({
       modifier: response.data.result.User.username + " 조교님",
-      time:
-        "(" + moment(response.data.result.time).format("LLL") + ")",
+      time: moment(response.data.result.updatedAt).format("LLL"),
     });
 
     form.setFieldsValue({
