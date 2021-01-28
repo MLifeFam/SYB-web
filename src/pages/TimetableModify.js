@@ -103,7 +103,7 @@ const TimetableModify = () => {
               width: "auto",
               timer: 1500,
             }).then(()=>{
-              onSearchFunc();
+              getData();
             }
             );
           }
@@ -138,6 +138,28 @@ const TimetableModify = () => {
     setInputValue(name);
   };
 
+  const getData = React.useCallback(async () => {
+    const response = await axios
+    .get(`https://sjswbot.site/timetable/${inputValue}`)
+    .catch((error) => {
+      openNotification('error', '서버와의 에러가 발생했습니다.');
+    });
+
+    console.log(response);
+    if (!response.data.result) {
+      return openNotification('error', '존재하지 않는 강의실 입니다.');
+    } else {
+      openNotification('success', '강의실 정보를 성공적으로 불러왔습니다.');
+      setNameCheck(true);
+      setData({
+        modifier: response.data.result.User.username + " 조교님",
+        time:
+        "(" + moment(response.data.result.time).format("LLL") + ")",
+        link: response.data.result.link,
+      });
+    }
+  }, []);
+
   const onSearchFunc = async () => {
     let value = inputValue.replace(/(\s*)/g, ""); // 띄어쓰기 제거
     if (value.length < 1) {
@@ -161,10 +183,8 @@ const TimetableModify = () => {
         "(" + moment(response.data.result.time).format("LLL") + ")",
         link: response.data.result.link,
       });
-      // form.setFieldsValue({
-      //   link: response.data.result.link,
-      // });
     }
+    // getData();
   };
 
   useEffect(() => {

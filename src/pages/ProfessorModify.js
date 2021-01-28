@@ -30,7 +30,7 @@ const openNotification = (type,comment) => {
 const ProfessorModify = () => {
   const [list, setlist] = React.useState([]);
   const [form] = Form.useForm();
-  const [data, getData] = React.useState({});
+  const [data, setData] = React.useState({});
   const [inputValue, setInputValue] = React.useState("");
   const [nameCheck, setNameCheck] = React.useState(false);
   const token = localStorage.getItem("user_token");
@@ -88,9 +88,11 @@ const ProfessorModify = () => {
             showConfirmButton: false,
             width: "auto",
             timer: 1500,
+          }).then(()=>{
+            getData();
           });
         }
-        getData();
+        
       })
       .catch((err) => {
         
@@ -132,6 +134,31 @@ const ProfessorModify = () => {
     );
   };
 
+  const getData = React.useCallback(async () => {
+    const response = await axios
+      .get(`https://sjswbot.site/professor/${inputValue}`)
+      .catch((error) => {
+      });
+    console.log(response);
+
+    if (!response.data.result) {
+      return openNotification('error', '존재하지 않는 이름입니다.');
+    }
+    openNotification('success','데이터를 성공적으로 불러왔습니다.');
+    setNameCheck(true);
+    setData({
+      modifier: response.data.result.User.username + " 조교님",
+      time:
+        "(" + moment(response.data.result.time).format("LLL") + ")",
+    });
+
+    form.setFieldsValue({
+      classPosition: response.data.result.classPosition,
+      phoneNumber: response.data.result.phoneNumber,
+      email: response.data.result.email,
+    });
+  }, []);
+
   const onSearchFunc = async () => {
     let name = inputValue;
     if (name.length < 2) {
@@ -148,7 +175,7 @@ const ProfessorModify = () => {
     }
     openNotification('success','데이터를 성공적으로 불러왔습니다.');
     setNameCheck(true);
-    getData({
+    setData({
       modifier: response.data.result.User.username + " 조교님",
       time:
         "(" + moment(response.data.result.time).format("LLL") + ")",
