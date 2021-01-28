@@ -167,16 +167,15 @@ const TimetableModify = () => {
   };
 
   useEffect(() => {
-    return () => {
-        let p_list = [];
-        axios.get(`https://sjswbot.site/timetable/`).then((res) => {
-        console.log(res.data.result.rows);
-        res.data.result.rows.map((v, i) => {
-            p_list.push({ value: v.name });
-        });
-        });
-        setlist(p_list);
-    }   
+    let p_list = [];
+    axios.get(`https://sjswbot.site/timetable/list`).then((res) => {
+    console.log(res.data.result);
+    res.data.result.map((v, i) => {
+        p_list.push({ value: v.classname });
+    });
+    })
+    setlist(p_list);
+    console.log(p_list);
   },[]);
 
   return (

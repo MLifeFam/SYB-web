@@ -155,16 +155,15 @@ const ProfessorModify = () => {
   };
 
   useEffect(() => {
-    return () => {
-        let p_list = [];
-        axios.get(`https://sjswbot.site/professor/`).then((res) => {
-        console.log(res.data.result.rows);
-        res.data.result.rows.map((v, i) => {
-            p_list.push({ value: v.name });
-        });
-        });
-        setlist(p_list);
-    }   
+    let p_list = [];
+    axios.get(`https://sjswbot.site/professor/list`).then((res) => {
+    console.log(res.data.result);
+    res.data.result.map((v, i) => {
+        p_list.push({ value: v.name });
+    });
+    })
+    setlist(p_list);
+    console.log(p_list);
   },[]);
 
   return (
@@ -205,11 +204,12 @@ const ProfessorModify = () => {
           flexDirection: "row",
           margin: "0 0 2rem 0",
           width: "40rem",
+          height:"auto",
         }}
       >
         <p style={{ width: "5rem" }}>성함:</p>
         <AutoComplete
-          style={{ width: "100%", marginRight: "1rem" }}
+          style={{ width: "100%", marginRight: "1rem"}}
           options={list}
           placeholder="교수님 성함을 입력해주세요"
           filterOption={(input, option) => option.value.indexOf(input) === 0}
