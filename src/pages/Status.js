@@ -34,7 +34,7 @@ const Status = () => {
     }
     setData({
       modifier: response.data.result.User.username,
-      time: moment(response.data.result.time).format("LLL"),
+      time: moment(response.data.result.updatedAt).format("LLL"),
       // 시간 안더해줘도 됨 (21-01-21)
     });
     form.setFieldsValue({

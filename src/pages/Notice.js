@@ -34,7 +34,7 @@ const Notice = () => {
     console.log(response);
     setData({
       modifier: response.data.result.User.username,
-      time: moment(response.data.result.time).format("LLL"),
+      time: moment(response.data.result.updatedAt).format("LLL"),
     });
 
     form.setFieldsValue({

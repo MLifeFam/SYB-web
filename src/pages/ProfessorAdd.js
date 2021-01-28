@@ -67,17 +67,6 @@ const ProfessorAdd = () => {
       });
   };
 
-
-  const showModifier = () => {
-    return (
-      <div style={{ width: "100%", color: "gray" }}>
-        {data.modifier}
-        <br />
-        {data.time}
-      </div>
-    );
-  };
-
   useEffect(() => {
     form.setFieldsValue({
         name:"",
@@ -137,7 +126,6 @@ const ProfessorAdd = () => {
           <Input />
         </Form.Item>
         <Divider />
-        {showModifier()}
         <Form.Item colon={false}>
             <center>
                 <Button htmlType="submit">
