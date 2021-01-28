@@ -52,6 +52,13 @@ const ProfessorAdd = () => {
             showConfirmButton: false,
             width: "auto",
             timer: 1500,
+          }).then(()=>{
+            form.setFieldsValue({
+              name:"",
+              classPosition:"",
+              phoneNumber:"",
+              email:"",
+            });
           });
         }
       })

@@ -63,6 +63,14 @@ const ProfessorModify = () => {
             showConfirmButton: false,
             width: "auto",
             timer: 1500,
+          }).then(()=>{
+            form.setFieldsValue({
+              classPosition: "",
+              phoneNumber: "",
+              email: "",
+            });
+            setNameCheck(false);
+            setInputValue("");
           })
         );
       }
@@ -82,7 +90,6 @@ const ProfessorModify = () => {
             timer: 1500,
           });
         }
-
         getData();
       })
       .catch((err) => {
