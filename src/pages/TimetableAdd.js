@@ -67,10 +67,12 @@ const TimetableAdd = () => {
               showConfirmButton: false,
               width: "auto",
               timer: 1500,
+            }).then(()=>{
+              form.setFieldsValue({
+                classname:"",
+              });
             });
           }
-
-        setFileList([]);
 
       })
       .catch((err) => {

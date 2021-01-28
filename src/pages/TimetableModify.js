@@ -72,6 +72,10 @@ const TimetableModify = () => {
             showConfirmButton: false,
             width: "auto",
             timer: 1500,
+          }).then(()=>{
+            setInputValue("");
+            setData([]);
+            setNameCheck(false);
           })
         );
       }
@@ -103,9 +107,6 @@ const TimetableModify = () => {
             }
             );
           }
-
-        
-
       })
       .catch((err) => {
         openNotification('error','서버와의 에러가 발생했습니다.');
@@ -219,6 +220,7 @@ const TimetableModify = () => {
       >
         <p style={{ width: "6rem" }}>강의실:</p>
         <AutoComplete
+          name="classname"
           style={{ width: "100%", marginRight: "1rem" }}
           options={list}
           placeholder="강의실을 입력해주세요"
