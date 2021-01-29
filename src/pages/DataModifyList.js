@@ -53,14 +53,14 @@ const DataModifylist = ({ data, getData, setPage, page, count ,pageSize}) => {
 
   return (
     <>
-      <Divider style={{ margin: "2vh 0" }} />
+      <Divider style={{ margin: "1vh 0" }} />
       <Row
         justify="start"
         style={{
           width: "90%",
           border: "1px solid lightgray",
           padding: "0.8rem 0",
-          margin: "0 1rem",
+          margin: "0.1rem 1rem",
           display: "flex",
           alignItems: "center",
           borderRadius: "5px",

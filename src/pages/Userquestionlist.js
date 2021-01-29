@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
 import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
 import {
   CloudUploadOutlined,
   ExclamationCircleOutlined,
@@ -15,6 +16,13 @@ import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 
 const Userquestionlist = ({ data, getData, setPage, page }) => {
+  const token = localStorage.getItem("user_token");
+  const deptname = localStorage.getItem("dept_name");
+  const header = {
+    headers: {
+      authorization: `${token}`,
+    },
+  };
   const confirmFunc = (formData) => {
     Swal.fire({
       title: "삭제하시겠습니까?",
@@ -33,7 +41,7 @@ const Userquestionlist = ({ data, getData, setPage, page }) => {
 
   const onDeleteFunc = async (formData) => {
     const response = await axios
-      .delete(`https://mfam.site/question/${data.idx}`, formData)
+      .delete(`https://sjswbot.site/question/${data.idx}`,header, {widthCredentials:true})
       .catch((error) => {
         return toast.error("에러가 났어요!");
         console.log(error);
@@ -45,14 +53,14 @@ const Userquestionlist = ({ data, getData, setPage, page }) => {
 
   return (
     <>
-      <Divider style={{ margin: "2vh 0" }} />
+      <Divider style={{ margin: "1vh 0" }} />
       <Row
         justify="start"
         style={{
           width: "90%",
           border: "1px solid lightgray",
           padding: "0.8rem 0",
-          margin: "0 1rem",
+          margin: "0.1rem 1rem",
           display: "flex",
           alignItems: "center",
           borderRadius: "5px",
@@ -62,19 +70,21 @@ const Userquestionlist = ({ data, getData, setPage, page }) => {
           flex={1}
           style={{ textAlign: "center", width: "15%", fontWeight: "bold" }}
         >
-          {data.department}
+          {data.department === 11
+          ?"공통질문"
+          :deptname}
         </Col>
         <Col flex={8} style={{ marginLeft: "2rem", width: "50%" }}>
           {data.content}
         </Col>
         <Col flex={2} style={{ width: "15%" }}>
-          {data.time}
+          {moment(data.updatedAt).format("LLL")}
         </Col>
         <Col flex={1}>
           <Button
             onClick={confirmFunc}
             type="primary"
-            style={{ backgroundColor: "red", border: "none" }}
+            style={{ backgroundColor: "red", border: "none"}}
           >
             삭제하기
           </Button>

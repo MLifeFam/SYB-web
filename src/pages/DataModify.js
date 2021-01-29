@@ -26,7 +26,7 @@ const { TextArea } = Input;
 
 const DataModify = (props) => {
   const department = localStorage.getItem("department");
-  const pageSize = parseInt(window.innerHeight / 100);
+  const pageSize = parseInt(window.innerHeight / 50);
   const [dataSize,setdataSize] = React.useState(0);
   let count = 0;
   const [size, setSize] = React.useState(0);
@@ -126,7 +126,7 @@ const DataModify = (props) => {
         <p>유저들의 데이터 수정 요청</p>
       </div>
       데이터에 오류가 있는 질문들의 수정 요청입니다.
-      <div style={{ display: "flex", flexDirection: "row", margin: "5px 0" }}>
+      <div style={{ display: "flex", flexDirection: "row", margin: "10px 0 2rem" }}>
         <Link to="/question">
           <u>질문 수정페이지</u>
         </Link>{" "}
