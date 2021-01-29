@@ -26,7 +26,7 @@ const { TextArea } = Input;
 
 const DataModify = (props) => {
   const department = localStorage.getItem("department");
-  const pageSize = parseInt(window.innerHeight / 50);
+  const pageSize = parseInt(window.innerHeight / 70);
   const [dataSize,setdataSize] = React.useState(0);
   let count = 0;
   const [size, setSize] = React.useState(0);

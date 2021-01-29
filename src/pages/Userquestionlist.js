@@ -84,7 +84,7 @@ const Userquestionlist = ({ data, getData, setPage, page }) => {
           <Button
             onClick={confirmFunc}
             type="primary"
-            style={{ backgroundColor: "red", border: "none"}}
+            style={{ backgroundColor: "RGB(255,0,0,0.6)", border: "none"}}
           >
             삭제하기
           </Button>

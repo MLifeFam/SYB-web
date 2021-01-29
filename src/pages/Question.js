@@ -25,13 +25,20 @@ const Option = Select.Option;
 const { TextArea } = Input;
 
 const Question = (props) => {
-  const pageSize = parseInt(window.innerHeight / 100);
+  const pageSize = parseInt(window.innerHeight / 70);
   // 한 페이지에 담을 데이터 수 (height에 따라 개수 다르게 설정)
+  const [dataSize,setdataSize] = React.useState(0);
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
-  const [page, setPage] = React.useState(1);
-  const num = data[0];
+  const [page, setPage] = React.useState(0);
+  const token = localStorage.getItem("user_token");
+  const header = {
+    headers: {
+      authorization: `${token}`,
+    },
+  };
+
   const FormHandler = () => {
     setVisible(true);
   };
@@ -44,27 +51,20 @@ const Question = (props) => {
     setVisible(false);
   };
 
-  const PageRefresh = (num) => {
-    const _data = data.slice(
-      (num - 1) * pageSize,
-      (num - 1) * pageSize + pageSize
-    );
-    // data page에 따라 자르는 작업
-
+  const PageRefresh = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     // data 새로 불러올시 맨 위로 스크롤
 
-    return _data.map((it, i) => {
-      it.count = data.length - i - pageSize * (page - 1);
-      // 게시글 번호 계산
+    return data.map((it, i) => {
 
-      it.props = props;
       return (
         <QuestionList
           key={i}
           data={it}
+          count={dataSize - i - pageSize * (page)}
           getData={getData}
           setPage={setPage}
+          pageSize={pageSize}
           page={page}
         />
       );
@@ -78,14 +78,14 @@ const Question = (props) => {
         formData[key] = "";
       }
     }
-    formData.modifier = localStorage.getItem("username");
+
     const response = await axios
-      .post(`https://mfam.site/knowledgePlus`, formData)
+      .post(`https://sjswbot.site/knowledgePlus`, formData, header, { widthCredentials:true })
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
           toast.success("질문을 등록했습니다!");
-          setPage(1);
+          setPage(0);
           getData();
           setVisible(false);
           form.setFieldsValue({
@@ -112,19 +112,19 @@ const Question = (props) => {
 
   const onPageChange = (pagenum) => {
     //pagenum은 1,2,3,4 식으로 전송 됨.
-    setPage(pagenum);
-    getData();
+    setPage(pagenum-1);
   };
 
   const getData = React.useCallback(async () => {
-    const response = await axios.get(`https://mfam.site/knowledgePlus`);
-    setData(response.data.reverse());
-    //setData(response.data.values.reverse());
-  }, []);
+    const response = await axios.get(`https://sjswbot.site/knowledgePlus?page=${page}&size=${pageSize}`,header,{ widthCredentials: true });
+    console.log(response);
+    setdataSize(response.data.result.count);
+    setData(response.data.result.rows);
+  }, [page,setPage]);
 
   React.useEffect(() => {
     getData();
-  }, []);
+  }, [page,setPage]);
 
   return (
     <div
@@ -149,17 +149,17 @@ const Question = (props) => {
         <p>질문 수정 페이지</p>
       </div>
       소융봇에서 제공 할 질문과 답변을 관리하는 페이지입니다.
-      <div style={{ display: "flex", flexDirection: "row", margin: "5px 0" }}>
+      <div style={{ display: "flex", flexDirection: "row", margin: "10px 0 2rem" }}>
         <Link to="/userquestion">
           <u>유저들의 질문</u>
         </Link>{" "}
         에서 질문을 골라보세요 😊
       </div>
-      {PageRefresh(page)}
+      {PageRefresh()}
       <div style={{ marginBottom: "2rem" }} />
       <Pagination
-        current={page}
-        total={data.length}
+        current={page+1}
+        total={dataSize}
         defaultPageSize={pageSize}
         onChange={onPageChange}
         style={{ marginBottom: "1.5rem" }}

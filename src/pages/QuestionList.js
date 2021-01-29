@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Form, Select, Input, Button, Row, Col, Divider, Modal } from "antd";
 import axios from "axios";
 import styled from "styled-components";
+import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,11 +15,17 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-const QuestionList = ({ data, getData, setPage, page }) => {
+const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
   console.log(data);
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
-  const num = data[0];
+  const token = localStorage.getItem("user_token");
+  const header = {
+    headers: {
+      authorization: `${token}`,
+    },
+  };
+  
   const FormHandler = () => {
     setVisible(true);
   };
@@ -49,7 +56,7 @@ const QuestionList = ({ data, getData, setPage, page }) => {
 
   const onDeleteFunc = async (formData) => {
     const response = await axios
-      .delete(`https://mfam.site/knowledgePlus/${data.faqno}`, formData)
+      .delete(`https://sjswbot.site/knowledgePlus/${data.faqno}`, header, { withReactContent : true })
       .catch((error) => {
         return toast.error("에러가 났어요!");
         console.log(error);
@@ -67,14 +74,14 @@ const QuestionList = ({ data, getData, setPage, page }) => {
         formData[key] = "";
       }
     }
-    formData.modifier = localStorage.getItem("username");
+    console.log(formData);
     const response = await axios
-      .put(`https://mfam.site/knowledgePlus/${data.faqno}`, formData)
+      .put(`https://sjswbot.site/knowledgePlus/${data.faqno}`, formData, header, { withReactContent : true })
       .then((res) => {
         console.log(res.status);
         if (res.status === 200) {
           setVisible(false);
-          setPage(page);
+          setPage(0);
           getData();
           toast.success("질문을 수정했습니다!");
         } else {
@@ -103,25 +110,34 @@ const QuestionList = ({ data, getData, setPage, page }) => {
       landingUrl: data.landingUrl,
       imageinfo: data.imageinfo,
     });
-  });
+  },[form]);
 
   return (
     <>
-      <Divider orientation="left">{data.count}</Divider>
+      <Divider style={{ margin: "1vh 0" }} />
       <Row
         justify="start"
         style={{
           width: "90%",
           border: "1px solid lightgray",
           padding: "0.8rem 0",
-          margin: "0 1rem",
+          margin: "0.1rem 1rem",
           display: "flex",
           alignItems: "center",
           borderRadius: "5px",
         }}
       >
-        <Col flex={9} style={{ marginLeft: "2rem", width: "70%" }}>
+        <Col
+          flex={1}
+          style={{ paddingLeft: "2rem", width: "5%", fontWeight: "bold" }}
+        >
+          {count}
+        </Col>
+        <Col flex={8} style={{ paddingLeft: "2rem", width: "60%" }}>
           {data.question}
+        </Col>
+        <Col flex={2} style={{ width: "15%" }}>
+          {moment(data.updatedAt).format("LLL")}
         </Col>
         <Col flex={1}>
           <Button onClick={FormHandler}>수정하기</Button>
@@ -200,8 +216,8 @@ const QuestionList = ({ data, getData, setPage, page }) => {
               </Form.Item>
               <Divider />
               <p style={{ width: "100%", color: "gray" }}>
-                {data.modifier} 조교님
-                <br />({data.time})
+                {data.User.username} 조교님
+                <br />({moment(data.updatedAt).format("LLL")})
               </p>
               <Form.Item colon={false} wrapperCol={{ span: 20, offset: 7 }}>
                 <Button icon={<CloudUploadOutlined />} htmlType="submit">
@@ -212,7 +228,7 @@ const QuestionList = ({ data, getData, setPage, page }) => {
                   type="primary"
                   onClick={confirmFunc}
                   style={{
-                    backgroundColor: "red",
+                    backgroundColor: "RGB(255,0,0,0.6)",
                     color: "white",
                     border: "none",
                     marginLeft: "3rem",
