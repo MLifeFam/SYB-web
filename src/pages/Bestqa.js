@@ -5,10 +5,12 @@ import {
   Form,
   Select,
   Input,
+  Divider,
   Button,
   Carousel,
   Image,
 } from "antd";
+import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
@@ -67,6 +69,8 @@ const BestqaData = ({ data, key }) => {
     <div
       style={{
         width: "100%",
+        height:"auto",
+        margin:"0.5rem 0"
       }}
     >
       <Form
@@ -88,7 +92,12 @@ const BestqaData = ({ data, key }) => {
             수정하기
           </Button>
         </Form.Item>
+        <div style={{color: "gray" ,marginLeft:'5rem'}}>
+            {data.User.username} 조교님
+            <br />({moment(data.updatedAt).format("LLL")})
+        </div>
       </Form>
+
       <ToastContainer
         position="bottom-right"
         autoClose={2500}
