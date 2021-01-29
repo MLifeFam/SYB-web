@@ -26,15 +26,22 @@ const { TextArea } = Input;
 
 const DataModify = (props) => {
   const department = localStorage.getItem("department");
-  const pageSize = parseInt(window.innerHeight / 50);
+  const pageSize = parseInt(window.innerHeight / 100);
+  const [dataSize,setdataSize] = React.useState(0);
   let count = 0;
   const [size, setSize] = React.useState(0);
   // 한 페이지에 담을 데이터 수 (height에 따라 개수 다르게 설정)
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
-  const [page, setPage] = React.useState(1);
-  const num = data[0];
+  const [page, setPage] = React.useState(0);
+  const token = localStorage.getItem("user_token");
+  const header = {
+    headers: {
+      authorization: `${token}`,
+    },
+  };
+  
   const FormHandler = () => {
     setVisible(true);
   };
@@ -47,26 +54,27 @@ const DataModify = (props) => {
     setVisible(false);
   };
 
-  const PageRefresh = (count) => {
-    const _data = data.slice(
-      (count - 1) * pageSize,
-      (count - 1) * pageSize + pageSize
-    );
+  const PageRefresh = () => {
+    // const _data = data.slice(
+    //   (count - 1) * pageSize,
+    //   (count - 1) * pageSize + pageSize
+    // );
     // data page에 따라 자르는 작업
 
     window.scrollTo({ top: 0, behavior: "smooth" });
     // data 새로 불러올시 맨 위로 스크롤
 
-    return _data.map((it, i) => {
+    return data.map((it, i) => {
       // 게시글 번호 계산
 
       return (
         <DataModifylist
           key={i}
           data={it}
-          count={data.length - i - pageSize * (page - 1)}
+          count={dataSize - i - pageSize * (page)}
           getData={getData}
           setPage={setPage}
+          pageSize={pageSize}
           page={page}
         />
       );
@@ -78,24 +86,22 @@ const DataModify = (props) => {
   };
 
   const onPageChange = (pagenum) => {
-    //pagenum은 1,2,3,4 식으로 전송 됨.
-    setPage(pagenum);
-    getData();
+    setPage(pagenum-1);
   };
 
   const getData = React.useCallback(async () => {
-    const response = await axios.get(`https://mfam.site/fixRequest`);
+    const response = await axios.get(`https://sjswbot.site/fixRequest?page=${page}&size=${pageSize}`, header, { widthCredentials: true });
 
-    response.data.map((i, it) => {
-      count += 1;
-    });
-    setData(response.data.reverse());
-    //setData(response.data.values.reverse());
-  }, []);
+    console.log(`https://sjswbot.site/fixRequest?page=${page}&size=${pageSize}`);
+    setdataSize(response.data.result.count);
+    setData(response.data.result.rows);
+    PageRefresh();
+    // setData(response.data.values.reverse());
+  },[page,setPage]);
 
   React.useEffect(() => {
     getData();
-  }, []);
+  }, [page,setPage]);
 
   return (
     <div
@@ -133,11 +139,11 @@ const DataModify = (props) => {
             <QuestionList key = {i} data={it} getData={getData}/>
         )
       })} */}
-      {PageRefresh(page)}
+      {PageRefresh()}
       <div style={{ marginBottom: "2rem" }} />
       <Pagination
-        current={page}
-        total={data.length}
+        current={page+1}
+        total={dataSize}
         defaultPageSize={pageSize}
         onChange={onPageChange}
         style={{ marginBottom: "1.5rem" }}

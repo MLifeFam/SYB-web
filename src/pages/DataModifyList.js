@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Form, Select, Input, Button, Row, Col, Divider, Modal } from "antd";
 import axios from "axios";
 import styled from "styled-components";
+import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,7 +15,14 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-const DataModifylist = ({ data, getData, setPage, page, count }) => {
+const DataModifylist = ({ data, getData, setPage, page, count ,pageSize}) => {
+  const token = localStorage.getItem("user_token");
+  const header = {
+    headers: {
+      authorization: `${token}`,
+    },
+  };
+
   const confirmFunc = (formData) => {
     Swal.fire({
       title: "삭제하시겠습니까?",
@@ -33,14 +41,14 @@ const DataModifylist = ({ data, getData, setPage, page, count }) => {
 
   const onDeleteFunc = async (formData) => {
     const response = await axios
-      .delete(`https://mfam.site/fixRequest/${data.idx}`, formData)
+      .delete(`https://sjswbot.site/fixRequest/${data.idx}`, header, { widthCredentials: true })
       .catch((error) => {
-        return toast.error("에러가 났어요!");
         console.log(error);
+        return toast.error("에러가 났어요!");
       });
     setPage(page);
     getData();
-    toast.success("요청을 삭제했습니다!");
+    toast.success("데이터 요청을 삭제했습니다!");
   };
 
   return (
@@ -68,7 +76,7 @@ const DataModifylist = ({ data, getData, setPage, page, count }) => {
           {data.question}
         </Col>
         <Col flex={2} style={{ width: "15%" }}>
-          {data.time}
+          {moment(data.updatedAt).format("LLL")}
         </Col>
         <Col flex={1}>
           <Button
