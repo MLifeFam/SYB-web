@@ -22,6 +22,7 @@ import { CloudUploadOutlined } from "@ant-design/icons";
 import QuestionList from "./QuestionList";
 
 const Option = Select.Option;
+const category = ["일반","학사","입학","학과행사","공모전","경시대회","교내모집","장학","기타"];
 const { TextArea } = Input;
 
 const Question = (props) => {
@@ -32,12 +33,24 @@ const Question = (props) => {
   const [visible, setVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
   const [page, setPage] = React.useState(0);
+  const [dep,setDep] = React.useState([]);
   const token = localStorage.getItem("user_token");
   const header = {
     headers: {
       authorization: `${token}`,
     },
   };
+
+  const loadDep = () => {
+    axios
+      .get("https://sjswbot.site/dep")
+      .then((res) => {
+        setDep(res.data.result);
+      })
+      .catch((error) => {
+        console.log("에러발생")
+      });
+  }
 
   const FormHandler = () => {
     setVisible(true);
@@ -124,6 +137,7 @@ const Question = (props) => {
 
   React.useEffect(() => {
     getData();
+    loadDep();
   }, [page,setPage]);
 
   return (
@@ -208,28 +222,42 @@ const Question = (props) => {
             <Input />
           </Form.Item>
           <Form.Item
-            label="카테고리 1"
+            label="학과"
             name="category1"
             rules={[
               {
                 required: true,
-                message: "하나 이상의 카테고리를 설정해주세요",
+                message: "학과를 설정해주세요",
               },
             ]}
             required
           >
+            <Select>
+                {dep.map(i => (i.department != "관리자") ? <Option value={i.department}>{i.department}</Option>:null)}
+            </Select>
+          </Form.Item>
+          <Form.Item 
+            label="대분류" 
+            name="category2"
+            rules={[
+              {
+                required: true,
+                message: "대분류를 설정해주세요",
+              },
+            ]}
+            required
+            >
+              <Select>
+                  {category.map(i => <Option value={i}>{i}</Option>)}
+              </Select>
+          </Form.Item>
+          <Form.Item label="카테고리 1" name="category3">
             <Input />
           </Form.Item>
-          <Form.Item label="카테고리 2" name="category2">
+          <Form.Item label="카테고리 2" name="category4">
             <Input />
           </Form.Item>
-          <Form.Item label="카테고리 3" name="category3">
-            <Input />
-          </Form.Item>
-          <Form.Item label="카테고리 4" name="category4">
-            <Input />
-          </Form.Item>
-          <Form.Item label="카테고리 5" name="category5">
+          <Form.Item label="카테고리 3" name="category5">
             <Input />
           </Form.Item>
           <Form.Item label="답변링크" name="landingUrl">

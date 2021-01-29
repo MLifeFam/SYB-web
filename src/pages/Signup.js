@@ -359,7 +359,7 @@ const Signup = (props) => {
   };
 
   useEffect(()=>{
-    loadDep()
+    loadDep();
   },[]);
 
   return (

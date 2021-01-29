@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, Select, Input, Button, Row, Col, Divider, Modal } from "antd";
+import { Form, Select, Input, Button, Row, Col, Divider, Modal} from "antd";
 import axios from "axios";
 import styled from "styled-components";
 import moment from "moment";
@@ -14,17 +14,31 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
+const Option = Select.Option;
+const category = ["일반","학사","입학","학과행사","공모전","경시대회","교내모집","장학","기타"];
 
 const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
   console.log(data);
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
+  const [dep,setDep] = React.useState([]);
   const token = localStorage.getItem("user_token");
   const header = {
     headers: {
       authorization: `${token}`,
     },
   };
+
+  const loadDep = () => {
+    axios
+      .get("https://sjswbot.site/dep")
+      .then((res) => {
+        setDep(res.data.result);
+      })
+      .catch((error) => {
+        console.log("에러발생")
+      });
+  }
   
   const FormHandler = () => {
     setVisible(true);
@@ -98,6 +112,7 @@ const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
   };
 
   useEffect(() => {
+    console.log(data);
     form.setFieldsValue({
       faqno: data.faqno,
       category1: data.category1,
@@ -184,28 +199,42 @@ const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
                 <Input initialvalues={data.questionAnswer} />
               </Form.Item>
               <Form.Item
-                label="카테고리 1"
+                label="학과"
                 name="category1"
                 rules={[
                   {
                     required: true,
-                    message: "하나 이상의 카테고리를 설정해주세요",
+                    message: "학과를 설정해주세요",
                   },
                 ]}
                 required
               >
-                <Input initialvalues={data.category1} />
+                <Select>
+                    {dep.map(i => (i.department != "관리자") ? <Option value={i.department}>{i.department}</Option>:null)}
+                </Select>
               </Form.Item>
-              <Form.Item label="카테고리 2" name="category2">
-                <Input initialvalues={data.category2} />
+              <Form.Item 
+                label="대분류" 
+                name="category2"
+                rules={[
+                  {
+                    required: true,
+                    message: "대분류를 설정해주세요",
+                  },
+                ]}
+                required
+                >
+                  <Select>
+                      {category.map(i => <Option value={i}>{i}</Option>)}
+                  </Select>
               </Form.Item>
-              <Form.Item label="카테고리 3" name="category3">
+              <Form.Item label="카테고리 1" name="category3">
                 <Input initialvalues={data.category3} />
               </Form.Item>
-              <Form.Item label="카테고리 4" name="category4">
+              <Form.Item label="카테고리 2" name="category4">
                 <Input initialvalues={data.category4} />
               </Form.Item>
-              <Form.Item label="카테고리 5" name="category5">
+              <Form.Item label="카테고리 3" name="category5">
                 <Input initialvalues={data.category5} />
               </Form.Item>
               <Form.Item label="답변링크" name="landingUrl">
