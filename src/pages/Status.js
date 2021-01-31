@@ -147,19 +147,19 @@ const Status = () => {
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468849-af946280-221f-11eb-975b-d12318fc58ad.png"
+            src="https://user-images.githubusercontent.com/51112542/106381844-f3ea6580-63fe-11eb-9c45-c440ca33d15f.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468851-b0c58f80-221f-11eb-9868-c9392a9bf029.png"
+            src="https://user-images.githubusercontent.com/51112542/106381846-f51b9280-63fe-11eb-919d-3f05c9d73e06.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468853-b1f6bc80-221f-11eb-9928-35e67889354c.png"
+            src="https://user-images.githubusercontent.com/51112542/106381847-f64cbf80-63fe-11eb-833f-6428fd43749e.png"
             width="100%"
           />
         </div>
