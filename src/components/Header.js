@@ -36,7 +36,7 @@ const Positioner = styled.div`
   top: 0px;
   width: 100%;
   min-width: 800px;
-  z-index: 3;
+  z-index: 5;
 `;
 
 const Logout = styled.div`
@@ -75,6 +75,7 @@ const HeaderContents = styled.div`
   margin: 0 2rem;
   padding-right: 3rem;
   padding-left: 1rem;
+  z-index:2;
 `;
 
 function Header(props) {
