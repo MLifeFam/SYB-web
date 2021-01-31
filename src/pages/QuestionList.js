@@ -196,7 +196,10 @@ const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
                 ]}
                 required
               >
-                <Input initialvalues={data.questionAnswer} />
+                <Input.TextArea 
+                  initialvalues={data.questionAnswer} 
+                  style={{height:"10rem", resize:"none"}}
+                />
               </Form.Item>
               <Form.Item
                 label="학과"

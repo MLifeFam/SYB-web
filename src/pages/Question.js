@@ -160,7 +160,7 @@ const Question = (props) => {
           fontFamily: "Gothic A1",
         }}
       >
-        <p>질문 수정 페이지</p>
+        <p>지식+ 질문 추가/수정 페이지</p>
       </div>
       소융봇에서 제공 할 질문과 답변을 관리하는 페이지입니다.
       <div style={{ display: "flex", flexDirection: "row", margin: "10px 0 2rem" }}>
@@ -219,7 +219,10 @@ const Question = (props) => {
             ]}
             required
           >
-            <Input />
+            <Input.TextArea 
+                  initialvalues={data.questionAnswer} 
+                  style={{height:"10rem", resize:"none"}}
+            />  
           </Form.Item>
           <Form.Item
             label="학과"
