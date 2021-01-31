@@ -11,6 +11,7 @@ import {
   Image,
   Divider,
 } from "antd";
+import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
@@ -27,6 +28,7 @@ const Curriculum = () => {
   const department = localStorage.getItem("department");
   const deptname = localStorage.getItem("dept_name");
   const [data, setData] = React.useState([]);
+  const [fileList, setFileList] = React.useState([]);
   const [isDisable, setDisable] = React.useState(true);
   const getData = React.useCallback(async () => {
     const response = await axios.get(

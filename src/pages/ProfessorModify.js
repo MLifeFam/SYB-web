@@ -205,25 +205,24 @@ const ProfessorModify = () => {
         background: "white",
       }}
     >
-
       <Carousel
         style={{ width: "50rem", height: "32rem", margin: "1rem 1rem 2rem" }}
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045727-22f9f380-25d5-11eb-8a36-a2135d9fb51d.png"
+            src="https://user-images.githubusercontent.com/51112542/106378898-939df880-63eb-11eb-964c-4d62e7ae2330.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045910-5fc5ea80-25d5-11eb-8f68-7b071a52350e.png"
+            src="https://user-images.githubusercontent.com/51112542/106378900-96005280-63eb-11eb-8c76-ed5945af6ca5.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045316-7cadee00-25d4-11eb-9b20-8c5bb4fbb247.png"
+            src="https://user-images.githubusercontent.com/51112542/106378903-98fb4300-63eb-11eb-9f2b-7d4ff32018d1.png"
             width="100%"
           />
         </div>

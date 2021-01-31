@@ -126,7 +126,7 @@ const TimetableAdd = () => {
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045316-7cadee00-25d4-11eb-9b20-8c5bb4fbb247.png"
+            src="https://user-images.githubusercontent.com/51112542/106379500-cd70fe00-63ef-11eb-8c9e-18e2a21d6d65.png"
             width="100%"
           />
         </div>

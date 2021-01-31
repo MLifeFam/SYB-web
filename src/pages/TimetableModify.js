@@ -222,7 +222,7 @@ const TimetableModify = () => {
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99046554-41142380-25d6-11eb-8be4-b10796d051f3.png"
+            src="https://user-images.githubusercontent.com/51112542/106379499-cba73a80-63ef-11eb-83dc-17489826a476.png"
             width="100%"
           />
         </div>

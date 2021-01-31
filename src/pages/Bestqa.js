@@ -6,6 +6,7 @@ import {
   Select,
   Input,
   Divider,
+  notification,
   Button,
   Carousel,
   Image,
@@ -18,6 +19,14 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
+const openNotification = (type,comment) => {
+  notification[type]({
+    description: comment,
+    placement: "bottomRight",
+    duration: 2,
+    width: "auto",
+  });
+};
 
 const BestqaData = ({ data, key }) => {
   const [form] = Form.useForm();
@@ -168,7 +177,7 @@ const Bestqa = () => {
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99047565-b9c7af80-25d7-11eb-852d-b6d83dd1012f.png"
+            src="https://user-images.githubusercontent.com/51112542/106379756-8e43ac80-63f1-11eb-9367-b7cc5cdd97d0.png"
             width="100%"
           />
         </div>
