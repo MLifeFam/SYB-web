@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, Select, Input, Button, Row, Col,notification, Divider, Modal} from "antd";
+import { Form, Select, Input, Button, Row, Col,notification, Divider, Modal,Tooltip} from "antd";
 import axios from "axios";
 import styled from "styled-components";
 import moment from "moment";
@@ -27,6 +27,8 @@ const category = ["일반","학사","입학","학과행사","공모전","경시�
 const QuestionList = ({ data, getData, setPage, page,
   count,pageSize }) => {
   console.log(data);
+  const deptname = localStorage.getItem("dept_name");
+  const department = localStorage.getItem("department");
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
   const [dep,setDep] = React.useState([]);
@@ -163,7 +165,13 @@ const QuestionList = ({ data, getData, setPage, page,
           {moment(data.updatedAt).format("LLL")}
         </Col>
         <Col flex={1}>
-          <Button onClick={FormHandler}>수정하기</Button>
+          {
+            data.category1 === "공통" || data.category1 === deptname
+            ?<Button onClick={FormHandler}>수정하기</Button>
+            :<Tooltip placement="bottom" title={data.category1+"의 질문입니다."}>
+              <Button onClick={FormHandler} disabled>수정하기</Button>
+            </Tooltip>
+          }
           <Modal
             title="질문수정"
             visible={visible}
@@ -220,9 +228,7 @@ const QuestionList = ({ data, getData, setPage, page,
                 ]}
                 required
               >
-                <Select>
-                    {dep.map(i => (i.department != "관리자") ? <Option value={i.department}>{i.department}</Option>:null)}
-                </Select>
+                <Input initialvalues={data.category1} readOnly/>
               </Form.Item>
               <Form.Item 
                 label="대분류" 

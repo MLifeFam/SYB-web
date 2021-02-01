@@ -36,6 +36,7 @@ const { TextArea } = Input;
 const Question = (props) => {
   const pageSize = parseInt(window.innerHeight / 70);
   // 한 페이지에 담을 데이터 수 (height에 따라 개수 다르게 설정)
+  const department = localStorage.getItem("department");
   const [dataSize,setdataSize] = React.useState(0);
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
@@ -244,7 +245,7 @@ const Question = (props) => {
             required
           >
             <Select>
-                {dep.map(i => (i.department != "관리자") ? <Option value={i.department}>{i.department}</Option>:null)}
+                {dep.map(i => (i.department === "공통" || i.idx === Number(department)) ? <Option value={i.department}>{i.department}</Option>:null)}
             </Select>
           </Form.Item>
           <Form.Item 
