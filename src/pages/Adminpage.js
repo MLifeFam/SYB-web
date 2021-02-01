@@ -29,6 +29,7 @@ const { TextArea } = Input;
 
 const AdminPage = (props) => {
   const name = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
   const pageSize = parseInt(window.innerHeight / 50);
   let count = 0;
   const [size, setSize] = React.useState(0);
@@ -52,7 +53,7 @@ const AdminPage = (props) => {
 
   return (
       <>
-      {name === ("이종민" || "허균" || "홍은호") ? (
+      {role === "2" ? (
         <div
         style={{
             margin: "3% 10%",

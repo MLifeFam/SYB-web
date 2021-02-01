@@ -112,7 +112,7 @@ function Header(props) {
                 backgroundColor: "gray",
               }}
             />
-            {dept}&emsp;
+            {/* {dept}&emsp; */}
             {username} 조교님
           </Logo>
           <Logout onClick={onClickHandler}>Logout</Logout>

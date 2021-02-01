@@ -56,6 +56,7 @@ const MenuItem = styled.div`
 
 const Menu = () => {
   let history = useHistory();
+  const role = localStorage.getItem("role");
   const name = localStorage.getItem("username");
   const ScrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -153,7 +154,7 @@ const Menu = () => {
           </MenuContent>
         </Link>
       </MenuItem>
-      { name === ("이종민" || "허균" || "홍은호") ?(<MenuItem onClick={ScrollTop}>
+      { role === "2" ?(<MenuItem onClick={ScrollTop}>
         <Link to="/adminpage" style={{ textDecoration: "none" }}>
           <MenuContent>
             <LockOutlined style={{ padding: "0 1rem" }} />

@@ -91,7 +91,7 @@ export function authUser(props) {
           type: AUTH_SUCCESS,
         });
         let dept = "";
-        
+        console.log(res);
         axios
         .get("https://sjswbot.site/dep")
         .then((res2) => {
