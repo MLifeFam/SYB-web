@@ -54,7 +54,7 @@ const Fallbacklist = ({ data, getData, setPage, page, count ,pageSize}) => {
       });
     setPage(page);
     getData();
-    return openNotification('success', '데이터를 삭제했습니다.');
+    return openNotification('success', '데이터를 삭제했습니다!');
   };
 
   return (

@@ -8,6 +8,7 @@ import {
   Col,
   Divider,
   Modal,
+  notification,
   Pagination,
   Image,
   Carousel,
@@ -15,14 +16,21 @@ import {
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
-import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import QuestionList from "./QuestionList";
 
 const Option = Select.Option;
 const category = ["일반","학사","입학","학과행사","공모전","경시대회","교내모집","장학","기타"];
+const openNotification = (type,comment) => {
+  notification[type]({
+    description: comment,
+    placement: "bottomRight",
+    duration: 1.5,
+    width: "auto",
+  });
+};
+
 const { TextArea } = Input;
 
 const Question = (props) => {
@@ -97,7 +105,6 @@ const Question = (props) => {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          toast.success("질문을 등록했습니다!");
           setPage(0);
           getData();
           setVisible(false);
@@ -112,10 +119,11 @@ const Question = (props) => {
             landingUrl: "",
             imageinfo: "",
           });
+          return openNotification('success', '질문을 등록했습니다!');
         }
       })
       .catch((error) => {
-        toast.error("서버와의 에러가 발생했습니다!");
+        return openNotification('error', '서버와의 에러가 발생했습니다.');
       });
   };
 

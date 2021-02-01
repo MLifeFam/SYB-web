@@ -7,17 +7,24 @@ import {
   Select,
   Input,
   Button,
+  notification,
   Carousel,
   Image,
   Divider,
 } from "antd";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
+const openNotification = (type,comment) => {
+  notification[type]({
+    description: comment,
+    placement: "bottomRight",
+    duration: 1.5,
+    width: "auto",
+  });
+};
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -89,7 +96,7 @@ const Notice = () => {
         }
       })
       .catch((err) => {
-        toast.error("서버와의 에러가 발생했습니다!");
+        return openNotification('error', '서버와의 에러가 발생했습니다.');
       });
   };
 
@@ -164,17 +171,6 @@ const Notice = () => {
             수정하기
           </Button>
         </Form.Item>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={2500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </Form>
     </div>
   );

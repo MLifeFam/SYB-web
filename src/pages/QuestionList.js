@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import { Form, Select, Input, Button, Row, Col, Divider, Modal} from "antd";
+import { Form, Select, Input, Button, Row, Col,notification, Divider, Modal} from "antd";
 import axios from "axios";
 import styled from "styled-components";
 import moment from "moment";
-import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
-import "react-toastify/dist/ReactToastify.css";
 import {
   CloudUploadOutlined,
   ExclamationCircleOutlined,
@@ -14,10 +12,20 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
+const openNotification = (type,comment) => {
+  notification[type]({
+    description: comment,
+    placement: "bottomRight",
+    duration: 1.5,
+    width: "auto",
+  });
+};
+
 const Option = Select.Option;
 const category = ["일반","학사","입학","학과행사","공모전","경시대회","교내모집","장학","기타"];
 
-const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
+const QuestionList = ({ data, getData, setPage, page,
+  count,pageSize }) => {
   console.log(data);
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
@@ -72,13 +80,13 @@ const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
     const response = await axios
       .delete(`https://sjswbot.site/knowledgePlus/${data.faqno}`, header, { withReactContent : true })
       .catch((error) => {
-        return toast.error("에러가 났어요!");
         console.log(error);
+        return openNotification('error', '서버와의 에러가 발생했습니다.');
       });
     setVisible(false);
     setPage(page);
     getData();
-    toast.success("질문을 삭제했습니다!");
+    return openNotification('success', '질문을 삭제했습니다!');
   };
 
   const onChangeFunc = async (formData) => {
@@ -97,13 +105,13 @@ const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
           setVisible(false);
           setPage(0);
           getData();
-          toast.success("질문을 수정했습니다!");
+          return openNotification('success', '질문을 수정했습니다!');
         } else {
-          toast.error("에러가 났어요!");
+          return openNotification('error', '서버와의 에러가 발생했습니다.');
         }
       })
       .catch((error) => {
-        toast.error("에러가 났어요!");
+        return openNotification('error', '서버와의 에러가 발생했습니다.');
       });
   };
 
@@ -273,17 +281,6 @@ const QuestionList = ({ data, getData, setPage, page,count,pageSize }) => {
           </Modal>
         </Col>
       </Row>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 };

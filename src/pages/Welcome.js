@@ -7,6 +7,7 @@ import {
   Button,
   Row,
   Col,
+  notification,
   Divider,
   Modal,
   Pagination,
@@ -17,14 +18,20 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
-import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined, LoadingOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
+const openNotification = (type,comment) => {
+  notification[type]({
+    description: comment,
+    placement: "bottomRight",
+    duration: 1.5,
+    width: "auto",
+  });
+};
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -99,11 +106,11 @@ const Welcome = (props) => {
             setVisible(false);
           });
         } else {
-          toast.error("서버와의 에러가 발생했습니다!");
+          return openNotification('error', '서버와의 에러가 발생했습니다.');
         }
       })
       .catch((err) => {
-        toast.error("서버와의 에러가 발생했습니다!");
+        return openNotification('error', '서버와의 에러가 발생했습니다.');
       });
   };
 

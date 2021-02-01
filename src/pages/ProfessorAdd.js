@@ -13,8 +13,6 @@ import {
   Divider,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -133,17 +131,6 @@ const ProfessorAdd = () => {
                 </Button>
             </center>
         </Form.Item>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={2500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </Form>
     </div>
   );

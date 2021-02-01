@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import { Form, Select, Input, Button, Row, Col, Divider, Modal } from "antd";
+import { Form, Select, Input, Button, Row, Col, notification, Divider, Modal } from "antd";
 import axios from "axios";
 import styled from "styled-components";
 import moment from "moment";
-import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
-import "react-toastify/dist/ReactToastify.css";
 import {
   CloudUploadOutlined,
   ExclamationCircleOutlined,
@@ -14,6 +12,14 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
+const openNotification = (type,comment) => {
+  notification[type]({
+    description: comment,
+    placement: "bottomRight",
+    duration: 1.5,
+    width: "auto",
+  });
+};
 
 const DataModifylist = ({ data, getData, setPage, page, count ,pageSize}) => {
   const token = localStorage.getItem("user_token");
@@ -44,11 +50,11 @@ const DataModifylist = ({ data, getData, setPage, page, count ,pageSize}) => {
       .delete(`https://sjswbot.site/fixRequest/${data.idx}`, header, { widthCredentials: true })
       .catch((error) => {
         console.log(error);
-        return toast.error("에러가 났어요!");
+        return openNotification('error', '서버와의 에러가 발생했습니다.');
       });
     setPage(page);
     getData();
-    toast.success("데이터 요청을 삭제했습니다!");
+    return openNotification('success', '데이터를 삭제했습니다!');
   };
 
   return (
@@ -88,17 +94,6 @@ const DataModifylist = ({ data, getData, setPage, page, count ,pageSize}) => {
           </Button>
         </Col>
       </Row>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 };

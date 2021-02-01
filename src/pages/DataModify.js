@@ -15,9 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
 import { FormInstance } from "antd/lib/form";
-import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import DataModifylist from "./DataModifyList";
 
