@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/SYB-web/static/css/main.4ec5c018.chunk.css",
-    "main.js": "/SYB-web/static/js/main.f0bf0620.chunk.js",
-    "main.js.map": "/SYB-web/static/js/main.f0bf0620.chunk.js.map",
+    "main.js": "/SYB-web/static/js/main.eafcdefc.chunk.js",
+    "main.js.map": "/SYB-web/static/js/main.eafcdefc.chunk.js.map",
     "runtime-main.js": "/SYB-web/static/js/runtime-main.80cb23b8.js",
     "runtime-main.js.map": "/SYB-web/static/js/runtime-main.80cb23b8.js.map",
-    "static/css/2.bf565a6d.chunk.css": "/SYB-web/static/css/2.bf565a6d.chunk.css",
-    "static/js/2.415c2097.chunk.js": "/SYB-web/static/js/2.415c2097.chunk.js",
-    "static/js/2.415c2097.chunk.js.map": "/SYB-web/static/js/2.415c2097.chunk.js.map",
+    "static/css/2.72375a5f.chunk.css": "/SYB-web/static/css/2.72375a5f.chunk.css",
+    "static/js/2.dcb34f7a.chunk.js": "/SYB-web/static/js/2.dcb34f7a.chunk.js",
+    "static/js/2.dcb34f7a.chunk.js.map": "/SYB-web/static/js/2.dcb34f7a.chunk.js.map",
     "index.html": "/SYB-web/index.html",
-    "static/css/2.bf565a6d.chunk.css.map": "/SYB-web/static/css/2.bf565a6d.chunk.css.map",
+    "static/css/2.72375a5f.chunk.css.map": "/SYB-web/static/css/2.72375a5f.chunk.css.map",
     "static/css/main.4ec5c018.chunk.css.map": "/SYB-web/static/css/main.4ec5c018.chunk.css.map",
-    "static/js/2.415c2097.chunk.js.LICENSE.txt": "/SYB-web/static/js/2.415c2097.chunk.js.LICENSE.txt",
+    "static/js/2.dcb34f7a.chunk.js.LICENSE.txt": "/SYB-web/static/js/2.dcb34f7a.chunk.js.LICENSE.txt",
     "static/media/UploadIcon.svg": "/SYB-web/static/media/UploadIcon.469126df.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.80cb23b8.js",
-    "static/css/2.bf565a6d.chunk.css",
-    "static/js/2.415c2097.chunk.js",
+    "static/css/2.72375a5f.chunk.css",
+    "static/js/2.dcb34f7a.chunk.js",
     "static/css/main.4ec5c018.chunk.css",
-    "static/js/main.f0bf0620.chunk.js"
+    "static/js/main.eafcdefc.chunk.js"
   ]
 }
