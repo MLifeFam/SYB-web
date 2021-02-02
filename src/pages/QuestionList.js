@@ -55,12 +55,12 @@ const QuestionList = ({ data, getData, setPage, page,
       category1: data.category1,
       category2: data.category2,
       category3: data.category3,
-      category4: data.category4,
-      category5: data.category5,
+      // category4: data.category4,
+      // category5: data.category5,
       question: data.question,
       questionAnswer: data.questionAnswer,
       landingUrl: data.landingUrl,
-      imageinfo: data.imageinfo,
+      // imageinfo: data.imageinfo,
     });
     setVisible(true);
   };
@@ -267,9 +267,9 @@ const QuestionList = ({ data, getData, setPage, page,
               <Form.Item label="답변링크" name="landingUrl">
                 <Input initialvalues={data.landingUrl} />
               </Form.Item>
-              <Form.Item label="이미지링크" name="imageinfo">
+              {/* <Form.Item label="이미지링크" name="imageinfo">
                 <Input initialvalues={data.imageinfo} />
-              </Form.Item>
+              </Form.Item> */}
               <Divider />
               <p style={{ width: "100%", color: "gray" }}>
                 {data.User.username} 조교님

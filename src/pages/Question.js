@@ -9,6 +9,7 @@ import {
   Divider,
   Modal,
   notification,
+  Tooltip,
   Pagination,
   Image,
   Carousel,
@@ -17,7 +18,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FormInstance } from "antd/lib/form";
-import { CloudUploadOutlined } from "@ant-design/icons";
+import { CloudUploadOutlined ,QuestionCircleOutlined } from "@ant-design/icons";
 import QuestionList from "./QuestionList";
 
 const Option = Select.Option;
@@ -40,6 +41,7 @@ const Question = (props) => {
   const [dataSize,setdataSize] = React.useState(0);
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
+  const [helpvisible,setHelpVisible] = React.useState(false);
   const [data, setData] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dep,setDep] = React.useState([]);
@@ -167,9 +169,14 @@ const Question = (props) => {
           textAlign: "center",
           fontSize: "30px",
           fontFamily: "Gothic A1",
+          width:"100%"
         }}
       >
-        <p>지식+ 질문 추가/수정 페이지</p>
+        <div style={{width:"100%",margin:"1rem 0 1rem"}}>
+          지식+ 질문 추가/수정 페이지
+          <QuestionCircleOutlined  onClick={()=>setHelpVisible(true)} style={{fontSize:"1.5rem",margin:"1rem 5rem 0",float:"right",position:"absolute"}}/>
+        </div>
+
       </div>
       소융봇에서 제공 할 질문과 답변을 관리하는 페이지입니다.
       <div style={{ display: "flex", flexDirection: "row", margin: "10px 0 2rem" }}>
@@ -178,6 +185,50 @@ const Question = (props) => {
         </Link>{" "}
         에서 질문을 골라보세요 😊
       </div>
+      <Modal
+        centered
+        visible={helpvisible}
+        onOk={() => setHelpVisible(false)}
+        onCancel={() => setHelpVisible(false)}
+        width={"auto"}
+        height={"auto"}
+        footer={null}
+      >
+        <Carousel
+          style={{ width: "65rem", margin: "1rem" }}
+        >
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/106609840-5f703680-65a9-11eb-9847-0f54daeb2a6d.png"
+              width="100%"
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/106609847-60a16380-65a9-11eb-9492-3fc72d2732f3.png"
+              width="100%"
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/106609851-61d29080-65a9-11eb-98f8-1b625babedd5.png"
+              width="100%"
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/106609927-7a42ab00-65a9-11eb-80fc-25cbc99e4387.png"
+              width="100%"
+            />
+          </div>
+          <div>
+            <Image
+              src="https://user-images.githubusercontent.com/51112542/106609862-64cd8100-65a9-11eb-805e-c6d963267397.png"
+              width="100%"
+            />
+          </div>
+        </Carousel>
+      </Modal>
       {data.map((it, i) => {
         return (
         <QuestionList
@@ -287,9 +338,9 @@ const Question = (props) => {
           <Form.Item label="답변링크" name="landingUrl">
             <Input />
           </Form.Item>
-          <Form.Item label="이미지링크" name="imageinfo">
+          {/* <Form.Item label="이미지링크" name="imageinfo">
             <Input />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item colon={false} wrapperCol={{ offset: 11 }}>
             <Button
               icon={<CloudUploadOutlined />}
