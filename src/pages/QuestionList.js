@@ -245,15 +245,15 @@ const QuestionList = ({ data, getData, setPage, page,
                       {category.map(i => <Option value={i}>{i}</Option>)}
                   </Select>
               </Form.Item>
-              <Form.Item label="카테고리 1" name="category3">
+              <Form.Item label="소분류" name="category3">
                 <Input initialvalues={data.category3} />
               </Form.Item>
-              <Form.Item label="카테고리 2" name="category4">
+              {/* <Form.Item label="카테고리 2" name="category4">
                 <Input initialvalues={data.category4} />
               </Form.Item>
               <Form.Item label="카테고리 3" name="category5">
                 <Input initialvalues={data.category5} />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="답변링크" name="landingUrl">
                 <Input initialvalues={data.landingUrl} />
               </Form.Item>
