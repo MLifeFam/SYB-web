@@ -26,7 +26,6 @@ const category = ["일반","학사","입학","학과행사","공모전","경시�
 
 const QuestionList = ({ data, getData, setPage, page,
   count,pageSize }) => {
-  console.log(data);
   const deptname = localStorage.getItem("dept_name");
   const department = localStorage.getItem("department");
   const [form] = Form.useForm();
@@ -51,6 +50,18 @@ const QuestionList = ({ data, getData, setPage, page,
   }
   
   const FormHandler = () => {
+    form.setFieldsValue({
+      faqno: data.faqno,
+      category1: data.category1,
+      category2: data.category2,
+      category3: data.category3,
+      category4: data.category4,
+      category5: data.category5,
+      question: data.question,
+      questionAnswer: data.questionAnswer,
+      landingUrl: data.landingUrl,
+      imageinfo: data.imageinfo,
+    });
     setVisible(true);
   };
 
@@ -122,7 +133,6 @@ const QuestionList = ({ data, getData, setPage, page,
   };
 
   useEffect(() => {
-    console.log(data);
     form.setFieldsValue({
       faqno: data.faqno,
       category1: data.category1,
@@ -135,7 +145,7 @@ const QuestionList = ({ data, getData, setPage, page,
       landingUrl: data.landingUrl,
       imageinfo: data.imageinfo,
     });
-  },[form]);
+  },[]);
 
   return (
     <>

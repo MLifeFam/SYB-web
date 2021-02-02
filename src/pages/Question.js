@@ -77,20 +77,20 @@ const Question = (props) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     // data 새로 불러올시 맨 위로 스크롤
 
-    return data.map((it, i) => {
+    // return data.map((it, i) => {
 
-      return (
-        <QuestionList
-          key={i}
-          data={it}
-          count={dataSize - i - pageSize * (page)}
-          getData={getData}
-          setPage={setPage}
-          pageSize={pageSize}
-          page={page}
-        />
-      );
-    });
+    //   return (
+    //     <QuestionList
+    //       key={i}
+    //       data={it}
+    //       count={dataSize - i - pageSize * (page)}
+    //       getData={getData}
+    //       setPage={setPage}
+    //       pageSize={pageSize}
+    //       page={page}
+    //     />
+    //   );
+    // });
   };
 
   const onFinishFunc = async (formData) => {
@@ -178,7 +178,19 @@ const Question = (props) => {
         </Link>{" "}
         에서 질문을 골라보세요 😊
       </div>
-      {PageRefresh()}
+      {data.map((it, i) => {
+        return (
+        <QuestionList
+          key={i}
+          data={it}
+          count={dataSize - i - pageSize * (page)}
+          getData={getData}
+          setPage={setPage}
+          pageSize={pageSize}
+          page={page}
+        />
+      );
+      })}
       <div style={{ marginBottom: "2rem" }} />
       <Pagination
         current={page+1}
