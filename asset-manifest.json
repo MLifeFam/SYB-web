@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/SYB-web/static/css/main.4ec5c018.chunk.css",
-    "main.js": "/SYB-web/static/js/main.d3e726ee.chunk.js",
-    "main.js.map": "/SYB-web/static/js/main.d3e726ee.chunk.js.map",
+    "main.js": "/SYB-web/static/js/main.9b2a59a1.chunk.js",
+    "main.js.map": "/SYB-web/static/js/main.9b2a59a1.chunk.js.map",
     "runtime-main.js": "/SYB-web/static/js/runtime-main.80cb23b8.js",
     "runtime-main.js.map": "/SYB-web/static/js/runtime-main.80cb23b8.js.map",
     "static/css/2.72375a5f.chunk.css": "/SYB-web/static/css/2.72375a5f.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.72375a5f.chunk.css",
     "static/js/2.3923e5c2.chunk.js",
     "static/css/main.4ec5c018.chunk.css",
-    "static/js/main.d3e726ee.chunk.js"
+    "static/js/main.9b2a59a1.chunk.js"
   ]
 }
