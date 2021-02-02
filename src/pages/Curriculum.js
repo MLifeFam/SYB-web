@@ -143,7 +143,7 @@ const Curriculum = () => {
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468774-575d6080-221f-11eb-97ad-fe254308449e.png"
+            src="https://user-images.githubusercontent.com/51112542/106621897-5fc2fe80-65b6-11eb-8b2f-75cbf02ca793.png"
             width="100%"
           />
         </div>
