@@ -13,6 +13,7 @@ import {
   Pagination,
   Image,
   Carousel,
+  Checkbox,
 } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -38,6 +39,8 @@ const Question = (props) => {
   const pageSize = parseInt(window.innerHeight / 70);
   // 한 페이지에 담을 데이터 수 (height에 따라 개수 다르게 설정)
   const department = localStorage.getItem("department");
+  const deptname = localStorage.getItem("dept_name");
+  const [mode,setmode] = React.useState(false);
   const [dataSize,setdataSize] = React.useState(0);
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
@@ -140,16 +143,45 @@ const Question = (props) => {
   };
 
   const getData = React.useCallback(async () => {
-    const response = await axios.get(`https://sjswbot.site/knowledgePlus?page=${page}&size=${pageSize}`,header,{ widthCredentials: true });
-    console.log(response);
-    setdataSize(response.data.result.count);
-    setData(response.data.result.rows);
+    if (!mode){
+      const response = await axios.get(`https://sjswbot.site/knowledgePlus/list/${deptname}?page=${page}&size=${pageSize}`,header,{ widthCredentials: true });
+      console.log(response);
+      setdataSize(response.data.result.count);
+      setData(response.data.result.rows);
+    }
+    else{
+      const response = await axios.get(`https://sjswbot.site/knowledgePlus/?page=${page}&size=${pageSize}`,header,{ widthCredentials: true });
+      console.log(response);
+      setdataSize(response.data.result.count);
+      setData(response.data.result.rows);
+    }
   }, [page,setPage]);
+
+  const changeMode = React.useCallback(async () =>{
+    if(!mode){
+      const response = await axios.get(`https://sjswbot.site/knowledgePlus/list/${deptname}?page=0&size=${pageSize}`,header,{ widthCredentials: true });
+      console.log(response);
+      setdataSize(response.data.result.count);
+      setData(response.data.result.rows);
+      setPage(0);
+    }
+    else{
+      const response = await axios.get(`https://sjswbot.site/knowledgePlus/?page=0&size=${pageSize}`,header,{ widthCredentials: true });
+      console.log(response);
+      setdataSize(response.data.result.count);
+      setData(response.data.result.rows);
+      setPage(0);
+    }
+  },[mode,setmode]);
 
   React.useEffect(() => {
     getData();
     loadDep();
   }, [page,setPage]);
+
+  React.useEffect(() => {
+    changeMode();
+  }, [mode,setmode]);
 
   return (
     <div
@@ -185,6 +217,19 @@ const Question = (props) => {
         </Link>{" "}
         에서 질문을 골라보세요 😊
       </div>
+      <div style={{width:"100%",marginRight:"8rem"}}>
+        <Checkbox 
+        onClick={()=>{
+            mode
+            ?setmode(false)
+            :setmode(true)
+          }
+        }
+        style={{float:"right",fontSize:"0.7rem"}}
+        >
+          타학과 질문 포함하기
+        </Checkbox>
+      </div>
       <Modal
         centered
         visible={helpvisible}
@@ -195,7 +240,7 @@ const Question = (props) => {
         footer={null}
       >
         <Carousel
-          style={{ width: "65rem", margin: "1rem" }}
+          style={{ width: "65rem", margin: "1rem", lineHeight:"8rem" }}
         >
           <div>
             <Image
@@ -231,16 +276,16 @@ const Question = (props) => {
       </Modal>
       {data.map((it, i) => {
         return (
-        <QuestionList
-          key={i}
-          data={it}
-          count={dataSize - i - pageSize * (page)}
-          getData={getData}
-          setPage={setPage}
-          pageSize={pageSize}
-          page={page}
-        />
-      );
+          <QuestionList
+            key={i}
+            data={it}
+            count={dataSize - i - pageSize * (page)}
+            getData={getData}
+            setPage={setPage}
+            pageSize={pageSize}
+            page={page}
+          />
+        );
       })}
       <div style={{ marginBottom: "2rem" }} />
       <Pagination
