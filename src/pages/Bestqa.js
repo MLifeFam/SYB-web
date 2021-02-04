@@ -145,25 +145,25 @@ const Bestqa = () => {
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99047553-b502fb80-25d7-11eb-898a-7b1c46473b0f.png"
+            src="https://user-images.githubusercontent.com/51112542/106900224-9bd29c80-6739-11eb-982b-2d8dfdadb5b5.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99047557-b6342880-25d7-11eb-8fcf-7256e6887d65.png"
+            src="https://user-images.githubusercontent.com/51112542/106900225-9d03c980-6739-11eb-8318-f08e617a2651.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99047561-b7fdec00-25d7-11eb-87a3-9b443cd8be5a.png"
+            src="https://user-images.githubusercontent.com/51112542/106900229-9e34f680-6739-11eb-8e25-a8dac86eff44.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106379756-8e43ac80-63f1-11eb-9367-b7cc5cdd97d0.png"
+            src="https://user-images.githubusercontent.com/51112542/106900234-9f662380-6739-11eb-8d10-08bfc76dca34.png"
             width="100%"
           />
         </div>
