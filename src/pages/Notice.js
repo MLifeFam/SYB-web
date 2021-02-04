@@ -131,19 +131,19 @@ const Notice = () => {
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468604-8f17d880-221e-11eb-90fc-43a1acad45c6.png"
+            src="https://user-images.githubusercontent.com/51112542/106898575-b441b780-6737-11eb-82bc-dd9bce611df8.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468606-90e19c00-221e-11eb-9dde-738e963f0458.png"
+            src="https://user-images.githubusercontent.com/51112542/106898440-89576380-6737-11eb-8fac-40cfd5e629af.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468607-9212c900-221e-11eb-8763-c018eebf650f.png"
+            src="https://user-images.githubusercontent.com/51112542/106898444-8a889080-6737-11eb-9d9d-6212a26c42e3.png"
             width="100%"
           />
         </div>
