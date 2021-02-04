@@ -210,19 +210,19 @@ const TimetableModify = () => {
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99046546-3eb1c980-25d6-11eb-91d1-9e65182a72cb.png"
+            src="https://user-images.githubusercontent.com/51112542/106899261-80b35d00-6738-11eb-90e8-0b56566f653a.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99046550-3fe2f680-25d6-11eb-8f35-49df97a88419.png"
+            src="https://user-images.githubusercontent.com/51112542/106899269-827d2080-6738-11eb-8adf-70c59f18cb5c.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106379499-cba73a80-63ef-11eb-83dc-17489826a476.png"
+            src="https://user-images.githubusercontent.com/51112542/106899277-8446e400-6738-11eb-93f6-6fb72c2550f6.png"
             width="100%"
           />
         </div>

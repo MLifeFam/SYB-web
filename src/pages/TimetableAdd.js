@@ -114,19 +114,19 @@ const TimetableAdd = () => {
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045727-22f9f380-25d5-11eb-8a36-a2135d9fb51d.png"
+            src="https://user-images.githubusercontent.com/51112542/106899261-80b35d00-6738-11eb-90e8-0b56566f653a.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/99045910-5fc5ea80-25d5-11eb-8f68-7b071a52350e.png"
+            src="https://user-images.githubusercontent.com/51112542/106899269-827d2080-6738-11eb-8adf-70c59f18cb5c.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106379500-cd70fe00-63ef-11eb-8c9e-18e2a21d6d65.png"
+            src="https://user-images.githubusercontent.com/51112542/106899277-8446e400-6738-11eb-93f6-6fb72c2550f6.png"
             width="100%"
           />
         </div>
