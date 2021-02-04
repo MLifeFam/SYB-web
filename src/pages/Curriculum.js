@@ -137,19 +137,19 @@ const Curriculum = () => {
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468769-55939d00-221f-11eb-9ead-db3cce00f58c.png"
+            src="https://user-images.githubusercontent.com/51112542/106897492-59f42700-6736-11eb-89ba-662f61ecc7ad.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106621897-5fc2fe80-65b6-11eb-8b2f-75cbf02ca793.png"
+            src="https://user-images.githubusercontent.com/51112542/106897503-5bbdea80-6736-11eb-864b-55fa1e16fd18.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/98468778-59272400-221f-11eb-95f0-4df3d930c7bb.png"
+            src="https://user-images.githubusercontent.com/51112542/106897509-5d87ae00-6736-11eb-8fa0-9ac5f3542e12.png"
             width="100%"
           />
         </div>

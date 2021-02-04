@@ -147,7 +147,7 @@ const Status = () => {
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106897230-01248e80-6736-11eb-92bd-1231fef6253b.png"
+            src="https://user-images.githubusercontent.com/51112542/106897620-86a83e80-6736-11eb-91dd-f37794b6b38d.png"
             width="100%"
           />
         </div>
