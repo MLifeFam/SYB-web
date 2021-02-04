@@ -45,7 +45,7 @@ const AdminRequestList = ({ data, getData, setPage, page, count ,pageSize}) => {
     });
   };
 
-  const onDeleteFunc = async (formData) => {
+  const onDeleteFunc = async () => {
     const response = await axios
       .delete(`https://sjswbot.site/adminRequest/${data.idx}`, header, { widthCredentials: true })
       .catch((error) => {

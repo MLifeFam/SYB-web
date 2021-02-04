@@ -244,31 +244,31 @@ const Question = (props) => {
         >
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/106609840-5f703680-65a9-11eb-9847-0f54daeb2a6d.png"
+              src="https://user-images.githubusercontent.com/51112542/106896939-983d1680-6735-11eb-8afc-a03366f22dba.png"
               width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/106609847-60a16380-65a9-11eb-9492-3fc72d2732f3.png"
+              src="https://user-images.githubusercontent.com/51112542/106896944-9a9f7080-6735-11eb-92a8-a764fd6cd534.png"
               width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/106609851-61d29080-65a9-11eb-98f8-1b625babedd5.png"
+              src="https://user-images.githubusercontent.com/51112542/106896949-9c693400-6735-11eb-9478-183d37ed4362.png"
               width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/106609927-7a42ab00-65a9-11eb-80fc-25cbc99e4387.png"
+              src="https://user-images.githubusercontent.com/51112542/106896953-9e32f780-6735-11eb-821d-980d9cf48950.png"
               width="100%"
             />
           </div>
           <div>
             <Image
-              src="https://user-images.githubusercontent.com/51112542/106609862-64cd8100-65a9-11eb-805e-c6d963267397.png"
+              src="https://user-images.githubusercontent.com/51112542/106896957-9f642480-6735-11eb-9952-ee7b45c4e614.png"
               width="100%"
             />
           </div>

@@ -108,7 +108,7 @@ const Login = (props) => {
   return (
     <LoginForm>
       <Whitespace>
-        <Logo style={{ marginBottom: "3%" }}>SYB ADMIN</Logo>
+        <Logo style={{ marginBottom: "3%"}}>SYB ADMIN</Logo>
         <Form
           name="normal_login"
           className="login-form"
