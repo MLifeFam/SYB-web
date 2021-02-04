@@ -210,19 +210,19 @@ const ProfessorModify = () => {
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106378898-939df880-63eb-11eb-964c-4d62e7ae2330.png"
+            src="https://user-images.githubusercontent.com/51112542/106898715-e18e6580-6737-11eb-9b89-aaed3a8979cb.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106378900-96005280-63eb-11eb-8c76-ed5945af6ca5.png"
+            src="https://user-images.githubusercontent.com/51112542/106898719-e3582900-6737-11eb-8931-05536127a510.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106378903-98fb4300-63eb-11eb-9f2b-7d4ff32018d1.png"
+            src="https://user-images.githubusercontent.com/51112542/106898725-e4895600-6737-11eb-95d4-774d237a14e5.png"
             width="100%"
           />
         </div>
