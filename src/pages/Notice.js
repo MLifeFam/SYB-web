@@ -47,6 +47,7 @@ const Notice = () => {
     form.setFieldsValue({
       department: deptname,
       link: response.data.result.link,
+      content:response.data.result.content,
     });
   }, [department]);
 
@@ -157,6 +158,9 @@ const Notice = () => {
       >
         <Form.Item label="학과" name="department" value={department} required>
           <Input readOnly={true} />
+        </Form.Item>
+        <Form.Item label="내용" name="content" required>
+          <TextArea style={{height:"10rem", resize:"none"}}/>
         </Form.Item>
         <Form.Item label="링크" name="link" required>
           <Input />
