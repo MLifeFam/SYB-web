@@ -23,6 +23,7 @@ const openNotification = (type,comment) => {
 
 const DataModifylist = ({ data, getData, setPage, page, count ,pageSize}) => {
   const token = localStorage.getItem("user_token");
+  const deptname = localStorage.getItem("dept_name");
   const header = {
     headers: {
       authorization: `${token}`,
@@ -74,9 +75,11 @@ const DataModifylist = ({ data, getData, setPage, page, count ,pageSize}) => {
       >
         <Col
           flex={1}
-          style={{ paddingLeft: "2rem", width: "5%", fontWeight: "bold" }}
+          style={{ textAlign: "center", width: "15%", fontWeight: "bold" }}
         >
-          {count}
+          {data.department === 11
+          ?"공통질문"
+          :deptname}
         </Col>
         <Col flex={8} style={{ paddingLeft: "2rem", width: "60%" }}>
           {data.question}

@@ -88,9 +88,10 @@ const DataModify = (props) => {
   };
 
   const getData = React.useCallback(async () => {
-    const response = await axios.get(`https://sjswbot.site/fixRequest?page=${page}&size=${pageSize}`, header, { widthCredentials: true });
-
-    console.log(`https://sjswbot.site/fixRequest?page=${page}&size=${pageSize}`);
+    const response = await axios.get(`https://sjswbot.site/fixRequest/${department}?page=${page}&size=${pageSize}`, header, { widthCredentials: true });
+    
+    console.log(response);
+    
     setdataSize(response.data.result.count);
     setData(response.data.result.rows);
     PageRefresh();
