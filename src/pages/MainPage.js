@@ -80,8 +80,7 @@ const MainPage = (props) => {
         <Header />
       </header>
       <Container>
-        {/* <Router basename={`${process.env.PUBLIC_URL}/`}> */}
-        <Router>
+        <Router basename={`${process.env.PUBLIC_URL}/`}>
           <MenuBar style={{ marginTop: "2rem" }}>
             <Menu />
           </MenuBar>

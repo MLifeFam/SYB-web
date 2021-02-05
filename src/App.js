@@ -26,8 +26,7 @@ class App extends Component {
   render() {
     return (
       <Container>
-        {/* <Router basename={`${process.env.PUBLIC_URL}/`}> */}
-        <Router>
+        <Router basename={`${process.env.PUBLIC_URL}/`}>
           <Switch>
             <Route path="/" component={Login} exact />
             <Route path="/signup" component={Signup} exact />
