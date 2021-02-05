@@ -22,7 +22,7 @@ const openNotification = (type,comment) => {
 };
 
 const Option = Select.Option;
-const category = ["일반","학사","입학","학과행사","공모전","경시대회","교내모집","장학","기타"];
+const category = ["일반공지","입학","학사","국제교류","졸업","행사","취업","장학","교내모집","경시대회/공모전","기타"];
 
 const QuestionList = ({ data, getData, setPage, page,
   count,pageSize }) => {
