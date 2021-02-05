@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Link, Route, Switch, BrowserRouter as Router, HashRouter } from "react-router-dom";
 import {
   AutoComplete,
   Form,
@@ -80,7 +80,8 @@ const MainPage = (props) => {
         <Header />
       </header>
       <Container>
-        <Router basename={`${process.env.PUBLIC_URL}/`}>
+        {/* <Router basename={`${process.env.PUBLIC_URL}/`}> */}
+        <Router>
           <MenuBar style={{ marginTop: "2rem" }}>
             <Menu />
           </MenuBar>

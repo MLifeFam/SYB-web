@@ -4,6 +4,7 @@ import {
   Route,
   Switch,
   withRouter,
+  HashRouter,
   BrowserRouter as Router,
 } from "react-router-dom";
 import styled from "styled-components";
@@ -25,7 +26,8 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Router basename={`${process.env.PUBLIC_URL}/`}>
+        {/* <Router basename={`${process.env.PUBLIC_URL}/`}> */}
+        <Router>
           <Switch>
             <Route path="/" component={Login} exact />
             <Route path="/signup" component={Signup} exact />
