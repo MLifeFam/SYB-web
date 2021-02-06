@@ -166,7 +166,7 @@ const Notice = () => {
           <Input readOnly={true} />
         </Form.Item>
         <Form.Item label="내용" name="content" required>
-          <TextArea maxLength={50} style={{height:"6rem", resize:"none"}}/>
+          <TextArea maxLength={300} style={{height:"20rem", resize:"none"}}/>
         </Form.Item>
         <Form.Item label="링크" name="link" required>
           <Input />
