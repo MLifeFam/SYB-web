@@ -48,6 +48,11 @@ const Question = (props) => {
   const [data, setData] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dep,setDep] = React.useState([]);
+  const {
+    menu,
+    setmenu
+  } = props;
+
   const token = localStorage.getItem("user_token");
   const header = {
     headers: {
@@ -212,9 +217,9 @@ const Question = (props) => {
       </div>
       소융봇에서 제공 할 질문과 답변을 관리하는 페이지입니다.
       <div style={{ display: "flex", flexDirection: "row", margin: "10px 0 2rem" }}>
-        <Link to="/userquestion">
+        <div onClick={()=>setmenu(2)} style={{color:'RGB(50,50,255)',cursor:'pointer'}}>
           <u>유저들의 질문</u>
-        </Link>{" "}
+        </div>{" "}
         에서 질문을 골라보세요 😊
       </div>
       <div style={{width:"100%",marginRight:"8rem"}}>

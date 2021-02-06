@@ -81,11 +81,11 @@ const MainPage = (props) => {
       case 0:
         return <Welcome/>;
       case 1:
-        return <Question/>;
+        return <Question menu={menu} setmenu={setmenu}/>;
       case 2:
-        return <Userquestion/>;
+        return <Userquestion menu={menu} setmenu={setmenu}/>;
       case 3:
-        return <Datamodify/>;
+        return <Datamodify menu={menu} setmenu={setmenu}/>;
       case 4:
         return <Status/>;
       case 5:

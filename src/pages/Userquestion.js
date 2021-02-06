@@ -40,6 +40,11 @@ const Userquestion = (props) => {
     },
   };
 
+  const {
+    menu,
+    setmenu
+  } = props;
+
   const FormHandler = () => {
     setVisible(true);
   };
@@ -118,9 +123,9 @@ const Userquestion = (props) => {
       </div>
       소융봇에서 제공하고 있지 않은 질문들에 대해서 유저들이 남긴 질문입니다.
       <div style={{ display: "flex", flexDirection: "row", margin: "10px 0 2rem" }}>
-        <Link to="/question">
-          <u>질문 수정페이지</u>
-        </Link>{" "}
+        <div onClick={()=>setmenu(1)} style={{color:'RGB(50,50,255)',cursor:'pointer'}}>
+          <u>질문 추가 및 수정페이지 </u>
+        </div>
         에서 질문에 대한 답변을 올려주세요 😊
       </div>
       {/* {data.map((it,i)=>{
