@@ -13,8 +13,6 @@ import {
   Tabs,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import TimetableAdd from './TimetableAdd';
 import TimetableModify from './TimetableModify';
