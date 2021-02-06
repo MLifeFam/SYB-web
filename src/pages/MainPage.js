@@ -74,7 +74,8 @@ const Contents = styled.div`
 
 const MainPage = (props) => {
   const userdata = props.data;
-  const [menu,setmenu] = React.useState(0);
+  const [menu,setmenu] = React.useState(Number(localStorage.getItem("menuIndex")));
+
   const loadcontents = (() => {
     switch (menu){
       case 0:
@@ -103,6 +104,11 @@ const MainPage = (props) => {
         return null;
     }
   })
+
+  React.useEffect(()=>{
+    localStorage.setItem("menuIndex",menu);
+    console.log(menu);
+  },[menu,setmenu])
 
   return (
     <div>

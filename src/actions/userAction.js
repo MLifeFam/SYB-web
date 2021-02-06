@@ -59,7 +59,7 @@ export function loginUser(dataToSubmit) {
 export function loginSuccess(accessToken) {
   localStorage.setItem("user_token", accessToken);
   //axios.defaults.headers.common['Authorization'] = accessToken;
-
+  localStorage.setItem("menuIndex",0);
   return (dispatch) => {
     dispatch({
       type: LOGIN_SUCCESS,
