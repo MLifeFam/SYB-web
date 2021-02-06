@@ -150,7 +150,7 @@ const Notice = () => {
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/107045056-6d6fc280-6808-11eb-9a9d-59ccf859e1c2.png"
+            src="https://user-images.githubusercontent.com/51112542/107118658-93a76800-68c5-11eb-97bd-0ca0fbab4cd2.png"
             width="100%"
           />
         </div>
