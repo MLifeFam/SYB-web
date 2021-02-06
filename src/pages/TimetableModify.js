@@ -86,12 +86,12 @@ const TimetableModify = () => {
     const formData = new FormData();
 
     formData.append('img',fileList[0]);
-    // fileList.forEach(file => formData.append('img',file));
 
     for(let key in meta) {
       formData.append(key,meta[key]);
     }
     console.log(formData);
+
     await axios
       .put(`https://sjswbot.site/timetable/${inputValue}`, formData , header , { widthCredentials: true })
       .then((res)=>{
@@ -176,12 +176,10 @@ const TimetableModify = () => {
       setNameCheck(true);
       setData({
         modifier: response.data.result.User.username + " 조교님",
-        time:
-        "(" + moment(response.data.result.time).format("LLL") + ")",
+        time: moment(response.data.result.updatedAt).format("LLL"),
         link: response.data.result.link,
       });
     }
-    // getData();
   };
 
   useEffect(() => {
@@ -259,7 +257,7 @@ const TimetableModify = () => {
           <Form.Item
             label = "현재 시간표"
           >
-            <Image src={"https://sjswbot.site"+data.link} style={{maxWidth:"40rem"}}></Image>
+            <Image src={"https://sjswbot.site"+data.link+"?"+new Date().getTime()} style={{maxWidth:"40rem"}}></Image>
           </Form.Item>
           :null
         }
