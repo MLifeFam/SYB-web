@@ -132,19 +132,25 @@ const Notice = () => {
       >
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106898575-b441b780-6737-11eb-82bc-dd9bce611df8.png"
+            src="https://user-images.githubusercontent.com/51112542/107045026-6779e180-6808-11eb-9d8b-e66e21d92e28.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106898440-89576380-6737-11eb-8fac-40cfd5e629af.png"
+            src="https://user-images.githubusercontent.com/51112542/107045032-68127800-6808-11eb-8cc4-c3d1d297c985.png"
             width="100%"
           />
         </div>
         <div>
           <Image
-            src="https://user-images.githubusercontent.com/51112542/106898444-8a889080-6737-11eb-9d9d-6212a26c42e3.png"
+            src="https://user-images.githubusercontent.com/51112542/107045039-6943a500-6808-11eb-967f-98e341c584a2.png"
+            width="100%"
+          />
+        </div>
+        <div>
+          <Image
+            src="https://user-images.githubusercontent.com/51112542/107045056-6d6fc280-6808-11eb-9a9d-59ccf859e1c2.png"
             width="100%"
           />
         </div>
@@ -160,7 +166,7 @@ const Notice = () => {
           <Input readOnly={true} />
         </Form.Item>
         <Form.Item label="내용" name="content" required>
-          <TextArea style={{height:"10rem", resize:"none"}}/>
+          <TextArea maxLength={50} style={{height:"6rem", resize:"none"}}/>
         </Form.Item>
         <Form.Item label="링크" name="link" required>
           <Input />

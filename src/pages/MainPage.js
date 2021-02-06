@@ -74,6 +74,36 @@ const Contents = styled.div`
 
 const MainPage = (props) => {
   const userdata = props.data;
+  const [menu,setmenu] = React.useState(0);
+  const loadcontents = (() => {
+    switch (menu){
+      case 0:
+        return <Welcome/>;
+      case 1:
+        return <Question/>;
+      case 2:
+        return <Userquestion/>;
+      case 3:
+        return <Datamodify/>;
+      case 4:
+        return <Status/>;
+      case 5:
+        return <Curriculum/>;
+      case 6:
+        return <Notice/>;
+      case 7:
+        return <Professor/>;
+      case 8:
+        return <Timetable/>;
+      case 9:
+        return <Bestqa/>;
+      case 10:
+        return <Adminpage/>;
+      default:
+        return null;
+    }
+  })
+
   return (
     <div>
       <header>
@@ -82,13 +112,14 @@ const MainPage = (props) => {
       <Container>
         <Router basename={`${process.env.PUBLIC_URL}/`}>
           <MenuBar style={{ marginTop: "2rem" }}>
-            <Menu />
+            <Menu menu={menu} setmenu={setmenu}/>
           </MenuBar>
           <Contents>
-            <Switch>
+            {/* 라우트 방식은 새로고침 문제가 있어서 state로 변경 */}
+            {/* <Switch>
               <Route path="/status" component={Auth(Status)} exact />
-              <Route path="/question" component={Question} exact />
-              <Route path="/userquestion" component={Userquestion} exact />
+              <Route path="/question" component={Auth(Question)} exact />
+              <Route path="/userquestion" component={Auth(Userquestion)} exact />
               <Route path="/curriculum" component={Auth(Curriculum)} exact />
               <Route path="/notice" component={Auth(Notice)} exact />
               <Route path="/professor" component={Auth(Professor)} exact />
@@ -96,8 +127,9 @@ const MainPage = (props) => {
               <Route path="/bestqa" component={Auth(Bestqa)} exact />
               <Route path="/datamodify" component={Auth(Datamodify)} exact />
               <Route path="/main" component={Auth(Welcome)} exact />
-              <Route path="/adminpage" component={Adminpage} exact />
-            </Switch>
+              <Route path="/adminpage" component={Auth(Adminpage)} exact />
+            </Switch> */}
+            {loadcontents()}
           </Contents>
         </Router>
       </Container>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component ,useEffect} from "react";
 import {
   Link,
   Route,
@@ -20,7 +20,7 @@ import {
   WarningOutlined,
   LockOutlined,
 } from "@ant-design/icons";
-import { Divider } from "antd";
+import { Divider,Button } from "antd";
 import styled from "styled-components";
 import oc from "open-color";
 
@@ -54,8 +54,12 @@ const MenuItem = styled.div`
   }
 `;
 
-const Menu = () => {
+const Menu = (props) => {
   let history = useHistory();
+  const {
+    menu,
+    setmenu
+  } = props;
   const role = localStorage.getItem("role");
   const name = localStorage.getItem("username");
   const ScrollTop = () => {
@@ -65,102 +69,102 @@ const Menu = () => {
   return (
     <MenuContainer>
       <MenuItem onClick={ScrollTop}>
-        <Link to="/main" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(0)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <NotificationOutlined style={{ padding: "0 1rem" }} />
             공지사항
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/question" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(1)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <BulbOutlined style={{ padding: "0 1rem" }} />
             질문 추가 및 수정
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/userquestion" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(2)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <QuestionCircleOutlined style={{ padding: "0 1rem" }} />
             유저들의 질문
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/datamodify" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(3)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <WarningOutlined style={{ padding: "0 1rem" }} />
             데이터 수정 요청
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
 
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/status" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(4)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <ClockCircleOutlined style={{ padding: "0 1rem" }} />
             학과 사무실
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/curriculum" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(5)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <BarsOutlined style={{ padding: "0 1rem" }} />
             교과과정
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/notice" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(6)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <CalendarOutlined style={{ padding: "0 1rem" }} />
             학과공지
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/professor" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(7)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <AuditOutlined style={{ padding: "0 1rem" }} />
             교수님 연구실
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/timetable" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(8)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <LayoutOutlined style={{ padding: "0 1rem" }} />
             강의실
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       <Divider style={{ margin: "0" }} />
       <MenuItem onClick={ScrollTop}>
-        <Link to="/bestqa" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(9)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <MessageOutlined style={{ padding: "0 1rem" }} />
             자주 묻는 질문
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>
       { role === "2" ?(<MenuItem onClick={ScrollTop}>
-        <Link to="/adminpage" style={{ textDecoration: "none" }}>
+        <div onClick={()=>setmenu(10)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <LockOutlined style={{ padding: "0 1rem" }} />
             관리자페이지
           </MenuContent>
-        </Link>
+        </div>
       </MenuItem>):null}
     </MenuContainer>
   );
