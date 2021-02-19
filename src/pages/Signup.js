@@ -166,7 +166,7 @@ const Signup = (props) => {
         console.log(res)
         if (res.status === 200) {
           handleCancel();
-          setEmail(true);
+          checkEmail(true);
           Swal.fire({
             icon: "success",
             text: res.data.message,
@@ -480,7 +480,7 @@ const Signup = (props) => {
               ]}
             >
               <Select onChange={onChangeSelectFunc}>
-                {dep.map(i => (i.department != "관리자") ? <Option value={i.idx}>{i.department}</Option>:null)}
+                {dep.map(i => (i.department != "관리자" && i.department != "공통") ? <Option value={i.idx}>{i.department}</Option>:null)}
               </Select>
             </Form.Item>
 
