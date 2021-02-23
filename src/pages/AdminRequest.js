@@ -108,7 +108,7 @@ const AdminRequest = (props) => {
 
   return (
       <>
-      {role === "2" ? (
+      {role === "1" ? (
         <div
         style={{
           display: "flex",

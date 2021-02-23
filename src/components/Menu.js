@@ -158,7 +158,7 @@ const Menu = (props) => {
           </MenuContent>
         </div>
       </MenuItem>
-      { role === "2" ?(<MenuItem onClick={ScrollTop}>
+      { role === "1" ?(<MenuItem onClick={ScrollTop}>
         <div onClick={()=>setmenu(10)} style={{ textDecoration: "none" }}>
           <MenuContent>
             <LockOutlined style={{ padding: "0 1rem" }} />

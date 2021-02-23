@@ -36,7 +36,7 @@ const AdminPage = (props) => {
 
   return (
       <>
-      {role === "2" ? (
+      {role === "1" ? (
         <div
         style={{
           margin: "3% 10%",
