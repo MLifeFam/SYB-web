@@ -78,6 +78,12 @@ const HeaderContents = styled.div`
   z-index:2;
 `;
 
+const EmptyBox = styled.div`
+  height: 1.3rem;
+  background-color:white;
+  display: fixed;
+`;
+
 function Header(props) {
   const dispatch = useDispatch();
   const username = localStorage.getItem("username");
@@ -119,6 +125,7 @@ function Header(props) {
         </UserContainer>
       </HeaderContents>
       <GradientBorder />
+      <EmptyBox/>
     </Positioner>
   );
 }
