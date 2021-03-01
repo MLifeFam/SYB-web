@@ -29,7 +29,7 @@
 
 <br>
 
-<a href="syb-admin.site">페이지 접속하기</a>
+<a href="https://syb-admin.site">페이지 접속하기</a>
 
 <br>
 
