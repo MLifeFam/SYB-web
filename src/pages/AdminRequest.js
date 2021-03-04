@@ -16,7 +16,7 @@ import {
 } from "antd";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import FallbackList from "./Fallbacklist";
+import AdminRequestList from "./AdminRequestList";
 import styled from "styled-components";
 import { FormInstance } from "antd/lib/form";
 import { CloudUploadOutlined, LoadingOutlined } from "@ant-design/icons";
@@ -73,7 +73,7 @@ const AdminRequest = (props) => {
       // 게시글 번호 계산
 
       return (
-        <FallbackList
+        <AdminRequestList
           key={i}
           data={it}
           count={dataSize - i - pageSize * (page)}
