@@ -1,6 +1,7 @@
 # <center>세종대 소융봇</center>
 
-![SYB ADMIN GIF](C:\Users\Jongmin\Desktop\SYB\logo.jpg)![image-20210301201732521](C:\Users\Jongmin\AppData\Roaming\Typora\typora-user-images\image-20210301201732521.png)
+<p align="center"><image src="https://user-images.githubusercontent.com/51112542/109491639-2b673300-7acd-11eb-9661-85b69014dce2.jpg"></p>
+<p align="center"><image src="https://user-images.githubusercontent.com/51112542/109491693-446fe400-7acd-11eb-89c2-ab2f96af6e02.png"></p>
 
 
 
@@ -18,7 +19,7 @@
 
 # <center>SYB - ADMIN</center>
 
-![SYB ADMIN GIF](C:\Users\Jongmin\Desktop\SYB ADMIN GIF.gif)
+<p align="center"><image src="https://user-images.githubusercontent.com/51112542/109491826-6a958400-7acd-11eb-901d-8022e9e7a041.gif" width="70%"></p>
 
 <br>
 
@@ -26,15 +27,13 @@
 
 소융봇내의 질문들과 학과 사무실, 교과과정, 학과공지 등의 데이터를 추가하거나 수정, 삭제 할 수 있습니다.
 
+<br>
 
-
-<a href="syb-admin.site">페이지 접속하기</a>
+<a href="https://syb-admin.site">페이지 접속하기</a>
 
 <br>
 
 ## 기술 스택
-
-<br>
 
 - #### React JS
 
