@@ -1,9 +1,13 @@
 # <center>세종대 소융봇</center>
 
-<p align="center"><image src="https://user-images.githubusercontent.com/51112542/111062506-9d3b7580-84ec-11eb-879b-585ee50a661f.png" width="50%"></p>
-<p align="center"><image src="https://user-images.githubusercontent.com/51112542/111062507-9e6ca280-84ec-11eb-9feb-da0b225cbb0d.png" width="50%"></p>
-<p align="center"><image src="https://user-images.githubusercontent.com/51112542/111062508-9f053900-84ec-11eb-82f2-6dc4033df73f.png" width="50%"></p>
-<p align="center"><image src="https://user-images.githubusercontent.com/51112542/111062510-a0366600-84ec-11eb-9cbb-a444c1f9cdd0.png" width="50%"></p>
+<p align="center">
+  <image src="https://user-images.githubusercontent.com/51112542/111062506-9d3b7580-84ec-11eb-879b-585ee50a661f.png" width="45%">
+  <image src="https://user-images.githubusercontent.com/51112542/111062507-9e6ca280-84ec-11eb-9feb-da0b225cbb0d.png" width="45%">
+</p>
+<p align="center">
+  <image src="https://user-images.githubusercontent.com/51112542/111062508-9f053900-84ec-11eb-82f2-6dc4033df73f.png" width="45%">
+  <image src="https://user-images.githubusercontent.com/51112542/111062510-a0366600-84ec-11eb-9cbb-a444c1f9cdd0.png" width="45%">
+</p>
 
 <br/>
 
