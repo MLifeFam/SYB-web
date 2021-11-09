@@ -69,7 +69,7 @@
 
 ### 관리자 사이트
 
-`React` `JavaScript` `Redux` `Firebase` `Material UI` `Responsive Web` `REST API`
+`React` `JavaScript` `Material UI` `REST API`
 
 ### 카카오톡 챗봇
 
